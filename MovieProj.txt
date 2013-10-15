@@ -1,0 +1,13 @@
+Filme verwalten
+
+Login
+Rechte: Gast = View 	logged in = insert del
+rating der Filme (5Star)
+Filter über die Filme 
+Gesehen/ nicht gesehen Hacken
+
+Imdb Filmplakat beim drüberfahren mit der Maus (ahover)
+freebase(google)
+
+
+
