@@ -3,29 +3,32 @@
 
 <html>
  <head>
-  <title>Homepage - Über uns</title>   
-   <!-- css -->
+  <title>Film Verwaltung</title> 
+  
+   <!-- css ------------------------------------------------------------------------------------>
    <link href="css/index.css" rel="stylesheet" type="text/css"/> 
-   <!-- js jquery-->
-   <script src="\js\underscore.js" type="text/javascript" ></script>
-   <script src="\js\jquery-2.0.3.min.js" type="text/javascript" ></script>
+   <!-- js jquery------------------------------------------------------------------------------->   
    <script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript" ></script>	
 	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-	<script src="underscore-min.js" type="text/javascript"></script>
-   <script src="Loginscript.js" type="text/javascript" ></script>	
+	<script src="./js/underscore-min.js" type="text/javascript"></script>
+   <script src="./js/loginscript.js" type="text/javascript" ></script>	
+   
    </head>
  <body>
+ 
  <div id="container">
+ <!--logo--------------------------------------------------------------------------------------->
   <div id="logo"></div>
   <ul id="menu">
    <li><a href="#" target="iframe">Home</a></li> 
    <li><a href="http://www.tagesschau.de " target="iframe">Genre</a></li> 
-   <li><a href="http://www.google.de" target="iframe">Pflege</a></li>
-  
+   <li><a href="http://www.google.de" target="iframe">Pflege</a></li>  
    </ul>
-  <dl id="subnav"> 
-   <dt>Wilkommen</dt>
-    <dd><div id="loginscreen">
+<!--login--------------------------------------------------------------------------------------->
+
+  <dl id="login"> 
+    <dd>
+	<div id="loginscreen">
 		<h1>Login</h1>
 		<table border= "0">
 			<tr>
@@ -36,7 +39,7 @@
 				<td><input id="PW" type="password" placeholder="Password" />
 				</td></tr>
 			<tr><td></td>
-				<td><div align="right"><a id="loginLink" style="color: black;" href="#">Login</a>
+				<td><div align="right"><a id="loginLink"  href="#">Login</a>
 				</div>
 				</td>
 				</tr>
@@ -44,6 +47,8 @@
 	</div>
 	</dd>   
   </dl>
+<!--main--------------------------------------------------------------------------------------->
+
   <div id="main">
   <iframe src="" class="iframe" scrolling="no" frameborder='0' name="iframe">
 

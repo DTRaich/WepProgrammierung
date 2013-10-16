@@ -109,27 +109,33 @@ img { /* Alle Bilder bekommen einen schönen Rahmen. */
 }
 
 /* - Subnavigation, Rechte Spalte - */
-#subnav {
-  width: 26%; /* Je kleiner das Fenster desto kleiner soll auch die Breite der Subnavigation werden, damit immer genügend Platz für den richtigen Inhalt bleibt. */
+#login {
+  width: 22%; /* Je kleiner das Fenster desto kleiner soll auch die Breite der Subnavigation werden, damit immer genügend Platz für den richtigen Inhalt bleibt. */
   min-width: 10em; /* Damit uns die Subnavigarion nicht zu sehr zusammengeschoben wird. */
   float: left; /* Damit erreichen wir dass der Inhalt links neben der Subnavigation vorbeifließt und nicht erst unten drunter anfängt. */
-  padding: 70px 1% 1em 1%;
   margin: 1em 1% 0 1%;
-  border-left: 1px dotted #aaa; /* Hiermit trennen wir optisch die Subnavigation vom eigentlichen Inhalt ab. */
+  border-right: 1px dotted #aaa; /* Hiermit trennen wir optisch die Subnavigation vom eigentlichen Inhalt ab. */
   font-size: 0.9em; /* Die Schriftgröße setzen wir hier ein wenig herunter damit erkennbar wird dass das Informationen zweiter Rangordnung sind. */
 }
-#subnav dt { /* Die einzelnen Überschriften in der Subnavigation */
+#login dt { /* Die einzelnen Überschriften in der Subnavigation */
   font-size: 1.2em;
   font-family: Georgia, "Times New Roman", Times, serif;
   padding: 0.5em;
   margin-top: 1em;
   border-top: 1px dotted #aaa; /* Hier eine optische Trennungslinie zwischen den einzelnen Bereichen der Subnavigation. */
 }
-#subnav dd { /* Die Unterpunkte der Subnavigation. */
+#login dd { /* Die Unterpunkte der Subnavigation. */
   padding: 0;
   margin: 0.2em 0;
 }
 
+#login h1{
+  color: black;
+  border: 0;
+}
+#loginLink{
+color: black;
+}
 /* - Der Hauptinhaltsteil - */
 #main {
    padding-left: 31%;/*0 31% 0 20px;  Der rechte Abstand (31%) stellt sicher, dass auch nach dem Umfließen der Subnavigation der Text genau so breit wird wie oben und ein zwei-Spalten Eindruck entsteht. */
