@@ -1,12 +1,6 @@
-/* Dies ist die screen.css Datei zum freien Layout von selfhtml.org
- * geschrieben von Jeena Paradies <http://jeenaparadies.net/webdesign/leistungen>
- * ACHTUNG! Man sollte alle Hilfskommentare hier herauslöschen, bevor man das CSS
- * produktiv nutzt, damit die Datei so klein wie möglich bleibt.
- */
-
 /* -- Allgemeines -- */
 body {
-  background: url(../img/bg.gif) #e7f3f7; /* Hier sollte man, auch wenn man ein Bild als Hintergrund hat, nicht vergessen die Hintergrundfarbe zu setzen. Es könnte nämlich sein dass man aus versehen für den Text die gleiche Farbe hat wie für den Hintergrund wobei die Leute mit ausgeschalteten Bildern nichts erkennen können. */
+  background: url(../img/bg.gif) #e7f3f7; 
   color: black;
   margin: 0;
   padding: 1%; /* Ein wenig Abstand, damit der Anschein eines Blattes auf der Wand immer erhalten bleibt. */
@@ -47,6 +41,12 @@ img { /* Alle Bilder bekommen einen schönen Rahmen. */
   float: right;
   margin: 0 0 0.2em 1em;
   padding: 1px;
+}
+.iframe {
+  width:100%; 
+  height:100%; 
+  border:0;
+ 
 }
 
 
@@ -112,7 +112,7 @@ img { /* Alle Bilder bekommen einen schönen Rahmen. */
 #subnav {
   width: 26%; /* Je kleiner das Fenster desto kleiner soll auch die Breite der Subnavigation werden, damit immer genügend Platz für den richtigen Inhalt bleibt. */
   min-width: 10em; /* Damit uns die Subnavigarion nicht zu sehr zusammengeschoben wird. */
-  float: right; /* Damit erreichen wir dass der Inhalt links neben der Subnavigation vorbeifließt und nicht erst unten drunter anfängt. */
+  float: left; /* Damit erreichen wir dass der Inhalt links neben der Subnavigation vorbeifließt und nicht erst unten drunter anfängt. */
   padding: 70px 1% 1em 1%;
   margin: 1em 1% 0 1%;
   border-left: 1px dotted #aaa; /* Hiermit trennen wir optisch die Subnavigation vom eigentlichen Inhalt ab. */
@@ -132,7 +132,6 @@ img { /* Alle Bilder bekommen einen schönen Rahmen. */
 
 /* - Der Hauptinhaltsteil - */
 #main {
-  background: url(../img/blaue-blume.png) no-repeat 100% 0 white; /* Die kleine, blaue, halbdurchsichtige Blume wird als Hintergrundbild, welches rechts oben in der Ecke steht, definiert. */
-  padding: 0 31% 0 20px; /* Der rechte Abstand (31%) stellt sicher, dass auch nach dem Umfließen der Subnavigation der Text genau so breit wird wie oben und ein zwei-Spalten Eindruck entsteht. */
-  line-height: 1.5em; /* Zur besseren Lesbarkeit erhöhen wir die Zeilenhöhe. */
+   padding-left: 31%;/*0 31% 0 20px;  Der rechte Abstand (31%) stellt sicher, dass auch nach dem Umfließen der Subnavigation der Text genau so breit wird wie oben und ein zwei-Spalten Eindruck entsteht. */
+   line-height: 1.5em; /* Zur besseren Lesbarkeit erhöhen wir die Zeilenhöhe. */
 }
