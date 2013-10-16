@@ -104,6 +104,7 @@ img { /* Alle Bilder bekommen einen schönen Rahmen. */
   font-weight: bold;
 }
 #menu li a {
+  font-size: 1.2em;
   color: white; /* Hier ist das mit der Linkfarbe genau so, sie soll weiß sein. */
   text-decoration: none;
 }
@@ -141,3 +142,12 @@ color: black;
    padding-left: 31%;/*0 31% 0 20px;  Der rechte Abstand (31%) stellt sicher, dass auch nach dem Umfließen der Subnavigation der Text genau so breit wird wie oben und ein zwei-Spalten Eindruck entsteht. */
    line-height: 1.5em; /* Zur besseren Lesbarkeit erhöhen wir die Zeilenhöhe. */
 }
+/* test css.--------------------------------------------*/
+#menu li ul { display:none; }
+#menu li:hover ul, #menu li.sfhover ul { display:block; }
+
+.test li ul { display:none; }
+.test li:hover ul, .test li.sfhover ul { display:block; }
+
+
+
