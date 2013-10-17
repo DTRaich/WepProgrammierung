@@ -1,3 +1,6 @@
+//LoginScript 
+// templates
+
 var welcometemplate= _.template("<h1>welcome, <%- id %> !</h1><a id='logout' href='#' align='center'>logout</a>")
 var logintemplate=_.template('<h1>Login</h1>'+
 		'<table border= "0">'+
@@ -14,16 +17,19 @@ var logintemplate=_.template('<h1>Login</h1>'+
 			'</td>'+
 			'</tr>'+
 		'</table>')
+
+// Funktionen für Click und Enter
+		
 $(document).ready(function(){
 var log=$('#loginLink');
 		$(loginLink).click(function(event){
 		var ID=$.trim($('#ID').val());
 		var PW=$.trim($('#PW').val());
 		if(ID == 'X' && PW == '13'){
-		alert('login');
+		
 		$('#loginscreen').html(welcometemplate({id:ID}));
 		}else{
-		alert('Bitte füllen sie alle Felder richtig aus.');
+		alert('Login Fehlgeschlagen! \n \nBitte überprüfen Sie Ihre Eingaben.');
 		}
 		event.preventDefault();
 		event.stopImmediatePropagation();
