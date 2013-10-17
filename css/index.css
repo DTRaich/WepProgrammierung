@@ -1,6 +1,6 @@
 /* -- Allgemeines -- */
 body {
-  background: url(../img/bg.gif) #e7f3f7; 
+  background: #E7E7EA;
   color: black;
   margin: 0;
   padding: 1%; /* Ein wenig Abstand, damit der Anschein eines Blattes auf der Wand immer erhalten bleibt. */
@@ -42,12 +42,7 @@ img { /* Alle Bilder bekommen einen schönen Rahmen. */
   margin: 0 0 0.2em 1em;
   padding: 1px;
 }
-.iframe {
-  width:100%; 
-  height:100%; 
-  border:0;
- 
-}
+
 
 
 /* -- Layoutspezifisches -- */
@@ -55,7 +50,7 @@ img { /* Alle Bilder bekommen einen schönen Rahmen. */
   font-size: 0.8em; /* Ein Kompromiss über den man sicherlich streiten kann, aber viele Leute empfinden die von Ihnen selbst eingestellte Textgröße für zu groß, wissen aber nicht wie man das ändert. */
   max-width: 70em; /* Eine Begrenzung der Breite auf höhstens 70em. Das machen wir um nicht zu lange Textbreiten zu erhalten, welche dann schlecht zu lesen sind. Für den IE gibt es in ielte6.css einen Woraround. */
   margin: auto; /* Hiermit zentrieren wir unsere Seite. */
-  border: 1px solid #aaa; /* Eine kleine optische Abgränzung. */
+  border: 0 ;/*1px solid #aaa;  Eine kleine optische Abgränzung. */
   border-top: 0; /* Ganz oben allerdings würde es mit dem grauen komisch aussehen, deshalb weg damit. */
   background: white;
 }
@@ -66,15 +61,15 @@ img { /* Alle Bilder bekommen einen schönen Rahmen. */
 
 /* - Logo bzw. Kopf - */
 #logo {
-  background: url(../img/blume.jpg) 0 0 no-repeat black; /* Das Bild mit der Blume hat einen Übergang zum Schwarzen das nutzen wir aus. Wir lassen es oben links beginnen und wiederholen es nicht. Dadurch dass die Hintergrundfarbe auch schwarz ist, entsteht der Eindruck als ob das Bild unendlich lang wäre. */
-  height: 64px; /* Das Blumenbild ist 64px hoch also wählen wir das auch als höhe für unseren Kopf. */
-  padding: 0 20px;
-  text-align: right;
-  line-height: 54px;
+  background: url(../img/big/Filmrolle.png) 0 0 no-repeat #E7E7EA;/* Das Bild mit der Blume hat einen Übergang zum Schwarzen das nutzen wir aus. Wir lassen es oben links beginnen und wiederholen es nicht. Dadurch dass die Hintergrundfarbe auch schwarz ist, entsteht der Eindruck als ob das Bild unendlich lang wäre. */
+  text-align: center;
+  line-height: 54px;  
+  height: 154px;
   font-size: 54px; /* Das Logo soll auch in unseren Kopf passen deswegen ist es ein wenig kleiner. Durch die Angabe der Textgröße in px verhindern wir im IE die Vergrößerung und zerstörung des Layouts durch den Benutzer. Der Opera vergrößert das Bild proportional mit also kann da auch nichts passieren. */
   overflow: hidden; /* Einzig der Mozilla könnte den Text unverhältnissmäßig zum Hintergrund verändern. Damit dann wenigstens das Menü benutzbar bleibt schneiden wir alles was herausragt ab. */
   letter-spacing: -3px; /* Wieder ein wenig Typografie damit das Logo besser aussieht. */
-  margin: 0; /* Manche Browser haben das schon voreingestellt aber nicht alle, deshalb vereinheitlichen wir das. */
+  margin:0; /* Manche Browser haben das schon voreingestellt aber nicht alle, deshalb vereinheitlichen wir das. */
+  
 }
 #logo a {
   color: white; /* Die vorher eingestellte Farbe passt nicht um auch als Logofarbe zu dienen, deshalb wählen wir hier weiß. */
@@ -89,24 +84,64 @@ img { /* Alle Bilder bekommen einen schönen Rahmen. */
 
 /* - Menü - */
 #menu {
-  background: url(../img/wechselschatten.png) #287635;
-  padding: 5px 5%; /* Je kleiner das Fenster desto kleiner soll auch der Abstand des Menüs rechts und links sein. */
-  margin: 0;
-  text-align: right;
-  color: yellow; /* Hier definieren wir die Farbe des Menüpunktes, der kein Link ist, also den Menüpunkt der Seite auf der wir uns gerade befinden. */
+  font-size:30px;
+  position: absolute;
+  /*padding-left: 13%;*/
+
 }
-#menu li {
-  font-size: 1.2em;
-  display: inline; /* Damit die Menüpunkte nebeneinander und nicht untereinander erscheinen. */
-  list-style-type: none; /* Die Bullets vor den Menüpunkten schalten wir ab. */
-  border-left: 1px solid white; /* Ein optischer Trennungsstrich */
-  padding: 0 10px 0 15px;
-  font-weight: bold;
+
+#menu ul {
+  list-style-type:none;
+  list-style-image:none;
+  margin:0px;
+  padding:0px;
 }
-#menu li a {
-  font-size: 1.2em;
-  color: white; /* Hier ist das mit der Linkfarbe genau so, sie soll weiß sein. */
-  text-decoration: none;
+
+#menu li.topmenu {
+  float:left;
+}
+
+.topmenu a {
+  float:left;
+  width:286.5px;
+  text-align:center;
+}
+
+.topmenu ul{
+  display:none;
+}
+
+.topmenu a, .submenu a{
+  padding:1px 5px;
+  border:1px solid #C37000;
+  border-collapse:collapse;
+  color:#C37000;
+  font-weight:bold;
+  text-decoration:none;
+  background-color:#7F4800;
+  margin:0;  
+
+}
+
+.submenu a{
+  font-size:12px;
+  width:200;
+  position:relative;
+  clear:both; 
+}
+
+#menu a:hover, .topmenu.on a {
+  color:#4C4C4C;
+  background-color:#ffddbb !important;
+}
+
+.topmenu:hover ul {
+  display:block;  
+  z-index:500;
+}
+
+.alert{
+
 }
 
 /* - Subnavigation, Rechte Spalte - */
@@ -141,13 +176,9 @@ color: black;
 #main {
    padding-left: 31%;/*0 31% 0 20px;  Der rechte Abstand (31%) stellt sicher, dass auch nach dem Umfließen der Subnavigation der Text genau so breit wird wie oben und ein zwei-Spalten Eindruck entsteht. */
    line-height: 1.5em; /* Zur besseren Lesbarkeit erhöhen wir die Zeilenhöhe. */
+  
 }
-/* test css.--------------------------------------------*/
-#menu li ul { display:none; }
-#menu li:hover ul, #menu li.sfhover ul { display:block; }
 
-.test li ul { display:none; }
-.test li:hover ul, .test li.sfhover ul { display:block; }
 
 
 

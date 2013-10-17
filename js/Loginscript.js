@@ -23,7 +23,7 @@ var log=$('#loginLink');
 		alert('login');
 		$('#loginscreen').html(welcometemplate({id:ID}));
 		}else{
-		alert('insert values');
+		alert('Bitte füllen sie alle Felder richtig aus.');
 		}
 		event.preventDefault();
 		event.stopImmediatePropagation();
