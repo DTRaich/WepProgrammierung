@@ -135,9 +135,9 @@ img {
 
 }
 
-/* - Subnavigation, Rechte Spalte - */
+/* - Login, Linke Spalte - */
 #login {
-  width: 22%; 
+  width: 25%; 
   min-width: 10em;
   float: left; 
   margin: 1em 1% 0 1%;
@@ -163,9 +163,10 @@ img {
 #loginLink{
 color: black;
 }
-/* - Der MainTeil - */
+/* - Hauptteil - */
+
 #main {
-   padding-left: 31%;
+   padding-left: 26%;
    line-height: 1.5em; 
   
 }
