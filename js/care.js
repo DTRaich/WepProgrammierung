@@ -1,40 +1,71 @@
-//LoginScript 
-// templates
+//CareScript 
+//----------------------------------------GLOBAL VARIABLES-------------------------
+var isSeen = false;
+//-------------------------------------------TEMPLATES-------------------------------
 
-var welcometemplate= _.template("<h1>welcome, <%- id %> !</h1><a id='logout' href='#' align='center'>logout</a>")
-var logintemplate=_.template('<h1>Login</h1>'+
-		'<table border= "0">'+
-		'<tr>'+
-			'<td>User:</td>'+
-			'<td><input id="ID" type="text" placeholder="Username" /></td></tr>'+
-		'<tr>'+
-			'<td>PW:</td>'+	
-			'<td><input id="PW" type="password" placeholder="Password" />'+
-			'</td></tr>'+
-		'<tr><td></td>'+
-			'<td><div align="right"><a id="loginLink" style="color: black;" href="#">Login</a>'+
-			'</div>'+
-			'</td>'+
-			'</tr>'+
-		'</table>')
+// ---------------------------------------standart care Form----------------------
+var careFormTemplate = _.template('<br> <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
+									'Filmtitel:<input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> ' +
+									'Gesehen: <input id="ratingChb" name"chbRating" type="checkbox" name="Gesehen:" value="seen" / ><br>');
+									
+//-----------------------------------------button to sen/add the movie ---------------------									
+var sendButtonTemplate = _.template('<input type="button" name="addFilm" id="addMovie" value="Film hinzufügen" / >');
 
-// Funktionen für Click und Enter
+
+//------------------------------------- rate and Commen Template which is displayed between them----------									
+var rateAndCommentTemplate = _.template('<select name="rating" size="5"> '+
+										'  <option  value ="0">0</option> ' +
+										'  <option  value ="1">1</option> '+
+										' <option  value ="2" selected>2</option> '+
+										' <option  value ="3">3</option> '+
+										'  <option  value ="4">4</option> '+
+										' <option  value ="5">5 </option> '+	  
+										' </select> ');
+
+
+										
+//------------------------------------ PUBLIC METHODS TO CALL--------------------------
+
+//--------------------------------------INTERN METHODS------------------------------
+
+
+//------------------------------ CLICK AND KEYDOWN EVENTS----------------------------
 		
 $(document).ready(function(){
-var log=$('#loginLink');
-		$(loginLink).click(function(event){
-		var ID=$.trim($('#ID').val());
-		var PW=$.trim($('#PW').val());
-		if(ID == 'X' && PW == '13'){
+
+	// display templates for the Form
+	$(document).on('click', '#nav_care', function(event) {
 		
-		$('#loginscreen').html(welcometemplate({id:ID}));
-		}else{
-		alert('Login Fehlgeschlagen! \n \nBitte überprüfen Sie Ihre Eingaben.');
-		}
+		$('#main').html(careFormTemplate() + sendButtonTemplate());
 		event.preventDefault();
 		event.stopImmediatePropagation();
-		});		
-		$(document).on('click','#logout', function(event){	
-		$('#loginscreen').html(logintemplate());
-		})
+	
+	});	
+			
+	//add rating and comment stuff
+	$(document).on('change', '#ratingChb', function(event) {
+		
+		
+		if(isSeen=== false)
+		{ // hier funkt was noch nicht richtig
+			isSeen= true;
+			$('#rateAndComment').html(rateAndCommentTemplate());
+		}else
+		{	alert("2");
+			$('#rateAndComment').html('');
+			isSeen = false;			
+		}	
+		
+	})
+
+	//addMovie Method
+	$(document).on('click', '#addMovie', function(event) {
+		
+			var titel=$.trim($('#ID').val());		
+			
+		
+			event.preventDefault();
+			event.stopImmediatePropagation();
+			});	
+
 })

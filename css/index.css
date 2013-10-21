@@ -1,4 +1,4 @@
-/* -- Allgemeines -- */
+/* --------------------------------------------------- Overall ----------------------- */
 body {
   background: #E7E7EA;
   color: black;
@@ -45,7 +45,7 @@ img {
 
 
 
-/* -- Layoutspezifisches -- */
+/* ------------------------------------------------ Layout ---------------------- */
 #container { 
   font-size: 0.8em; 
   max-width: 70em; 
@@ -59,7 +59,7 @@ img {
   padding: 0 20px;
 }
 
-/* - Logo bzw. Kopf - */
+/* ----------------------------------------------- Logo-------------------------- */
 #logo {
   background: url(../img/big/Filmrolle.png) 0 0 no-repeat #E7E7EA;
   text-align: center;
@@ -73,7 +73,7 @@ img {
 }
 
 
-/* - Menü - */
+/* ---------------------------------------------- Menu------------------------------ */
 #menu {
   font-size:30px;
   position: absolute;
@@ -135,7 +135,7 @@ img {
 
 }
 
-/* - Login, Linke Spalte - */
+/* -------------------------------------------------- Login, left column--------------------------- */
 #login {
   width: 25%; 
   min-width: 10em;
@@ -163,7 +163,7 @@ img {
 #loginLink{
 color: black;
 }
-/* - Hauptteil - */
+/* --------------- Mainpart ---place for templates; IDs are in the specific templates in their .js files -------------------- */
 
 #main {
    padding-left: 26%;
