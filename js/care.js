@@ -36,7 +36,8 @@ $(document).ready(function(){
 	// display templates for the Form
 	$(document).on('click', '#nav_care', function(event) {
 		
-		$('#main').html(careFormTemplate() + sendButtonTemplate());
+		$('#main_top').html(careFormTemplate());
+		$('#main_low').html(sendButtonTemplate());
 		event.preventDefault();
 		event.stopImmediatePropagation();
 	
@@ -49,10 +50,10 @@ $(document).ready(function(){
 		if(isSeen=== false)
 		{ // hier funkt was noch nicht richtig
 			isSeen= true;
-			$('#rateAndComment').html(rateAndCommentTemplate());
+			$('#main_middle').html(rateAndCommentTemplate());
 		}else
-		{	alert("2");
-			$('#rateAndComment').html('');
+		{
+			$('#main_middle').html('');
 			isSeen = false;			
 		}	
 		
