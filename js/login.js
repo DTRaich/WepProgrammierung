@@ -64,11 +64,21 @@ $(function(){
 //-----------------------INTERN METHODS------------------
 
 // login Method 
-$.loginMethod = function(ID)
+$.loginMethod = function()
 {
-	$('#login').html(welcomeTemplate({id:ID}));
-	$('#menu').html(nav_login_Template());
-	logedIn = true;
+	var ID=$.trim($('#ID').val());
+	var PW=$.trim($('#PW').val());
+	
+	if(ID === 'X' && PW === '13'){
+		
+		$('#login').html(welcomeTemplate({id:ID}));
+		$('#menu').html(nav_login_Template());
+		logedIn = true;		
+				
+	}else{
+		
+		alert('Login Fehlgeschlagen! \n \nBitte überprüfen Sie Ihre Eingaben.');
+	}
 }
 
 // logout Method 
@@ -78,35 +88,45 @@ $.logOutMethod = function()
 	$('#menu').html(nav_logout_Template());
 	$('#main').html('');
 	logedIn = false;
-	event.preventDefault();
-    event.stopImmediatePropagation();
+	
 }
 
 //--------------------------------CLICK AND KEYDOWN EVENTS-----------------------------		
 $(document).ready(function(){
+
 		// click on the loginLink and providing the logout Link
 		$(document).on('click', '#loginLink', function(event) {
-		
-		var ID=$.trim($('#ID').val());
-		var PW=$.trim($('#PW').val());
-		
-		if(ID === 'X' && PW === '13'){
-		
-			$.loginMethod(ID);
 				
-		}else{
+			$.loginMethod();		
+				
+			event.preventDefault();
+			event.stopImmediatePropagation();
 		
-			alert('Login Fehlgeschlagen! \n \nBitte überprüfen Sie Ihre Eingaben.');
-		}
-		
-		event.preventDefault();
-		event.stopImmediatePropagation();
 		});	
 		
 		// provides clicks on the logout Link
 		$(document).on('click','#logout', function(event){	
 		
-		$.logOutMethod();		
+			$.logOutMethod();	
+
+			event.preventDefault();
+			event.stopImmediatePropagation();		
 		
-		})
+		});
+		
+		// login on keypress enter in password field
+		$(document).on('keypress', '#PW', function(event) {
+		
+			if(event.which == 13) {
+				$.loginMethod();
+			}
+		});
+		
+		// login on keypress enter in ID field
+		$(document).on('keypress', '#ID', function(event) {
+		
+			if(event.which == 13) {
+				$.loginMethod();
+			}
+		});
 })
