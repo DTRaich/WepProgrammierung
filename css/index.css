@@ -56,7 +56,7 @@ img {
 }
 #footer {
   clear: both; 
-  padding: 0 20px;
+  padding: 0 20px;  
 }
 
 /* ----------------------------------------------- Logo-------------------------- */
@@ -141,7 +141,6 @@ img {
   min-width: 10em;
   float: left; 
   margin: 1em 1% 0 1%;
-  border-right: 1px dotted #aaa; 
   font-size: 0.9em; 
 }
 #login dt { 
@@ -165,9 +164,10 @@ color: black;
 }
 /* --------------- Mainpart ---place for templates; IDs are in the specific templates in their .js files -------------------- */
 
-#main {
+#main , #main_top, #main_middle , #main_low{
    padding-left: 26%;
    line-height: 1.5em; 
+   border-left: 1px dotted #aaa; 
   
 }
 

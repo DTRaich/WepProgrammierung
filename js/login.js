@@ -29,8 +29,10 @@ var nav_login_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="na
 									' <a href="#" >Genre</a> '+
 									' <ul>' +
 									' <li class="submenu" ><a href="#" id="nav_action">Action</a></li> '+
-									'<li class="submenu"><a href="#" id="nav_comedy">Comedy</a></li>' +
+									' <li class="submenu"><a href="#" id="nav_comedy">Comedy</a></li>' +
 									' <li class="submenu"><a href="#" id="nav_horror">Horror</a></li> '+
+								    ' <li class="submenu"><a href="#" id="nav_scifi">Sci-Fi</a></li> '+
+									' <li class="submenu"><a href="#" id="nav_thriller">Thriller</a></li> '+
 									' </ul> </li>' +
 									' <li class="topmenu">' +
 									'  <a href="#" id="nav_care">Pflege</a></li> ' + 
@@ -42,9 +44,11 @@ var nav_logout_Template=_.template('<ul> <li class="topmenu">  <a href="#">Home<
 								    '<li class="topmenu">' +
 									' <a href="#" >Genre</a> '+
 									' <ul>' +
-									' <li class="submenu"><a href="#">Action</a></li> '+
-									'<li class="submenu"><a href="#">Comedy</a></li>' +
-									' <li class="submenu"><a href="#">Horror</a></li>  </ul> '+
+									' <li class="submenu"><a href="#" id="nav_action">Action</a></li> '+
+									' <li class="submenu"><a href="#" id="nav_comedy">Comedy</a></li>' +
+									' <li class="submenu"><a href="#" id="nav_horror">Horror</a></li>  '+
+									' <li class="submenu"><a href="#" id="nav_scifi">Sci-Fi</a></li> '+
+									' <li class="submenu"><a href="#" id="nav_thriller">Thriller</a></li> </ul> '+
 									' </li> </ul> ');
 									
 									

@@ -6,6 +6,7 @@ var isSeen = false;
 // ---------------------------------------standart care Form----------------------
 var careFormTemplate = _.template('<br> <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
 									'Filmtitel:<input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> ' +
+									'Genre: ' +
 									'Gesehen: <input id="ratingChb" name"chbRating" type="checkbox" name="Gesehen:" value="seen" / ><br>');
 									
 //-----------------------------------------button to sen/add the movie ---------------------									
@@ -13,7 +14,7 @@ var sendButtonTemplate = _.template('<input type="button" name="addFilm" id="add
 
 
 //------------------------------------- rate and Commen Template which is displayed between them----------									
-var rateAndCommentTemplate = _.template('<select name="rating" size="5"> '+
+var rateAndCommentTemplate = _.template('<select id="rating">'+
 										'  <option  value ="0">0</option> ' +
 										'  <option  value ="1">1</option> '+
 										' <option  value ="2" selected>2</option> '+
