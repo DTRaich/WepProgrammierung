@@ -48,7 +48,7 @@ $(document).ready(function(){
 		
 		
 		if(isSeen=== false)
-		{ // hier funkt was noch nicht richtig
+		{ 
 			isSeen= true;
 			$('#main_middle').html(rateAndCommentTemplate());
 		}else

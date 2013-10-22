@@ -5,16 +5,16 @@ var logedIn = false;
 // ----------------------------------TEMPLATES---------------------------
 
 //-----------------------------------Loginscreens----------------------
-var welcomeTemplate= _.template("<h1>welcome, <%- id %> !</h1><a id='logout' href='#' align='center'>logout</a>")
+var welcomeTemplate= _.template("<h1>welcome, <%- id %> !</h1><a id='logout' href='#' align='center'>Logout</a>")
 
 var loginTemplate=_.template('<h1>Login</h1>'+
 								'<table border= "0">'+
 								'<tr>'+
 								'<td>Benutzer:</td>'+
-								'<td><input id="ID" type="text" placeholder="Username" /></td></tr>'+
+								'<td><input id="ID" type="text" placeholder="Benutzername" /></td></tr>'+
 								'<tr>'+
 								'<td>Passwort:</td>'+	
-								'<td><input id="PW" type="password" placeholder="Password" />'+
+								'<td><input id="PW" type="password" placeholder="Passwort" />'+
 								'</td></tr>'+
 								'<tr><td></td>'+
 								'<td><div align="right"><a id="loginLink" style="color: black;" href="#">Login</a>'+
@@ -55,13 +55,18 @@ $.getLogStatus = function()
 {
 	return logedIn; 
 }
+// provides start template
+$(function(){
+	$('#menu').html(nav_logout_Template());
+	$('#login').html(loginTemplate());
+})
 
 //-----------------------INTERN METHODS------------------
 
 // login Method 
 $.loginMethod = function(ID)
 {
-	$('#loginscreen').html(welcomeTemplate({id:ID}));
+	$('#login').html(welcomeTemplate({id:ID}));
 	$('#menu').html(nav_login_Template());
 	logedIn = true;
 }
@@ -69,7 +74,7 @@ $.loginMethod = function(ID)
 // logout Method 
 $.logOutMethod = function()
 {
-	$('#loginscreen').html(loginTemplate());
+	$('#login').html(loginTemplate());
 	$('#menu').html(nav_logout_Template());
 	$('#main').html('');
 	logedIn = false;
@@ -85,7 +90,7 @@ $(document).ready(function(){
 		var ID=$.trim($('#ID').val());
 		var PW=$.trim($('#PW').val());
 		
-		if(ID == 'X' && PW == '13'){
+		if(ID === 'X' && PW === '13'){
 		
 			$.loginMethod(ID);
 				

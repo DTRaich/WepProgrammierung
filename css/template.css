@@ -1,0 +1,176 @@
+/* --------------------------------------------------- Overall ----------------------- */
+body {
+  background: #E7E7EA;
+  color: black;
+  margin: 0;
+  padding: 1%; 
+  min-width: 640px;
+  font-size: 100.01%; 
+  font-family: verdana, arial, sans-serif ;
+}
+a { color: #0B4D8C; text-decoration: underline; } 
+a:visited { color: black; } 
+.skip { 
+  position: absolute;
+  margin-left: -999px;
+  width: 990px;
+}
+h1 {
+  font-size: 2.7em;
+  font-weight: normal;
+  line-height: 0.8em;
+  padding: 0.6em 0 0.2em 2%;
+  margin: 0;
+  
+}
+h2, h3, h4 { font-weight: normal; }
+h1, h2, h3, h4, h5, h6 { 
+  color: #6699CC;
+  font-family: Arial;
+}
+img { 
+  border: solid 1px #aaa;
+  padding: 1px;
+  max-width: 95%;
+}
+.fleft { 
+  float: left;
+  margin: 0 1em 0.2em 0; 
+}
+.fright {
+  float: right;
+  margin: 0 0 0.2em 1em;
+  padding: 1px;
+}
+
+
+
+/* ------------------------------------------------ Layout ---------------------- */
+#container { 
+  font-size: 0.8em; 
+  max-width: 70em; 
+  margin: auto; 
+  border: 0 ;
+  border-top: 0; 
+  background: white;
+}
+#footer {
+  clear: both; 
+  padding: 0 20px;
+}
+
+/* ----------------------------------------------- Logo-------------------------- */
+#logo {
+  background: url(../img/big/Filmrolle.png) 0 0 no-repeat #E7E7EA;
+  text-align: center;
+  line-height: 54px;  
+  height: 154px;
+  font-size: 54px; 
+  overflow: hidden;  
+  letter-spacing: -3px; 
+  margin:0;
+  
+}
+
+
+/* ---------------------------------------------- Menu------------------------------ */
+#menu {
+  font-size:30px;
+  position: absolute;
+  /*padding-left: 13%;*/
+
+}
+
+#menu ul {
+  list-style-type:none;
+  list-style-image:none;
+  margin:0px;
+  padding:0px;
+}
+
+#menu li.topmenu {
+  float:left;
+}
+
+.topmenu a {
+  float:left;
+  width:286.5px;
+  text-align:center;
+}
+
+.topmenu ul{
+  display:none;
+}
+
+.topmenu a, .submenu a{
+  padding:1px 5px;
+  border:1px solid #E7E7EA;
+  border-collapse:collapse;
+  color:white;
+  /*font-weight:bold;*/
+  text-decoration:none;
+  background-color:#191F61;
+  margin:0;  
+
+}
+
+.submenu a{
+  font-size:12px;
+  width:200;
+  position:relative;
+  clear:both; 
+}
+
+#menu a:hover, .topmenu.on a {
+  color:white;
+  background-color:#3E48B5 !important;
+}
+
+.topmenu:hover ul {
+  display:block;  
+  z-index:500;
+}
+
+.alert{
+
+}
+
+/* -------------------------------------------------- Login, left column--------------------------- */
+#login {
+  width: 25%; 
+  min-width: 10em;
+  float: left; 
+  margin: 1em 1% 0 1%;
+  border-right: 1px dotted #aaa; 
+  font-size: 0.9em; 
+}
+#login dt { 
+  font-size: 1.2em;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding: 0.5em;
+  margin-top: 1em;
+  border-top: 1px dotted #aaa; 
+}
+#login dd { 
+  padding: 0;
+  margin: 0.2em 0;
+}
+
+#login h1{
+  color: black;
+  border: 0;
+}
+#loginLink{
+color: black;
+}
+/* --------------- Mainpart ---place for templates; IDs are in the specific templates in their .js files -------------------- */
+
+#main {
+   padding-left: 26%;
+   line-height: 1.5em; 
+  
+}
+
+
+
+
