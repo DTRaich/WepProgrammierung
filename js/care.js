@@ -6,7 +6,7 @@ var isSeen = false;
 // ---------------------------------------standart care Form----------------------
 var careFormTemplate = _.template('<br> <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
 									'Filmtitel:<input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> <br> ' +
-									'Erscheinungsjahr:<input type="text" placeholder="Jahr" id="year" maxlength="4" size="4"/> <br> <br> '+
+									'Erscheinungsjahr:<input type="text" placeholder="Jahr" size="4" id="year" maxlength="4" /> <br> <br> '+
 									'Genre: <select id="genre_select">'+
 												'<option value="null">- Genre -</option>' +
 												'<option value="Action">Action</option>' +
@@ -23,12 +23,12 @@ var sendButtonTemplate = _.template('<input type="button" name="addFilm" id="add
 
 //------------------------------------- rate and Commen Template which is displayed between them----------									
 var rateAndCommentTemplate = _.template(' Bewertung : <select id="rating">'+
-										'  <option  value ="0">0</option> ' +
-										'  <option  value ="1">1</option> '+
-										' <option  value ="2" selected>2</option> '+
-										' <option  value ="3">3</option> '+
-										'  <option  value ="4">4</option> '+
-										' <option  value ="5">5 </option> '+	  
+
+										'  <option  value ="1"> &#9733</option> '+
+										'  <option  value ="2"> &#9733 &#9733</option> '+
+										'  <option  value ="3"> &#9733 &#9733 &#9733</option> '+
+										'  <option  value ="4"> &#9733 &#9733 &#9733 &#9733</option> '+
+										'  <option  value ="5"> &#9733 &#9733 &#9733 &#9733 &#9733</option> '+	  
 										' </select> <br><br>');
 
 
