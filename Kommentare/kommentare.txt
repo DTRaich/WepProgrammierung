@@ -1,0 +1,8 @@
+was wir brauchen ist bilder von sternen für die bewertungen
+kleine bilder für delete und ändern;
+
+template Formatierungen löschen und per css lösen
+
+beim zusammenschieben des Browsers verengt sich der Platz 
+für den Loginbereich und die Navigationsleiste wird untereinander 
+angezeigt. (siehe screenshot) 
