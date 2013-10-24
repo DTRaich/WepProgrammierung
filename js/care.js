@@ -5,23 +5,31 @@ var isSeen = false;
 
 // ---------------------------------------standart care Form----------------------
 var careFormTemplate = _.template('<br> <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
-									'Filmtitel:<input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> ' +
-									'Genre: ' +
-									'Gesehen: <input id="ratingChb" name"chbRating" type="checkbox" name="Gesehen:" value="seen" / ><br>');
+									'Filmtitel:<input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> <br> ' +
+									'Erscheinungsjahr:<input type="text" placeholder="Jahr" id="year" maxlength="4" size="4"/> <br> <br> '+
+									'Genre: <select id="genre_select">'+
+												'<option value="null">- Genre -</option>' +
+												'<option value="Action">Action</option>' +
+												'<option value="Comedy">Comedy</option>' +
+												'<option value="Horror">Horror</option>' +
+												'<option value="Sci-Fi">Sci-Fi</option>' +
+												'<option value="Thriller">Thriller</option>' +
+											'</select> <br><br>' +
+									'Gesehen: <input id="ratingChb" name"chbRating" type="checkbox" name="Gesehen:" value="seen" / ><br><br>');
 									
 //-----------------------------------------button to sen/add the movie ---------------------									
 var sendButtonTemplate = _.template('<input type="button" name="addFilm" id="addMovie" value="Film hinzufügen" / >');
 
 
 //------------------------------------- rate and Commen Template which is displayed between them----------									
-var rateAndCommentTemplate = _.template('<select id="rating">'+
+var rateAndCommentTemplate = _.template(' Bewertung : <select id="rating">'+
 										'  <option  value ="0">0</option> ' +
 										'  <option  value ="1">1</option> '+
 										' <option  value ="2" selected>2</option> '+
 										' <option  value ="3">3</option> '+
 										'  <option  value ="4">4</option> '+
 										' <option  value ="5">5 </option> '+	  
-										' </select> ');
+										' </select> <br><br>');
 
 
 										
