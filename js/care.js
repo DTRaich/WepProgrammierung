@@ -31,9 +31,16 @@ var rateAndCommentTemplate = _.template(' Bewertung : &nbsp&nbsp&nbsp&nbsp&nbsp&
 										'  <option  value ="5"> &#9733 &#9733 &#9733 &#9733 &#9733</option> '+	  
 										' </select> <br><br>');
 										
-//------------------------------------ PUBLIC METHODS TO CALL--------------------------
+//------------------------------------ METHODS TO CALL--------------------------
+
+$.ChangeMovie = function(){
+// aufrufen und befüllen der jeweiligen Felder und boxen mit den bereits vorhandenen Daten 
+// problem : normaler checkAblauf kann nicht 1:1 übernommen werden da der Film ja schon vorliegt oder durch schreibfehler korrektur erst danach vorliegt
+// zum akteulle daten holen gibt es eine Funktion im data Script (Daniel fragen);
+}
 
 //--------------------------------------INTERN METHODS------------------------------
+
 
 
 //------------------------------ CLICK AND KEYDOWN EVENTS----------------------------
@@ -97,6 +104,7 @@ $(document).ready(function(){
 			event.stopImmediatePropagation();
 			});
 			
-			
+			// sehr gut -- > noch aussstehend
+			// "prompt" poUp zum bestätigen das man speichert (daten nochmal wie in deinem Alert mit anzeigen (evtl. auch mit nils nochmal ablären was er meint)
 
 })
