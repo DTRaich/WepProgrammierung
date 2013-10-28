@@ -44,6 +44,13 @@ $.proofMovieExists = function(movieTitle,year){
 
 }
 
+// returns all Movies without Filters
+$.getAllMovies = function(){
+
+	return movieArray;
+}
+
+//------------------------------add and delete-----------------------------
 // adds a new movie to the Array
 $.addMovie = function (movieArr){
 	
@@ -51,11 +58,6 @@ $.addMovie = function (movieArr){
 
 }
 
-// returns all Movies without Filters
-$.getAllMovies = function(){
-
-	return movieArray;
-}
 //delets a movie in the movieArray
 $.deleteMovies(movie,year) = function(){
 
@@ -65,21 +67,8 @@ $.deleteMovies(movie,year) = function(){
 
 	}	
 }
-
-// Filters movie with the genre
-$.getWithGenreFilter = function(filterGenre){
-
-	var filteredMovieArray = new Array();	
-	for(var i = 0; i < movieArray.length; i++){
 	
-		if(movieArray[i].genre === filterGenre){
-			filteredMovieArray.push(movieArray[i]);			
-		}
-	}
-	return filteredMovieArray;
-}
-	
-
+//---------------------------changeStuff------------------------
 // changes the parameters of the movie
 $.addChanges = function(movieArr){
 
@@ -101,17 +90,52 @@ $.getOneMovieData = function(movie, year){
 	return movieData;
 }
 
+//------------------sorting and filtering-----------------------------------
 //sort seen or not; seen= true/fals
-$.sortMovieSeen =  function(seen){
+$.sortMovieSeen =  function(seen, preSortedArray){
+	var sortedArray = new Array();
+	if(preSortedArray == "null"){
+		//usemovieArray
+	}else{
+		//use preSorted
+	}
 
 }
 
 // sort rating best first or last;  best = true/false;
-$.sortMovieRating = function(best){
-
+$.sortMovieRating = function(best,preSortedArray){
+	var sortedArray = new Array();
+	
+	if(preSortedArray == "null"){
+		//usemovieArray
+	}else{
+		//use preSorted
+	}
 }
 
+//sort Alphabet asc= true/false
+$.sortMovieAlphabet = function(asc,preSortedArray){
+	var sortedArray = new Array();
+	
+	if(preSortedArray == "null"){
+		//usemovieArray
+	}else{
+		//use preSorted
+	}
+}
 
+// Filters movie with the genre
+$.getWithGenreFilter = function(filterGenre){
+
+	var filteredMovieArray = new Array();	
+	for(var i = 0; i < movieArray.length; i++){
+	
+		if(movieArray[i].genre === filterGenre){
+			filteredMovieArray.push(movieArray[i]);			
+		}
+	}
+	return filteredMovieArray;
+}
 
 
 //--------------------------------------------------INTERN METHODS--------------------------------
