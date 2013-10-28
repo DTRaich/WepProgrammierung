@@ -67,7 +67,7 @@ $.deleteMovies(movie,year) = function(){
 }
 
 // Filters movie with the genre
-$.genreFilter = function(filterGenre){
+$.getWithGenreFilter = function(filterGenre){
 
 	var filteredMovieArray = new Array();	
 	for(var i = 0; i < movieArray.length; i++){
@@ -81,13 +81,13 @@ $.genreFilter = function(filterGenre){
 	
 
 // changes the parameters of the movie
-$.changeMovies = function(movieArr){
+$.addChanges = function(movieArr){
 
-	var movielocation = findLocationOfMovie(movieArr[0].title, movieArr[0].year);
+	var movielocation = findLocationOfMovie(movieArr[0]["title"], movieArr[0]["year"]);
 	
-	for (var attribute in movieArr[movielocation]){
+	for (var attribute in movieArr[0]){
 		
-		moviearr		
+		movieArray[movielocation][attribute] = movieArr[0][attribute];	
 	}
 }
 
@@ -110,6 +110,7 @@ $.sortMovieSeen =  function(seen){
 $.sortMovieRating = function(best){
 
 }
+
 
 
 

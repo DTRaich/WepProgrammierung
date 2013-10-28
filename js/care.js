@@ -1,6 +1,7 @@
 //CareScript 
 //----------------------------------------GLOBAL VARIABLES-------------------------
 var isSeen = false;
+var inCommingChangeset;
 // &nbsp leerzeichen
 //-------------------------------------------TEMPLATES-------------------------------
 
