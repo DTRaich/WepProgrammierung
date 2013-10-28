@@ -4,13 +4,17 @@ was uns so aufgefallen ist bitte abarbeiten und vorabgabe durchschauen!!!
 -------------------------------NOCH OFFEN-------------------------------
 
 3) template Formatierungen löschen und per css lösen
-4) Formatierungen der Bereiche MAIN MIDDLE TOP etc.. bezüglich padding überprüfen ob hier nicht falsch gesetzte wurde
+
+
+
+--------------------TALK-----------------------------------------
 5)beim zusammenschieben des Browsers verengt sich der Platz 
 für den Loginbereich und die Navigationsleiste wird untereinander 
 angezeigt. (siehe screenshot) 
-
-
+-----> (DANIEL) angeschaut prblem identifizier "width " angaben in prozent.. zeit investieren erst am ende sonst so lassen... 
+			---> Meinungen
 ------------------DONE-----------------------------------------------------
 
 1)was wir brauchen ist bilder von sternen für die bewertungen   ---> SINA/NILS
 2) kleine bilder für delete und ändern;  ---> SINA/NILS
+4) Formatierungen der Bereiche MAIN MIDDLE TOP etc.. bezüglich padding überprüfen ob hier nicht falsch gesetzte wurde --> Daniel

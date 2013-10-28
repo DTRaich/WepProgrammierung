@@ -35,7 +35,7 @@ var nav_login_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="na
 									' <li class="submenu"><a href="#" id="nav_thriller">Thriller</a></li> '+
 									' </ul> </li>' +
 									' <li class="topmenu">' +
-									'  <a href="#" id="nav_care">Pflege</a></li> ' + 
+									'  <a href="#" id="nav_care">Verwaltung</a></li> ' + 
 									' </li> '+
 									'</ul> ');
 	
