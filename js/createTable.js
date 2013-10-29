@@ -1,13 +1,14 @@
-var maintemplate=_.template('<br><table width="100%" height="100%" border="1" id="tabelle"></table>');
+var maintemplate=_.template('<br><table width="100%" height="100%" border="1" id="tabelle"></table>'+
+							'<div id="main_top"></div>'+
+							'<div id="main_middle"></div>'+	
+							'<div id="main_low"></div>');
 var movies;
 var backg="#C4C4C4";
 var backg2 = "#E3E3E3";
 
 $(document).ready(function(){
-$(document).on('click','#nav_home',function(event){
-			
-	preselecttable();
-	
+$(document).on('click','#nav_home',function(event){			
+	preselecttable();	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
