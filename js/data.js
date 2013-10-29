@@ -4,19 +4,18 @@ var movieArray = new Array();
 
 
 //------------------------DATA----------------------------------------
-// hier noch mehr Filme eventuel von nils übernehemen
 movieArray[0] = new Object();
 movieArray[0]["title"] = "American History X";
 movieArray[0]["year"] = "1999";
 movieArray[0]["genre"] = "Genre";
-movieArray[0]["rating"] = "0";
+movieArray[0]["rating"] = "3";
 movieArray[0]["seen"] = "1";
 
 movieArray[1] = new Object();
 movieArray[1]["title"] = "Lord of War";
 movieArray[1]["year"] = "1999";
-movieArray[1]["genre"] = "";
-movieArray[1]["rating"] = "0";
+movieArray[1]["genre"] = "Action";
+movieArray[1]["rating"] = "3";
 movieArray[1]["seen"] = "0";
 
 movieArray[2] = new Object();
@@ -29,7 +28,7 @@ movieArray[2]["seen"] = "0";
 
 // searches for the movie and the year
 $.findLocationOfMovie = function(movie, year){
-	
+	alert("location");
 	//-1 represents not found
 	var location = -1;
 	
@@ -54,9 +53,23 @@ $.proofMovieExists = function(movieTitle,year){
 		return false;
 	}else{
 		return true;
-	}
+	}	 
+}
+
+
+$.getOneMovieData =function(movieTitle,year){
+
+	var movieData = new Object();
+	var movielocation = $.findLocationOfMovie(movieTitle,year);
+
+	movieData["title"] = movieArray[movielocation]["title"];
+	movieData["year"] = movieArray[movielocation]["year"];
+	movieData["genre"] = movieArray[movielocation]["genre"];
+	movieData["rating"] = movieArray[movielocation]["rating"];
+	movieData["seen"] = movieArray[movielocation]["seen"];
+	movieData["OriginalId"] = movielocation;
 	
-	 
+	return movieData;
 }
 
 // returns all Movies without Filters
@@ -95,14 +108,13 @@ $.addChanges = function(movieObj){
 }
 
 // gets the MovieData of one Movie
-$.getOneMovieData = function(movie, year){
-	var movieData;
-	var movielocation = findLocationOfMovie(movie,year);
-	
-	movieData.push(movieArray[movielocation]);
-	
-	return movieData;
-}
+
+
+
+
+
+
+
 
 //------------------sorting and filtering-----------------------------------
 //sort seen or not; seen= true/fals

@@ -2,10 +2,10 @@
 width: 100px;
 }
 
-.care_textbox{
-			 }
 			 			 
-
+.inputError{
+	border: solid 2px red;
+}
 
 
 
