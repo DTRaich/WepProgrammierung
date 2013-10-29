@@ -53,9 +53,11 @@ $.getAllMovies = function(){
 //------------------------------add and delete-----------------------------
 // adds a new movie to the Array
 $.addMovie = function (movieArr){
-	
-	movieArray.push(movieArr);
+	alert('voradd!');
 
+	movieArray.push(movieArr);
+	
+	alert('nachadd!'); 
 }
 
 //delets a movie in the movieArray

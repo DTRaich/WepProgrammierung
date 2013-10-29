@@ -2,6 +2,8 @@
 //----------------------------------------GLOBAL VARIABLES-------------------------
 var isSeen = false;
 var inCommingChangeset;
+var addMovieSet;
+
 // &nbsp leerzeichen
 //-------------------------------------------TEMPLATES-------------------------------
 
@@ -42,15 +44,13 @@ $.changeMovie = function(){
 
 //--------------------------------------INTERN METHODS------------------------------
 
-
-
 //------------------------------ CLICK AND KEYDOWN EVENTS----------------------------
 		
 $(document).ready(function(){
 
 	// display templates for the Form
 	$(document).on('click', '#nav_care', function(event) {
-		
+		$('#main').html(maintemplate());	
 		$('#main_top').html(careFormTemplate());
 		$('#main_low').html(sendButtonTemplate());
 		event.preventDefault();
@@ -80,38 +80,51 @@ $(document).ready(function(){
 			var title_input = $.trim($('#movietitle').val());
 			var year_input = "1999";
 			var rating_input;
-			var isSeen_input;
 			var genreEl = document.getElementById("genre_select");
 			var genre_input = genreEl.options[genreEl.selectedIndex].value;
 			
 			if(isSeen===true){
-			var ratingEl = document.getElementById("rating");
-			rating_input = ratingEl.options[ratingEl.selectedIndex].value;
-			isSeen_input = true;
-			}
-			else{
+				var ratingEl = document.getElementById("rating");
+				rating_input = ratingEl.options[ratingEl.selectedIndex].value;
+			}else{
 			rating_input = "0";
-			isSeen_input = false;
 			}
-			
-			//alert("Titel: " + title_input + "\n" +  "Genre: " + genre_input + "\n" + "Rating: " + rating_input + "\n" + "Gesehen: " + isSeen_input);
 			
 			if( genre_input == "null" && title_input == "" || title_input== "undefined" ){
-			alert('Bitte alle Felder richtig ausfüllen');
+				alert('Bitte alle Felder richtig ausfüllen');
 			}else{
 			// erst prüfen: film schon vorhanden ( Titel + Jahr ) 
 			// wenn ja dann nicht zulassen
 			//wenn nein dann weiter
-			prompt("bla");
-			// daten, ja/nein button frage wegen speichern
+				if (isSeen===true){ var result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
+				}else{
+				var result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
+				}
+				if ( result == true ){					
+
+					addMovieSet = new Object();
+					addMovieSet["title"] = title_input;
+					addMovieSet["year"] = year_input;
+					addMovieSet["genre"] = genre_input;
+					addMovieSet["rating"] = rating_input;
+				
+
+					if (isSeen == true ){
+					addMovieSet["seen"] = "1";
+					}else{
+					addMovieSet["seen"] = "0";
+					}
+			
+
+					$.addMovie(addMovieSet);
+					// leeren formular
+					// isSeen = false
+					}	
 			}
 			
 			
 			event.preventDefault();
 			event.stopImmediatePropagation();
 			});
-			
-			// sehr gut -- > noch aussstehend
-			// "prompt" poUp zum bestätigen das man speichert (daten nochmal wie in deinem Alert mit anzeigen (evtl. auch mit nils nochmal ablären was er meint)
 
 })
