@@ -6,8 +6,8 @@ body {
   padding: 1%; 
   min-width: 640px;
   font-size: 100.01%; 
-  font-family: verdana, arial, sans-serif ;
-}
+  font-family: arial ;
+  }
 a { color: #0B4D8C; text-decoration: underline; } 
 a:visited { color: black; } 
 .skip { 
@@ -33,16 +33,6 @@ img {
   padding: 1px;
   max-width: 95%;
 }
-.fleft { 
-  float: left;
-  margin: 0 1em 0.2em 0; 
-}
-.fright {
-  float: right;
-  margin: 0 0 0.2em 1em;
-  padding: 1px;
-}
-
 
 
 /* ------------------------------------------------ Layout ---------------------- */
@@ -77,8 +67,6 @@ img {
 #menu {
   font-size:30px;
   position: absolute;
-  /*padding-left: 13%;*/
-
 }
 
 #menu ul {
@@ -131,30 +119,16 @@ img {
   z-index:500;
 }
 
-.alert{
-
-}
 
 /* -------------------------------------------------- Login, left column--------------------------- */
-#login {
+#login {  
   width: 25%; 
   min-width: 10em;
   float: left; 
-  margin: 1em 1% 0 1%;
+  margin: 1em;
   font-size: 0.9em; 
-}
-#login dt { 
-  font-size: 1.2em;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  padding: 0.5em;
-  margin-top: 1em;
-  border-top: 1px dotted #aaa; 
-}
-#login dd { 
-  padding: 0;
-  margin: 0.2em 0;
-}
 
+}
 #login h1{
   color: black;
   border: 0;
@@ -164,11 +138,12 @@ color: black;
 }
 /* --------------- Mainpart ---place for templates; IDs are in the specific templates in their .js files -------------------- */
 
-#main , #main_top, #main_middle , #main_low{
-   padding-left: 26%;
-   line-height: 1.5em; 
-   border-left: 1px dotted #aaa; 
-  
+#main {
+	border-left: 1px dotted #aaa; 
+	padding-left: 2%;
+	width: 70%;   
+	float: right;
+	
 }
 
 

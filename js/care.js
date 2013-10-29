@@ -1,11 +1,12 @@
 //CareScript 
 //----------------------------------------GLOBAL VARIABLES-------------------------
 var isSeen = false;
+var inCommingChangeset;
 // &nbsp leerzeichen
 //-------------------------------------------TEMPLATES-------------------------------
 
 // ---------------------------------------standart care Form----------------------
-var careFormTemplate = _.template('<br> <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
+var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
 									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" size="50" id="movietitle" class="care_textbox"/> <br> <br> ' +
 									'Erscheinungsjahr: &nbsp&nbsp&nbsp <input type="number" placeholder="Jahr" size="4" id="year" maxlength="4" class="care_textbox" /> <br> <br> '+
 									'Genre: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <select id="genre_select" class="care_textbox">'+
@@ -31,9 +32,16 @@ var rateAndCommentTemplate = _.template(' Bewertung : &nbsp&nbsp&nbsp&nbsp&nbsp&
 										'  <option  value ="5"> &#9733 &#9733 &#9733 &#9733 &#9733</option> '+	  
 										' </select> <br><br>');
 										
-//------------------------------------ PUBLIC METHODS TO CALL--------------------------
+//------------------------------------ METHODS TO CALL--------------------------
+
+$.changeMovie = function(){
+// aufrufen und befüllen der jeweiligen Felder und boxen mit den bereits vorhandenen Daten 
+// problem : normaler checkAblauf kann nicht 1:1 übernommen werden da der Film ja schon vorliegt oder durch schreibfehler korrektur erst danach vorliegt
+// zum akteulle daten holen gibt es eine Funktion im data Script (Daniel fragen);
+}
 
 //--------------------------------------INTERN METHODS------------------------------
+
 
 
 //------------------------------ CLICK AND KEYDOWN EVENTS----------------------------
@@ -103,6 +111,7 @@ $(document).ready(function(){
 			event.stopImmediatePropagation();
 			});
 			
-			
+			// sehr gut -- > noch aussstehend
+			// "prompt" poUp zum bestätigen das man speichert (daten nochmal wie in deinem Alert mit anzeigen (evtl. auch mit nils nochmal ablären was er meint)
 
 })
