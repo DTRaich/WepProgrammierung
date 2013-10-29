@@ -25,23 +25,38 @@ movieArray[2]["year"] = "1999";
 movieArray[2]["genre"] = "Genre";
 movieArray[2]["rating"] = "0";
 movieArray[2]["seen"] = "0";
+//--------------------------------------------------INTERN METHODS--------------------------------
 
+// searches for the movie and the year
+$.findLocationOfMovie = function(movie, year){
+	
+	//-1 represents not found
+	var location = -1;
+	
+	for(var i = 0; i < movieArray.length; i++){
+		
+		if(movieArray[i]["title"] === movie && movieArray[i]["year"] === year){
+			// movie found place is "i"
+			location = i;
+		}
+	}
+	return location;
+}
 
 //----------------------------------------------------------METHODS TO CALL------------------------------
 // module pattern 
 // proofs if the movie exist ; same movie different year is OK!!!!
 $.proofMovieExists = function(movieTitle,year){
 
-	var moviePlace = $.findLocationOfMovie(movieTitle,year);
-	if(moviePlace === -1){
-		
-		return true;
-		
-	 }else{
-		
+	var location = $.findLocationOfMovie(movieTitle,year);
+	
+	if(location === -1){
 		return false;
+	}else{
+		return true;
 	}
-
+	
+	 
 }
 
 // returns all Movies without Filters
@@ -52,15 +67,12 @@ $.getAllMovies = function(){
 
 //------------------------------add and delete-----------------------------
 // adds a new movie to the Array
-$.addMovie = function (movieArr){
-	alert('voradd!');
-
+$.addMovie = function (movieArr){	
 	movieArray.push(movieArr);
 	
-	alert('nachadd!'); 
 }
 
-//delets a movie in the movieArray
+//deletes a movie in the movieArray
 $.deleteMovies(movie,year) = function(){
 
 	if(findLocationOfMovie(movie,year) !== -1){
@@ -72,19 +84,19 @@ $.deleteMovies(movie,year) = function(){
 	
 //---------------------------changeStuff------------------------
 // changes the parameters of the movie
-$.addChanges = function(movieArr){
+$.addChanges = function(movieObj){
 
-	var movielocation = findLocationOfMovie(movieArr[0]["title"], movieArr[0]["year"]);
+	var movielocation = findLocationOfMovie(movieObj[0]["title"], movieObj[0]["year"]);
 	
-	for (var attribute in movieArr[0]){
+	for (var attribute in movieObj[0]){
 		
-		movieArray[movielocation][attribute] = movieArr[0][attribute];	
+		movieArray[movielocation][attribute] = movieObj[0][attribute];	
 	}
 }
 
 // gets the MovieData of one Movie
 $.getOneMovieData = function(movie, year){
-	var movieData= new Array();	
+	var movieData;
 	var movielocation = findLocationOfMovie(movie,year);
 	
 	movieData.push(movieArray[movielocation]);
@@ -140,20 +152,3 @@ $.getWithGenreFilter = function(filterGenre){
 }
 
 
-//--------------------------------------------------INTERN METHODS--------------------------------
-
-// searches for the movie and the year
-$.findLocationOfMovie = function(movie, year){
-
-	//-1 represents not found
-	var location= -1;
-	
-	for(var i = 0; i < movieArray.length; i++){
-		
-		if(movieArray[i].Name === movie && movieArray[i].year === year){
-			// movie found place is "i"
-			location = i;
-		}
-	}
-	 return location;
-}

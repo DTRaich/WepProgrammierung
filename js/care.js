@@ -34,7 +34,7 @@ var rateAndCommentTemplate = _.template(' Bewertung : &nbsp&nbsp&nbsp&nbsp&nbsp&
 										
 //------------------------------------ METHODS TO CALL--------------------------
 
-$.changeMovie = function(){
+$.changeMovie = function(title, year){
 // aufrufen und befüllen der jeweiligen Felder und boxen mit den bereits vorhandenen Daten 
 // problem : normaler checkAblauf kann nicht 1:1 übernommen werden da der Film ja schon vorliegt oder durch schreibfehler korrektur erst danach vorliegt
 // zum akteulle daten holen gibt es eine Funktion im data Script (Daniel fragen);
@@ -55,7 +55,7 @@ $.collectFormData = function(){
 		var rating_input;
 		var genreEl = document.getElementById("genre_select");
 		var genre_input = genreEl.options[genreEl.selectedIndex].value;
-			
+		var result;	
 		if(isSeen===true){
 			var ratingEl = document.getElementById("rating");
 			rating_input = ratingEl.options[ratingEl.selectedIndex].value;
@@ -66,12 +66,12 @@ $.collectFormData = function(){
 		if( genre_input == "null" || title_input == "" || title_input== "undefined" ){
 			alert('Bitte alle Felder richtig ausfüllen');
 		}else{
-		// erst prüfen: film schon vorhanden ( Titel + Jahr ) 
-		// wenn ja dann nicht zulassen
-		//wenn nein dann weiter
-			if (isSeen===true){ var result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
+		if($.proofMovieExists(title_input, year_input) == true){
+				alert("Film schon vorhanden!");
 			}else{
-			var result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
+			if (isSeen===true){result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
+			}else{
+			result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
 			}
 			if ( result == true ){					
 				addMovieSet = new Object();
@@ -85,10 +85,17 @@ $.collectFormData = function(){
 				}else{
 					addMovieSet["seen"] = "0";
 				}
+			if($.proofMovieExists(title_input, year_input) == true){
+				alert("gefunden");
+			}else{
+			alert("nicht");
+			}
+			
 			$.addMovie(addMovieSet);
 			$.newFormular();			
 					}	
-			}			
+			}
+}			
 }
 
 //------------------------------ CLICK AND KEYDOWN EVENTS----------------------------
