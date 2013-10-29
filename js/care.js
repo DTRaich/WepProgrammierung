@@ -86,10 +86,16 @@ $(document).ready(function(){
 			isSeen_input = false;
 			}
 			
-			alert("Titel: " + title_input + "\n" +  "Genre: " + genre_input + "\n" + "Rating: " + rating_input + "\n" + "Gesehen: " + isSeen_input);
+			//alert("Titel: " + title_input + "\n" +  "Genre: " + genre_input + "\n" + "Rating: " + rating_input + "\n" + "Gesehen: " + isSeen_input);
 			
-			if( genre_input == "null" ){
-			alert('Bitte ein Genre auswählen');
+			if( genre_input == "null" && title_input == "" || title_input== "undefined" ){
+			alert('Bitte alle Felder richtig ausfüllen');
+			}else{
+			// erst prüfen: film schon vorhanden ( Titel + Jahr ) 
+			// wenn ja dann nicht zulassen
+			//wenn nein dann weiter
+			prompt("bla");
+			// daten, ja/nein button frage wegen speichern
 			}
 			
 			
