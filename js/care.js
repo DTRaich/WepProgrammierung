@@ -7,7 +7,7 @@ var receivedData;
 // ---------------------------------------standart care Form----------------------
 var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
 									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> <br> ' +
-									'Erscheinungsjahr: &nbsp&nbsp <input type="text" placeholder="Jahr" size="4" id="year" maxlength="4"/> <br> <br> '+
+									'Erscheinungsjahr: &nbsp&nbsp <div id="yearddb"/> <br> <br> '+
 									'Genre: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <select id="genre_select">'+
 												'<option value="null">- Genre -</option>' +
 												'<option value="Action">Action</option>' +
@@ -55,10 +55,24 @@ $.changeMovie = function(title, year){
 $.newFormular = function(){
 	$('#main').html(maintemplate());	
 	$('#main_top').html(careFormTemplate());
+	$.createDropDownYear();
 	$('#main_low').html(sendButtonTemplate());
 	isSeen = false;
 }
-
+//create DropDown Year
+$.createDropDownYear = function(){
+	node = document.getElementById("yearddb");
+	
+	var selector = document.createElement('select');
+	var option;
+ 	for(var i = 2014;i>1884;i--){
+		option = document.createElement('option');
+		option.value = i;
+		option.appendChild(document.createTextNode(i));
+		selector.appendChild(option);	
+	}
+	node.parentNode.insertBefore(selector,node);
+}
 // checks and colors fields
 $.checkFields = function(genre_input,title_input){;
 	var valid = false;
