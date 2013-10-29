@@ -12,50 +12,85 @@ $(document).on('click','#nav_home',function(event){
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
-});
-
 
 //navigation Genre Input
-$(document).ready(function(){
 $(document).on('click','#nav_action',function(event){	
 	movies = filter("Action");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
-});
-$(document).ready(function(){
 $(document).on('click','#nav_comedy',function(event){	
 	movies = filter("Comedy");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
-});
-$(document).ready(function(){
 $(document).on('click','#nav_horror',function(event){	
 	movies = filter("Horror");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
-});
-$(document).ready(function(){
 $(document).on('click','#nav_scifi',function(event){	
 	movies = filter("SciFi");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
-});
-$(document).ready(function(){
 $(document).on('click','#nav_thriller',function(event){	
 	movies = filter("Thriller");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+
+//Table Button click events
+//Editbutton clicked
+$(document).on('click','#Editclicked',function(event){
+
+	alert($(this).context.className);	
+	var classn = $(this).context.className;
+	alert(movies[classn]["title"]);
+
 });
+//deletebutton clicked
+$(document).on('click','#Deleteclicked',function(event){
+
+	alert($(this).context.className);		
+	var classn = $(this).context.className;
+	alert(movies[classn]["title"]);
+	
+});
+//Rating clicked
+$(document).on('click','#Ratingclicked',function(event){
+
+	alert($(this).context.className);		
+	var classn = $(this).context.className;
+	alert(movies[classn]["title"]);
+	
+});
+
+//HeaderSort Clicks
+//TitleSortClicked
+$(document).on('click','#TitleSortClicked',function(event){
+
+	alert($(this).context.id);	
+	
+});
+$(document).on('click','#YearSortClicked',function(event){
+
+	alert($(this).context.id);	
+	
+});
+$(document).on('click','#RatingSortClicked',function(event){
+
+	alert($(this).context.id);	
+	
+});
+
+});
+
 
 //Genre Input Filter Function
 function filter(filter){	
@@ -123,21 +158,49 @@ function createTablelogedIn(row, id) {
 			switch (i){
 				case 0:					  					
 					currenttext = document.createTextNode("Title");
+					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","TitleSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 1:				  					
 					currenttext = document.createTextNode("Jahr");
+					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","YearSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 2:
 					currenttext = document.createTextNode("Genre");
+					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 3:
 					currenttext = document.createTextNode("Gesehen");
+					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 4:
 					currenttext = document.createTextNode("Rating");
+					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","RatingSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;			
-			}			
-			mycurrent_cell.appendChild(currenttext);
+			}		
 			mycurrent_row.appendChild(mycurrent_cell);
 		}
 		
@@ -180,6 +243,9 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.style.width = "80px";
 					mycurrent_cell.style.height = "20px";
 					mycurrent_cell.style.border = "0";
+					mycurrent_cell.setAttribute("id","Ratingclicked");
+					mycurrent_cell.setAttribute("class",j);
+					mycurrent_cell.style.cursor = "pointer";
 					break;	
 				case 5:
 					mycurrent_cell =document.createElement("img");	
@@ -202,13 +268,11 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.setAttribute("class",j);
 					mycurrent_cell.style.cursor = "pointer";
 					mycurrent_cell.style.backgroundColor =backg2;
-					break;
-					
+					break;					
 			}			
 			mycurrent_cell.appendChild(currenttext);
 			mycurrent_row.appendChild(mycurrent_cell);
-		} 
-		
+		} 		
 		//complete Row
 		mycurrent_row.setAttribute("id","Row"+j);
         mytablebody.appendChild(mycurrent_row);
@@ -233,18 +297,45 @@ function createTableGuest(row, id) {
 			switch (i){
 				case 0:					  					
 					currenttext = document.createTextNode("Title");
+					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","TitleSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 1:				  					
 					currenttext = document.createTextNode("Jahr");
+					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","YearSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 2:
 					currenttext = document.createTextNode("Genre");
+					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 3:
-					currenttext = document.createTextNode("Rating");
+					currenttext = document.createTextNode("Rating");								
+					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","RatingSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;			
-			}			
-			mycurrent_cell.appendChild(currenttext);
+			}
 			mycurrent_row.appendChild(mycurrent_cell);
 		}
 		
@@ -295,19 +386,6 @@ function createTableGuest(row, id) {
     return myTable;
 }
 
-$(document).on('click','#Editclicked',function(event){
 
-	alert($(this).context.className);	
-	var classn = $(this).context.className;
-	alert(movies[classn]["title"]);
 
-})
-
-$(document).on('click','#Deleteclicked',function(event){
-
-	alert($(this).context.className);		
-	var classn = $(this).context.className;
-	alert(movies[classn]["title"]);
-	
-})
 
