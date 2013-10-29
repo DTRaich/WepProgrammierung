@@ -1,14 +1,13 @@
 //CareScript 
 //----------------------------------------GLOBAL VARIABLES-------------------------
 var isSeen = false;
-var inCommingChangeset;
-var addMovieSet;
+var receivedData;
 //-------------------------------------------TEMPLATES-------------------------------
 
 // ---------------------------------------standart care Form----------------------
 var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
 									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> <br> ' +
-									'Erscheinungsjahr: &nbsp&nbsp&nbsp <div id="yearddb"/> <br> <br> '+
+									'Erscheinungsjahr: &nbsp&nbsp <input type="text" placeholder="Jahr" size="4" id="year" maxlength="4"/> <br> <br> '+
 									'Genre: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <select id="genre_select">'+
 												'<option value="null">- Genre -</option>' +
 												'<option value="Action">Action</option>' +
@@ -17,7 +16,7 @@ var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+
 												'<option value="Sci-Fi">Sci-Fi</option>' +
 												'<option value="Thriller">Thriller</option>' +
 											'</select> <br><br>' +
-									'Gesehen: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input id="ratingChb" name"chbRating" type="checkbox" name="Gesehen:" value="seen"/><br><br>');
+									'Gesehen: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input id="ratingChb" name"chbRating" type="checkbox"/><br><br>');
 									
 //-----------------------------------------button to sen/add the movie ---------------------									
 var sendButtonTemplate = _.template('<input type="button" name="addFilm" id="addMovie" value="Film hinzufügen" / >');
@@ -33,21 +32,22 @@ var rateAndCommentTemplate = _.template(' Bewertung : &nbsp&nbsp&nbsp&nbsp&nbsp&
 										' </select> <br><br>');
 										
 //------------------------------------ METHODS TO CALL--------------------------
-
+// fills formular when data needs to be changed
 $.changeMovie = function(title, year){
 
-var receivedData = $.getOneMovieData(title,year);
-$.newFormular();
+	receivedData = $.getOneMovieData(title,year);
+	$.newFormular();
 
-$('#movietitle').val(receivedData['title']);
-$('#year').val(receivedData['year']);
-$('#genre_select').val(receivedData['genre']);
-$('#rating').val(receivedData['rating']);
-// $('#ratingChb').val(receivedData['genre']);
+	$('#movietitle').val(receivedData['title']);
+	$('#year').val(receivedData['year']);
+	$('#genre_select').val(receivedData['genre']);
 
-// aufrufen und befüllen der jeweiligen Felder und boxen mit den bereits vorhandenen Daten 
+	if (receivedData['seen'] === '1' ){
+		$('#ratingChb').attr('checked',true);
+		$('#main_middle').html(rateAndCommentTemplate());
+		$('#rating').val(receivedData['rating']);
+	}
 // problem : normaler checkAblauf kann nicht 1:1 übernommen werden da der Film ja schon vorliegt oder durch schreibfehler korrektur erst danach vorliegt
-// zum akteulle daten holen gibt es eine Funktion im data Script (Daniel fragen);
 }
 
 //--------------------------------------INTERN METHODS------------------------------
@@ -55,24 +55,10 @@ $('#rating').val(receivedData['rating']);
 $.newFormular = function(){
 	$('#main').html(maintemplate());	
 	$('#main_top').html(careFormTemplate());
-	$.createDropDownYear();
 	$('#main_low').html(sendButtonTemplate());
 	isSeen = false;
 }
-//create DropDown Year
-$.createDropDownYear = function(){
-	node = document.getElementById("yearddb");
-	
-	var selector = document.createElement('select');
-	var option;
- 	for(var i = 2014;i>1884;i--){
-		option = document.createElement('option');
-		option.value = i;
-		option.appendChild(document.createTextNode(i));
-		selector.appendChild(option);	
-	}
-	node.parentNode.insertBefore(selector,node);
-}
+
 // checks and colors fields
 $.checkFields = function(genre_input,title_input){;
 	var valid = false;
@@ -99,11 +85,8 @@ $.checkFields = function(genre_input,title_input){;
 	}
 	return valid;
 }
-	
-	
 
-
-
+// gets data from formular
 $.collectFormData = function(){
 		var title_input = $.trim($('#movietitle').val());
 		var year_input = "1999";
@@ -179,8 +162,8 @@ $(document).ready(function(){
 	})
 	//addMovie Method
 	$(document).on('click', '#addMovie', function(event) {		
-			//$.collectFormData();
-			$.changeMovie("Lord of War", "1999");
+			$.collectFormData();
+			//$.changeMovie("Lord of War", "1999");
 			
 			event.preventDefault();
 			event.stopImmediatePropagation();
