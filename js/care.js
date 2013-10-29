@@ -3,8 +3,6 @@
 var isSeen = false;
 var inCommingChangeset;
 var addMovieSet;
-
-// &nbsp leerzeichen
 //-------------------------------------------TEMPLATES-------------------------------
 
 // ---------------------------------------standart care Form----------------------
@@ -44,87 +42,80 @@ $.changeMovie = function(){
 
 //--------------------------------------INTERN METHODS------------------------------
 
+$.newFormular = function(){
+	$('#main').html(maintemplate());	
+	$('#main_top').html(careFormTemplate());
+	$('#main_low').html(sendButtonTemplate());
+	isSeen = false;
+}
+
+$.collectFormData = function(){
+		var title_input = $.trim($('#movietitle').val());
+		var year_input = "1999";
+		var rating_input;
+		var genreEl = document.getElementById("genre_select");
+		var genre_input = genreEl.options[genreEl.selectedIndex].value;
+			
+		if(isSeen===true){
+			var ratingEl = document.getElementById("rating");
+			rating_input = ratingEl.options[ratingEl.selectedIndex].value;
+		}else{
+			rating_input = "0";
+		}
+		
+		if( genre_input == "null" || title_input == "" || title_input== "undefined" ){
+			alert('Bitte alle Felder richtig ausfüllen');
+		}else{
+		// erst prüfen: film schon vorhanden ( Titel + Jahr ) 
+		// wenn ja dann nicht zulassen
+		//wenn nein dann weiter
+			if (isSeen===true){ var result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
+			}else{
+			var result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
+			}
+			if ( result == true ){					
+				addMovieSet = new Object();
+				addMovieSet["title"] = title_input;
+				addMovieSet["year"] = year_input;
+				addMovieSet["genre"] = genre_input;
+				addMovieSet["rating"] = rating_input;
+
+				if (isSeen == true ){
+					addMovieSet["seen"] = "1";
+				}else{
+					addMovieSet["seen"] = "0";
+				}
+			$.addMovie(addMovieSet);
+			$.newFormular();			
+					}	
+			}			
+}
+
 //------------------------------ CLICK AND KEYDOWN EVENTS----------------------------
 		
 $(document).ready(function(){
 
 	// display templates for the Form
 	$(document).on('click', '#nav_care', function(event) {
-		$('#main').html(maintemplate());	
-		$('#main_top').html(careFormTemplate());
-		$('#main_low').html(sendButtonTemplate());
+		$.newFormular();
 		event.preventDefault();
 		event.stopImmediatePropagation();
-	
 	});	
 			
 	//add rating and comment stuff
 	$(document).on('change', '#ratingChb', function(event) {
-		
-		
-		if(isSeen=== false)
-		{ 
+		if(isSeen=== false){ 
 			isSeen= true;
 			$('#main_middle').html(rateAndCommentTemplate());
-		}else
-		{
+		}else{
 			$('#main_middle').html('');
 			isSeen = false;			
-		}	
-		
+		}		
 	})
-
 	//addMovie Method
-	$(document).on('click', '#addMovie', function(event) {
-		
-			var title_input = $.trim($('#movietitle').val());
-			var year_input = "1999";
-			var rating_input;
-			var genreEl = document.getElementById("genre_select");
-			var genre_input = genreEl.options[genreEl.selectedIndex].value;
-			
-			if(isSeen===true){
-				var ratingEl = document.getElementById("rating");
-				rating_input = ratingEl.options[ratingEl.selectedIndex].value;
-			}else{
-			rating_input = "0";
-			}
-			
-			if( genre_input == "null" && title_input == "" || title_input== "undefined" ){
-				alert('Bitte alle Felder richtig ausfüllen');
-			}else{
-			// erst prüfen: film schon vorhanden ( Titel + Jahr ) 
-			// wenn ja dann nicht zulassen
-			//wenn nein dann weiter
-				if (isSeen===true){ var result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
-				}else{
-				var result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
-				}
-				if ( result == true ){					
-
-					addMovieSet = new Object();
-					addMovieSet["title"] = title_input;
-					addMovieSet["year"] = year_input;
-					addMovieSet["genre"] = genre_input;
-					addMovieSet["rating"] = rating_input;
-				
-
-					if (isSeen == true ){
-					addMovieSet["seen"] = "1";
-					}else{
-					addMovieSet["seen"] = "0";
-					}
-			
-
-					$.addMovie(addMovieSet);
-					// leeren formular
-					// isSeen = false
-					}	
-			}
-			
-			
+	$(document).on('click', '#addMovie', function(event) {		
+			$.collectFormData();
 			event.preventDefault();
 			event.stopImmediatePropagation();
 			});
-
 })
