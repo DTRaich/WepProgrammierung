@@ -64,6 +64,7 @@ $.createDropDownYear = function(){
 	node = document.getElementById("yearddb");
 	
 	var selector = document.createElement('select');
+	selector.id = "hallo";
 	var option;
  	for(var i = 2014;i>1884;i--){
 		option = document.createElement('option');
@@ -103,7 +104,8 @@ $.checkFields = function(genre_input,title_input){;
 // gets data from formular
 $.collectFormData = function(){
 		var title_input = $.trim($('#movietitle').val());
-		var year_input = "1999";
+		var yearEL = document.getElementById("hallo");
+		var year_input  = "1999"; //= yearEl.options[yearEl.selectedIndex].value;
 		var rating_input;
 		var genreEl = document.getElementById("genre_select");
 		var genre_input = genreEl.options[genreEl.selectedIndex].value;
@@ -140,11 +142,6 @@ $.collectFormData = function(){
 				}else{
 					addMovieSet["seen"] = "0";
 				}
-			if($.proofMovieExists(title_input, year_input) == true){
-				alert("gefunden");
-			}else{
-			alert("nicht");
-			}
 			
 			$.addMovie(addMovieSet);
 			$.newFormular();			
