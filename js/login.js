@@ -5,9 +5,10 @@ var logedIn = false;
 // ----------------------------------TEMPLATES---------------------------
 
 //-----------------------------------Loginscreens----------------------
-var welcomeTemplate= _.template("<h1>welcome, <%- id %> !</h1><a id='logout' href='#' align='center'>Logout</a>")
+var welcomeTemplate= _.template("<h2> Herzlich Willkommen , <%- id %> ! \n \n </h2><a id='logout' href='#' align='center'>Logout</a>")
 
 var loginTemplate=_.template('<h1>Login</h1>'+
+								'<br>'+
 								'<table border= "0">'+
 								'<tr>'+
 								'<td>Benutzer:</td>'+
@@ -40,7 +41,7 @@ var nav_login_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="na
 									'</ul> ');
 	
 //---------------------------Navigation when logout	-----------------------
-var nav_logout_Template=_.template('<ul> <li class="topmenu">  <a href="#">Home</a>  </li>'+
+var nav_logout_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="nav_home">Home</a>  </li>'+
 								    '<li class="topmenu">' +
 									' <a href="#" >Genre</a> '+
 									' <ul>' +

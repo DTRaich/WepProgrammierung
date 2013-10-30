@@ -7,8 +7,8 @@ var isChange = false;
 
 // ---------------------------------------standart care Form----------------------
 var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
-									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> <br> ' +
-									'Erscheinungsjahr: &nbsp&nbsp <div id="yearddb"/> <br> <br> '+
+									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> <br> <br> ' +
+									'Erscheinungsjahr: &nbsp&nbsp <div id="yearddb"/> <br> <br>'+
 									'Genre: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <select id="genre_select">'+
 												'<option value="null">- Genre -</option>' +
 												'<option value="Action">Action</option>' +
@@ -16,8 +16,8 @@ var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+
 												'<option value="Horror">Horror</option>' +
 												'<option value="Sci-Fi">Sci-Fi</option>' +
 												'<option value="Thriller">Thriller</option>' +
-											'</select> <br><br>' +
-									'Gesehen: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input id="ratingChb" name"chbRating" type="checkbox"/><br><br>');
+											'</select> <br><br><br>' +
+									'Gesehen: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input id="ratingChb" name"chbRating" type="checkbox"/><br><br><br>');
 									
 //-----------------------------------------button to sen/add the movie ---------------------									
 var sendButtonTemplate = _.template('<input type="button" name="addFilm" id="addMovie" value="Film hinzufügen" / >');
@@ -125,7 +125,7 @@ $.collectFormData = function(){
 		if($.checkFields(genre_input,title_input) == false){
 			alert('Bitte alle Felder richtig ausfüllen');
 		}else{
-		if($.proofMovieExists(title_input, year_input,isChange) == true){
+		if($.proofMovieExists(title_input, year_input,isChange,receivedData) == true){
 				alert("Film schon vorhanden!");
 				$('#movietitle').addClass("inputError");
 			}else{
@@ -146,8 +146,14 @@ $.collectFormData = function(){
 				}else{
 					addMovieSet["seen"] = "0";
 				}
+			if ( isChange == false){
+				$.addMovie(addMovieSet);
+				alert(' Neuer Film wurde erfolgreich gespeichert ' );
+			}else{
+				$.addChanges(addMovieSet);
+				isChange=false;
+			} 
 			
-			$.addMovie(addMovieSet);
 			$.newFormular();			
 					}	
 			}
