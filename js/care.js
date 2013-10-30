@@ -21,7 +21,7 @@ var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+
 									
 //-----------------------------------------button to sen/add the movie ---------------------									
 var sendButtonTemplate = _.template('<input type="button" name="addFilm" id="addMovie" value="Film hinzufügen" / >');
-
+var editButtonTemplate = _.template('<input type="button" name="addFilm" id="addMovie" value="Filmdaten ändern" / >');
 
 //------------------------------------- rate and Commen Template which is displayed between them----------									
 var rateAndCommentTemplate = _.template(' Bewertung : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <select id="rating">'+
@@ -35,7 +35,7 @@ var rateAndCommentTemplate = _.template(' Bewertung : &nbsp&nbsp&nbsp&nbsp&nbsp&
 //------------------------------------ METHODS TO CALL--------------------------
 // fills formular when data needs to be changed
 $.changeMovie = function(title, year){
-
+	isChange = true;
 	receivedData = $.getOneMovieData(title,year);
 	$.newFormular();
 
@@ -49,7 +49,7 @@ $.changeMovie = function(title, year){
 		$('#rating').val(receivedData['rating']);
 	}
 	
-	isChange = true;
+	
 	
 // problem : normaler checkAblauf kann nicht 1:1 übernommen werden da der Film ja schon vorliegt oder durch schreibfehler korrektur erst danach vorliegt
 }
@@ -59,8 +59,13 @@ $.changeMovie = function(title, year){
 $.newFormular = function(){
 	$('#main').html(maintemplate());	
 	$('#main_top').html(careFormTemplate());
-	$.createDropDownYear();
-	$('#main_low').html(sendButtonTemplate());
+	$.createDropDownYear(); 
+	
+	if(isChange==true){
+		$('#main_low').html(editButtonTemplate());
+	}else{
+		$('#main_low').html(sendButtonTemplate());
+	}
 	isSeen = false;
 }
 //create DropDown Year
@@ -166,6 +171,7 @@ $(document).ready(function(){
 
 	// display templates for the Form
 	$(document).on('click', '#nav_care', function(event) {
+	isChange = false;
 		$.newFormular();
 		event.preventDefault();
 		event.stopImmediatePropagation();
