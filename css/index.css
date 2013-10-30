@@ -74,8 +74,8 @@ img {
 #menu {
   font-size:30px;
   position: absolute;
-  min-width: 50em;
-  max-width: 50em;
+  min-width: 30em;
+  max-width: 30em;
 }
 
 #menu ul {
