@@ -80,7 +80,9 @@ $.loginMethod = function()
 		$('#login').html(welcomeTemplate({id:ID}));
 		$('#menu').html(nav_login_Template());
 		logedIn = true;		
-				
+		
+		//table reload
+		selectedtablerebuild();
 	}else{
 		
 		alert('Login Fehlgeschlagen! \n \nBitte überprüfen Sie Ihre Eingaben.');
@@ -95,6 +97,8 @@ $.logOutMethod = function()
 	$('#main').html('');
 	logedIn = false;
 	
+	//table reload
+	selectedtablerebuild();
 }
 
 //--------------------------------CLICK AND KEYDOWN EVENTS-----------------------------		
