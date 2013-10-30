@@ -39,6 +39,7 @@ img {
 #container { 
   font-size: 0.8em; 
   max-width: 70em; 
+  min-width: 70em;
   margin: auto; 
   border: 0 ;
   border-top: 0; 
@@ -67,6 +68,8 @@ img {
 #menu {
   font-size:30px;
   position: absolute;
+  min-width: 50em;
+  max-width: 50em;
 }
 
 #menu ul {

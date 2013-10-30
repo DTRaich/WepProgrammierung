@@ -34,7 +34,7 @@ $.findLocationOfMovie = function(movie, year){
 	
 	for(var i = 0; i < movieArray.length; i++){
 		
-		if(movieArray[i]["title"] === movie && movieArray[i]["year"] === year){
+		if(movieArray[i]["title"] === movie && movieArray[i]["year"] == year){
 			// movie found place is "i"
 			location = i;
 		}

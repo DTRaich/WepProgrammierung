@@ -2,6 +2,7 @@
 //----------------------------------------GLOBAL VARIABLES-------------------------
 var isSeen = false;
 var receivedData;
+var isChange = false;
 //-------------------------------------------TEMPLATES-------------------------------
 
 // ---------------------------------------standart care Form----------------------
@@ -47,6 +48,9 @@ $.changeMovie = function(title, year){
 		$('#main_middle').html(rateAndCommentTemplate());
 		$('#rating').val(receivedData['rating']);
 	}
+	
+	isChange = true;
+	
 // problem : normaler checkAblauf kann nicht 1:1 übernommen werden da der Film ja schon vorliegt oder durch schreibfehler korrektur erst danach vorliegt
 }
 
@@ -104,8 +108,8 @@ $.checkFields = function(genre_input,title_input){;
 // gets data from formular
 $.collectFormData = function(){
 		var title_input = $.trim($('#movietitle').val());
-		var yearEL = document.getElementById("hallo");
-		var year_input  = "1999"; //= yearEl.options[yearEl.selectedIndex].value;
+		var yearEl = document.getElementById("hallo");
+		var year_input  = yearEl.options[yearEl.selectedIndex].value;
 		var rating_input;
 		var genreEl = document.getElementById("genre_select");
 		var genre_input = genreEl.options[genreEl.selectedIndex].value;
@@ -121,7 +125,7 @@ $.collectFormData = function(){
 		if($.checkFields(genre_input,title_input) == false){
 			alert('Bitte alle Felder richtig ausfüllen');
 		}else{
-		if($.proofMovieExists(title_input, year_input) == true){
+		if($.proofMovieExists(title_input, year_input,isChange) == true){
 				alert("Film schon vorhanden!");
 				$('#movietitle').addClass("inputError");
 			}else{
