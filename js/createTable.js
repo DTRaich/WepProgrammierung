@@ -18,7 +18,10 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 var movies;
 var backg="#C4C4C4";
 var backg2 = "#E3E3E3";
-
+var asc = true;
+var yearsort = true;
+var ratingsort = true;
+var seensort = true;
 
 $(document).ready(function(){
 $(document).on('click','#nav_home',function(event){			
@@ -96,19 +99,33 @@ $(document).on('click','#detailsclicked',function(event){
 //TitleSortClicked
 $(document).on('click','#TitleSortClicked',function(event){
 
-	alert($(this).context.id);	
+	movies  = $.sortMovie(asc, movies, "title");
+	preselecttablefilter(movies);
+	if(asc === true){asc=false;}else{asc=true;}
 	
 });
 $(document).on('click','#YearSortClicked',function(event){
 
-	alert($(this).context.id);	
+	movies  = $.sortMovieNumbers(yearsort, movies, "year");
+	preselecttablefilter(movies);
+	if(yearsort === true){yearsort=false;}else{yearsort=true;}	
 	
 });
 $(document).on('click','#RatingSortClicked',function(event){
 
-	alert($(this).context.id);	
+	movies  = $.sortMovieNumbers(ratingsort, movies, "rating");
+	preselecttablefilter(movies);
+	if(ratingsort === true){ratingsort=false;}else{ratingsort=true;}
 	
 });
+$(document).on('click','#SeenSortClicked',function(event){
+
+	movies  = $.sortMovieNumbers(seensort, movies, "seen");
+	preselecttablefilter(movies);
+	if(seensort === true){seensort=false;}else{seensort=true;}
+	
+});
+
 //modaldismiss
 $(document).on('click','#btndismiss',function(){
 	selectedtablerebuild();
@@ -285,6 +302,14 @@ function createTablelogedIn(row, id) {
 				case 3:
 					currenttext = document.createTextNode("Gesehen");
 					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","SeenSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 4:
 					currenttext = document.createTextNode("Rating");
@@ -521,7 +546,3 @@ function createTableGuest(row, id) {
 	myTable.style.width="95%";
     return myTable;
 }
-
-
-
-

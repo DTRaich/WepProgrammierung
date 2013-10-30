@@ -7,23 +7,65 @@ var movieArray = new Array();
 movieArray[0] = new Object();
 movieArray[0]["title"] = "American History X";
 movieArray[0]["year"] = "1999";
-movieArray[0]["genre"] = "Genre";
-movieArray[0]["rating"] = "3";
+movieArray[0]["genre"] = "Thriller";
+movieArray[0]["rating"] = "5";
 movieArray[0]["seen"] = "1";
 
 movieArray[1] = new Object();
 movieArray[1]["title"] = "Lord of War";
 movieArray[1]["year"] = "1999";
-movieArray[1]["genre"] = "Action";
+movieArray[1]["genre"] = "Horror";
 movieArray[1]["rating"] = "3";
 movieArray[1]["seen"] = "0";
 
 movieArray[2] = new Object();
 movieArray[2]["title"] = "Der Soldat James Ryan";
 movieArray[2]["year"] = "1999";
-movieArray[2]["genre"] = "Genre";
-movieArray[2]["rating"] = "0";
+movieArray[2]["genre"] = "Comedy";
+movieArray[2]["rating"] = "2";
 movieArray[2]["seen"] = "0";
+
+movieArray[3] = new Object();
+movieArray[3]["title"] = "Boondock Saints";
+movieArray[3]["year"] = "2003";
+movieArray[3]["genre"] = "Comedy";
+movieArray[3]["rating"] = "5";
+movieArray[3]["seen"] = "1";
+
+movieArray[4] = new Object();
+movieArray[4]["title"] = "Saw 7";
+movieArray[4]["year"] = "2011";
+movieArray[4]["genre"] = "SciFi";
+movieArray[4]["rating"] = "4";
+movieArray[4]["seen"] = "1";
+
+movieArray[5] = new Object();
+movieArray[5]["title"] = "Pitch Black";
+movieArray[5]["year"] = "2007";
+movieArray[5]["genre"] = "Action";
+movieArray[5]["rating"] = "5";
+movieArray[5]["seen"] = "1";
+
+movieArray[6] = new Object();
+movieArray[6]["title"] = "Chronicles of Riddick";
+movieArray[6]["year"] = "2010";
+movieArray[6]["genre"] = "Action";
+movieArray[6]["rating"] = "5";
+movieArray[6]["seen"] = "1";
+
+movieArray[7] = new Object();
+movieArray[7]["title"] = "Daniel Trefzer the Movie";
+movieArray[7]["year"] = "2013";
+movieArray[7]["genre"] = "Comedy";
+movieArray[7]["rating"] = "1";
+movieArray[7]["seen"] = "1";
+
+movieArray[8] = new Object();
+movieArray[8]["title"] = "Daniel Trefzer 2";
+movieArray[8]["year"] = "2013";
+movieArray[8]["genre"] = "SciFi";
+movieArray[8]["rating"] = "1";
+movieArray[8]["seen"] = "1";
 //--------------------------------------------------INTERN METHODS--------------------------------
 
 // searches for the movie and the year
@@ -86,14 +128,14 @@ $.addMovie = function (movieArr){
 }
 
 //deletes a movie in the movieArray
-$.deleteMovies(movie,year) = function(){
+//$.deleteMovies(movie,year) = function(){
 
-	if(findLocationOfMovie(movie,year) !== -1){
+	//if(findLocationOfMovie(movie,year) !== -1){
 	
-		movieArray.splice(findLocationOfMovie(movie,year),1);
+		//movieArray.splice(findLocationOfMovie(movie,year),1);
 
-	}	
-}
+	//}	
+//}
 	
 //---------------------------changeStuff------------------------
 // changes the parameters of the movie
@@ -140,27 +182,57 @@ $.sortMovieRating = function(best,preSortedArray){
 }
 
 //sort Alphabet asc= true/false
-$.sortMovieAlphabet = function(asc,preSortedArray){
+$.sortMovie = function(asc,preSortedArray,filter){
 	var sortedArray = new Array();
+	var finalArray = new Array();
+	for(var i = 0 ; i < preSortedArray.length ; i++){
+		sortedArray.push(preSortedArray[i][filter]);	
+	}	
+	sortedArray.sort();
+	if(asc === true){sortedArray.sort();}else{sortedArray.reverse();}
 	
-	if(preSortedArray == "null"){
-		//usemovieArray
-	}else{
-		//use preSorted
-	}
+	for(var i = 0; i < sortedArray.length ; i++ ){
+		for(var j = 0; j< preSortedArray.length ; j++){
+			if(sortedArray[i] === preSortedArray[j][filter]){
+				finalArray[i] = new Object();
+				finalArray[i]["title"] = preSortedArray[j]["title"];
+				finalArray[i]["year"] = preSortedArray[j]["year"];
+				finalArray[i]["genre"] = preSortedArray[j]["genre"];
+				finalArray[i]["rating"] = preSortedArray[j]["rating"];
+				finalArray[i]["seen"] = preSortedArray[j]["seen"];				
+				
+			}		
+		}	
+	}	
+	return finalArray;
+}
+//sort Alphabet asc= true/false
+$.sortMovieNumbers = function(asc,preSortedArray,filter){
+	var sortedArray = new Array();
+	var finalArray = new Array();
+	for(var i = 0 ; i < preSortedArray.length ; i++){
+		sortedArray.push(preSortedArray[i][filter]+preSortedArray[i]["title"]);	
+	}	
+	sortedArray.sort();
+	if(asc === true){sortedArray.sort();}else{sortedArray.reverse();}
+	
+	for(var i = 0; i < sortedArray.length ; i++ ){
+		for(var j = 0; j< preSortedArray.length ; j++){
+			var test= preSortedArray[j][filter]+preSortedArray[j]["title"];
+			if(sortedArray[i] === test){
+				finalArray[i] = new Object();
+				finalArray[i]["title"] = preSortedArray[j]["title"];
+				finalArray[i]["year"] = preSortedArray[j]["year"];
+				finalArray[i]["genre"] = preSortedArray[j]["genre"];
+				finalArray[i]["rating"] = preSortedArray[j]["rating"];
+				finalArray[i]["seen"] = preSortedArray[j]["seen"];				
+				
+			}		
+		}	
+	}	
+	return finalArray;
 }
 
-// Filters movie with the genre
-$.getWithGenreFilter = function(filterGenre){
 
-	var filteredMovieArray = new Array();	
-	for(var i = 0; i < movieArray.length; i++){
-	
-		if(movieArray[i].genre === filterGenre){
-			filteredMovieArray.push(movieArray[i]);			
-		}
-	}
-	return filteredMovieArray;
-}
 
 
