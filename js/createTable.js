@@ -1,10 +1,24 @@
-var maintemplate=_.template('<br><table width="100%" height="100%" border="1" id="tabelle"></table>'+
+var maintemplate=_.template('<br><table width="100%" height="100%" border="0" id="tabelle"></table>'+
 							'<div id="main_top"></div>'+
 							'<div id="main_middle"></div>'+	
 							'<div id="main_low"></div>');
+							
+var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb Informationen</h1>'+
+								'</div>'+
+								'<table class="modal-body"><tr>'+  
+								'<td><div id="modal-pic">'+  
+								'</div></td>'+
+								'<td><div id="modal-text">'+
+								'<table border="1" id="tabelle"></table>'+
+								'</div></td></tr>'+
+								'</table>'+
+								'<div class="modal-footer">'+
+								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Back</button>'+
+								'</div>');
 var movies;
 var backg="#C4C4C4";
 var backg2 = "#E3E3E3";
+
 
 $(document).ready(function(){
 $(document).on('click','#nav_home',function(event){			
@@ -49,25 +63,32 @@ $(document).on('click','#nav_thriller',function(event){
 //Editbutton clicked
 $(document).on('click','#Editclicked',function(event){
 
-	alert($(this).context.className);	
+	//alert($(this).context.className);	
 	var classn = $(this).context.className;
 	alert(movies[classn]["title"]);
 
 });
 //deletebutton clicked
 $(document).on('click','#Deleteclicked',function(event){
-
-	alert($(this).context.className);		
+		
 	var classn = $(this).context.className;
 	alert(movies[classn]["title"]);
 	
 });
 //Rating clicked
 $(document).on('click','#Ratingclicked',function(event){
-
-	alert($(this).context.className);		
+	
 	var classn = $(this).context.className;
 	alert(movies[classn]["title"]);
+	
+});
+//detailsclicked
+$(document).on('click','#detailsclicked',function(event){
+
+	//alert($(this).context.className);		
+	var classn = $(this).context.className;
+	loadModal(movies[classn]["title"]);
+	//getPoster(classn);
 	
 });
 
@@ -88,8 +109,74 @@ $(document).on('click','#RatingSortClicked',function(event){
 	alert($(this).context.id);	
 	
 });
-
+//modaldismiss
+$(document).on('click','#btndismiss',function(){
+	selectedtablerebuild();
 });
+});
+
+//-------------------------------------------------
+
+//detailview
+function loadModal(title){
+	$('#main').html(modalTemplate());
+	
+	//Tabelle
+	node = document.getElementById("tabelle");
+	
+	node.parentNode.insertBefore(getPoster(title), node);	
+	
+}
+
+function getPoster(title){	
+    
+	var myTable = document.createElement("table");
+	var mytablebody = document.createElement("tbody");
+	
+	$.getJSON('http://www.imdbapi.com/?t=' + title + '&callback=?' ,
+      function(data){
+		//alert(data.Poster);
+		var items = [];
+		var itemkeys = [];
+		$.each(data, function(key, val) {	
+			itemkeys.push(key);
+			items.push(val);
+		});
+		mycurrent_img = document.createElement("img");		
+		mycurrent_img.src = data.Poster;	
+			
+		titlepic = document.getElementById("modal-pic");
+		titlepic.appendChild(mycurrent_img);
+		
+		
+		
+		for(var i = 0 ; i < items.length-3 ; i++){
+			if(i!==2&&i!==10){
+			mycurrent_row = document.createElement("tr");
+			mycurrent_cell = document.createElement("td");
+			
+			mycurrent_cell.appendChild(document.createTextNode(itemkeys[i]));
+			mycurrent_cell.style.backgroundColor = backg;	
+			
+			mycurrent_row.appendChild(mycurrent_cell);	
+			mycurrent_cell = document.createElement("td");
+			
+			mycurrent_cell.appendChild(document.createTextNode(items[i]));
+			mycurrent_cell.style.backgroundColor = backg2;
+			
+			mycurrent_row.appendChild(mycurrent_cell);		
+			mytablebody.appendChild(mycurrent_row);	
+			}
+		}	
+		
+		myTable.appendChild(mytablebody);
+		
+	  }	  
+    );	
+	myTable.style.width="95%";
+	return myTable;
+}
+//-------------------------------------------------
 
 
 //Genre Input Filter Function
@@ -134,6 +221,17 @@ function preselecttablefilter(filterArray){
 	
 	//load all Movies
 	movies = filterArray;	
+	
+	//check: Logedin User
+	if($.getLogStatus()){
+    node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
+	}else{
+    node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
+	}
+}
+function selectedtablerebuild(){
+	$('#main').html(maintemplate());	
+	node = document.getElementById("tabelle");
 	
 	//check: Logedin User
 	if($.getLogStatus()){
@@ -213,7 +311,7 @@ function createTablelogedIn(row, id) {
 		//create Row
         mycurrent_row = document.createElement("tr");
         
-		for(var i=0;i<7;i++){
+		for(var i=0;i<8;i++){
 			mycurrent_cell = document.createElement("td");
 			switch (i){
 				case 0:					  					
@@ -238,37 +336,56 @@ function createTablelogedIn(row, id) {
 					break;
 				case 4:
 					currenttext = document.createTextNode("");
-					mycurrent_cell = document.createElement("img");			
-					mycurrent_cell.src="./img/small/stars-"+id[j]["rating"]+".jpg";
-					mycurrent_cell.style.width = "80px";
-					mycurrent_cell.style.height = "20px";
-					mycurrent_cell.style.border = "0";
-					mycurrent_cell.setAttribute("id","Ratingclicked");
-					mycurrent_cell.setAttribute("class",j);
-					mycurrent_cell.style.cursor = "pointer";
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".jpg";
+					mycurrent_img.style.width = "80px";
+					mycurrent_img.style.height = "20px";
+					mycurrent_img.style.border = "0";
+					mycurrent_img.setAttribute("id","Ratingclicked");
+					mycurrent_img.setAttribute("class",j);
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.style.width = "90px";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;	
 				case 5:
-					mycurrent_cell =document.createElement("img");	
-					mycurrent_cell.src="./img/small/edit.png";
+					mycurrent_img =document.createElement("img");	
+					mycurrent_img.src="./img/small/details.jpg";
+					mycurrent_img.style.width = "20px";
+					mycurrent_img.style.height = "20px";
+					mycurrent_img.style.border = "0";
+					mycurrent_img.setAttribute("id","detailsclicked");
+					mycurrent_img.setAttribute("class",j);
+					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.style.width = "20px";
-					mycurrent_cell.style.height = "20px";
-					mycurrent_cell.style.border = "0";
-					mycurrent_cell.setAttribute("id","Editclicked");
-					mycurrent_cell.setAttribute("class",j);
-					mycurrent_cell.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;
 				case 6: 
-					mycurrent_cell = document.createElement("img");	
-					mycurrent_cell.src="./img/small/Delete.png";
+					mycurrent_img = document.createElement("img");	
+					mycurrent_img.src="./img/small/edit.png";
+					mycurrent_img.style.width = "20px";
+					mycurrent_img.style.height = "20px";
+					mycurrent_img.style.border = "0";
+					mycurrent_img.setAttribute("id","Editclicked");
+					mycurrent_img.setAttribute("class",j);
+					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.style.width = "20px";
-					mycurrent_cell.style.height = "20px";
-					mycurrent_cell.style.border = "0";
-					mycurrent_cell.setAttribute("id","Deleteclicked");
-					mycurrent_cell.setAttribute("class",j);
-					mycurrent_cell.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					mycurrent_cell.style.backgroundColor =backg2;
-					break;					
+					break;	
+				case 7: 
+					mycurrent_img = document.createElement("img");	
+					mycurrent_img.src="./img/small/Delete.png";
+					mycurrent_img.style.width = "20px";
+					mycurrent_img.style.height = "20px";
+					mycurrent_img.style.border = "0";
+					mycurrent_img.setAttribute("id","Deleteclicked");
+					mycurrent_img.setAttribute("class",j);
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
+					mycurrent_cell.style.width = "20px";
+					mycurrent_cell.style.backgroundColor =backg2;
+					break;						
 			}			
 			mycurrent_cell.appendChild(currenttext);
 			mycurrent_row.appendChild(mycurrent_cell);
@@ -349,31 +466,50 @@ function createTableGuest(row, id) {
 		//create Row
         mycurrent_row = document.createElement("tr");
 		
-		for(var i=0;i<4;i++){
+		for(var i=0;i<5;i++){
 			mycurrent_cell = document.createElement("td");
 			switch (i){
 				case 0:					  					
 					currenttext = document.createTextNode(id[j]["title"]);
 					mycurrent_cell.style.backgroundColor = backg;
+					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 1:				  					
 					currenttext = document.createTextNode(id[j]["year"]);
 					mycurrent_cell.style.backgroundColor =backg2;
+					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 2:
 					currenttext = document.createTextNode(id[j]["genre"]);
 					mycurrent_cell.style.backgroundColor =backg;
+					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 3:
 					currenttext = document.createTextNode("");
-					mycurrent_cell = document.createElement("img");			
-					mycurrent_cell.src="./img/small/stars-"+id[j]["rating"]+".jpg";
-					mycurrent_cell.style.width = "80px";
-					mycurrent_cell.style.height = "20px";
-					mycurrent_cell.style.border = "0";					
-					break;			
+					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".jpg";
+					mycurrent_img.style.width = "80px";
+					mycurrent_img.style.height = "20px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_cell.style.width = "90px";
+					mycurrent_cell.appendChild(mycurrent_img);
+					break;		
+				case 4:					
+					mycurrent_img =document.createElement("img");	
+					mycurrent_img.src="./img/small/details.jpg";
+					mycurrent_img.style.width = "20px";
+					mycurrent_img.style.height = "20px";
+					mycurrent_img.style.border = "0";
+					mycurrent_img.setAttribute("id","detailsclicked");
+					mycurrent_img.setAttribute("class",j);
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_img.caption = "Details";
+					mycurrent_cell.style.width = "20px";
+					mycurrent_cell.appendChild(mycurrent_img);
+					mycurrent_cell.style.backgroundColor = backg2;
+					break;
 			}			
-			mycurrent_cell.appendChild(currenttext);
 			mycurrent_row.appendChild(mycurrent_cell);
 		}        
 		//complete Row
