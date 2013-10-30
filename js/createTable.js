@@ -66,16 +66,17 @@ $(document).on('click','#nav_thriller',function(event){
 //Editbutton clicked
 $(document).on('click','#Editclicked',function(event){
 
-	//alert($(this).context.className);	
 	var classn = $(this).context.className;
-	alert(movies[classn]["title"]);
-
+	$.changeMovie(movies[classn]["title"],movies[classn]["year"]);	
+	
 });
 //deletebutton clicked
 $(document).on('click','#Deleteclicked',function(event){
 		
 	var classn = $(this).context.className;
-	alert(movies[classn]["title"]);
+	$.deleteMovies(movies[classn]["title"],movies[classn]["year"]);	
+	movies = $.getAllMovies();
+	selectedtablerebuild();
 	
 });
 //Rating clicked

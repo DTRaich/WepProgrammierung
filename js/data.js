@@ -70,7 +70,7 @@ movieArray[8]["seen"] = "1";
 
 // searches for the movie and the year
 $.findLocationOfMovie = function(movie, year){
-	alert("location");
+	
 	//-1 represents not found
 	var location = -1;
 	
@@ -128,20 +128,23 @@ $.addMovie = function (movieArr){
 }
 
 //deletes a movie in the movieArray
-//$.deleteMovies(movie,year) = function(){
-
-	//if(findLocationOfMovie(movie,year) !== -1){
+$.deleteMovies = function(movie,year){
+	var location = $.findLocationOfMovie(movie,year);
+	if(location !== -1){
+		alert(location);
+		movieArray.splice(location,1);
+		
+	}else{
+		alert("Film konnte nicht gelöscht werden!");
 	
-		//movieArray.splice(findLocationOfMovie(movie,year),1);
-
-	//}	
-//}
+	}	
+}
 	
 //---------------------------changeStuff------------------------
 // changes the parameters of the movie
 $.addChanges = function(movieObj){
 
-	var movielocation = findLocationOfMovie(movieObj[0]["title"], movieObj[0]["year"]);
+	var movielocation = $.findLocationOfMovie(movieObj[0]["title"], movieObj[0]["year"]);
 	
 	for (var attribute in movieObj[0]){
 		
