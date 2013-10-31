@@ -167,7 +167,7 @@ function getPoster(title){
 	
 	$.getJSON('http://www.imdbapi.com/?t=' + title + '&callback=?' ,
       function(data){
-	  if(data.Poster === undefined){
+	  if(data.Poster == undefined){
 		//default picture
 		mycurrent_img = document.createElement("img");		
 		mycurrent_img.src = "./img/big/img-not-found.gif";	
@@ -183,9 +183,12 @@ function getPoster(title){
 			itemkeys.push(key);
 			items.push(val);
 		});
-		mycurrent_img = document.createElement("img");		
+		mycurrent_img = document.createElement("img");
+		if(data.Poster == 'N/A'){
+		mycurrent_img.src = "./img/big/img-not-found.gif";
+		}else{				
 		mycurrent_img.src = data.Poster;	
-			
+		}	
 		titlepic = document.getElementById("modal-pic");
 		titlepic.appendChild(mycurrent_img);		
 		
