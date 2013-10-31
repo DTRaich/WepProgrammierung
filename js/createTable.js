@@ -167,6 +167,16 @@ function getPoster(title){
 	
 	$.getJSON('http://www.imdbapi.com/?t=' + title + '&callback=?' ,
       function(data){
+	  if(data.Poster === undefined){
+		//default picture
+		mycurrent_img = document.createElement("img");		
+		mycurrent_img.src = "./img/big/img-not-found.gif";	
+		titlepic = document.getElementById("modal-pic");
+		titlepic.appendChild(mycurrent_img);
+	  
+		alert("Fimdaten von imdb nicht abrufbar. \n\nBitte stellen Sie sicher, dass der Filmtitel korrekt eingegeben wurde.")
+		
+	  }else{
 		var items = [];
 		var itemkeys = [];
 		$.each(data, function(key, val) {	
@@ -177,9 +187,7 @@ function getPoster(title){
 		mycurrent_img.src = data.Poster;	
 			
 		titlepic = document.getElementById("modal-pic");
-		titlepic.appendChild(mycurrent_img);
-		
-		
+		titlepic.appendChild(mycurrent_img);		
 		
 		for(var i = 0 ; i < items.length-3 ; i++){
 			if(i!==2&&i!==10){
@@ -198,15 +206,15 @@ function getPoster(title){
 			mycurrent_row.appendChild(mycurrent_cell);		
 			mytablebody.appendChild(mycurrent_row);	
 			}
-		}	
-		
-		myTable.appendChild(mytablebody);
-		
+		}			
+	  }
+	  myTable.appendChild(mytablebody);
 	  }	  
     );	
 	myTable.style.width="95%";
 	return myTable;
 }
+
 //-------------------------------------------------
 
 
