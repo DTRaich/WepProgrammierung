@@ -83,19 +83,46 @@ $.findLocationOfMovie = function(movie, year){
 	}
 	return location;
 }
+// proofing change insert
+$.proofChange = function(location, receivedData){
+	// if not found
+	if(location === -1){
+	
+		alert('');
+	// if found	
+	}else{
+	
+	
+	}
+	
+
+}
 
 //----------------------------------------------------------METHODS TO CALL------------------------------
 
 // proofs if the movie exist ; same movie different year is OK!!!!
-$.proofMovieExists = function(movieTitle,year){
-
-	var location = $.findLocationOfMovie(movieTitle,year);
+$.proofMovieExists = function(movieTitle,year,isChange,receivedData ){
+	var location; 
+	var found = false;
+	location = $.findLocationOfMovie(movieTitle,year);
 	
-	if(location === -1){
-		return false;
+	//section for movie changing
+	if(isChange == true){
+		$.proofChange(location,receivedData);
+		
+	// section for new adding
 	}else{
-		return true;
-	}	 
+		// if not found
+		if(location === -1){
+			found = false;
+			
+		// if found		
+		}else{
+			found = true;
+		}
+	}
+	
+	return found;
 }
 
 // gets the MovieData of one Movie

@@ -1,4 +1,4 @@
-var maintemplate=_.template('<br><table width="100%" height="100%" border="0" id="tabelle"></table>'+
+var maintemplate=_.template('<br><table id="tabelle" class="mainTemplateTable" ></table>'+
 							'<div id="main_top"></div>'+
 							'<div id="main_middle"></div>'+	
 							'<div id="main_low"></div>');
@@ -13,7 +13,7 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 								'</div></td></tr>'+
 								'</table>'+
 								'<div class="modal-footer">'+
-								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Back</button>'+
+								'<button type="button" class="btn btn-primary" id="btndismiss" data-dismiss="modal">Zurück</button>'+
 								'</div>');
 var movies;
 var backg="#C4C4C4";
