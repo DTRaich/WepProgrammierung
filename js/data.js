@@ -160,8 +160,10 @@ $.addMovie = function (movieArr){
 $.deleteMovies = function(movie,year){
 	var location = $.findLocationOfMovie(movie,year);
 	if(location !== -1){
-		alert(location);
-		movieArray.splice(location,1);
+		delete_result = confirm('Soll dieser Film wirklich entfernt werden?');
+		if(delete_result == true){
+			movieArray.splice(location,1);
+		}
 		
 	}else{
 		alert("Film konnte nicht gelöscht werden!");
