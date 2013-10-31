@@ -6,6 +6,7 @@ was uns so aufgefallen ist bitte abarbeiten und vorabgabe durchschauen!!!
 6) bei chrome und IE wird unter den men¸punkten ein strich angezeigt , eventuell border?
 --> muss raus!
 8) imdb filme not found handling
+9) sterne unterschiedlich groﬂ!
 
 --------------------TALK---------------TALK-------------------------
 
