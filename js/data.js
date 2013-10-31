@@ -85,7 +85,7 @@ $.findLocationOfMovie = function(movie, year){
 }
 
 //----------------------------------------------------------METHODS TO CALL------------------------------
-// module pattern 
+
 // proofs if the movie exist ; same movie different year is OK!!!!
 $.proofMovieExists = function(movieTitle,year){
 
@@ -98,7 +98,7 @@ $.proofMovieExists = function(movieTitle,year){
 	}	 
 }
 
-
+// gets the MovieData of one Movie
 $.getOneMovieData =function(movieTitle,year){
 
 	var movieData = new Object();
@@ -152,14 +152,17 @@ $.addChanges = function(movieObj){
 	}
 }
 
-// gets the MovieData of one Movie
+// change rating
 
+$.changeRating = function(movieTitle, year, newRating){
 
-
-
-
-
-
+	var location = $.findLocationOfMovie(movieTitle,year);
+	if ( location !== -1 ){
+	movieArray[location]["rating"] = newRating;
+	}else{
+	alert('Änderung der Bewertung ist nicht möglich.');
+	}
+}
 
 //------------------sorting and filtering-----------------------------------
 //sort seen or not; seen= true/fals
