@@ -1,4 +1,4 @@
-var maintemplate=_.template('<br><table id="tabelle" class="mainTemplateTable" ></table>'+
+var maintemplate=_.template('<br><table class="mainTemplateTable" id="tabelle"></table>'+
 							'<div id="main_top"></div>'+
 							'<div id="main_middle"></div>'+	
 							'<div id="main_low"></div>');
@@ -13,7 +13,7 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 								'</div></td></tr>'+
 								'</table>'+
 								'<div class="modal-footer">'+
-								'<button type="button" class="btn btn-primary" id="btndismiss" data-dismiss="modal">Zurück</button>'+
+								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Back</button>'+
 								'</div>');
 var movies;
 var backg="#C4C4C4";
@@ -83,16 +83,28 @@ $(document).on('click','#Deleteclicked',function(event){
 $(document).on('click','#Ratingclicked',function(event){
 	
 	var classn = $(this).context.className;
-	alert(movies[classn]["title"]);
+	var rated= false;
+	var newrating;
+	while(rated === false){
+	newrating = prompt("Dein Rating:",movies[classn]["rating"]);
+	if(newrating>0&&newrating<6 || newrating === null){
+		rated = true;
+	}else{
+		alert("Gebe eine Bewertung von 1 bis 5 an!!!")
+	}
+	}
+	//change Rating in data.js
+	$.changeRating(movies[classn]["title"],movies[classn]["year"], newrating);
+	// change movie data to rebuild the same table as bevore
+	movies[classn]["rating"]= newrating;
+	selectedtablerebuild();
 	
 });
 //detailsclicked
 $(document).on('click','#detailsclicked',function(event){
-
-	//alert($(this).context.className);		
+	
 	var classn = $(this).context.className;
-	loadModal(movies[classn]["title"]);
-	//getPoster(classn);
+	detailview(movies[classn]["title"]);
 	
 });
 
@@ -136,7 +148,7 @@ $(document).on('click','#btndismiss',function(){
 //-------------------------------------------------
 
 //detailview
-function loadModal(title){
+function detailview(title){
 	$('#main').html(modalTemplate());
 	
 	//Tabelle
@@ -153,7 +165,6 @@ function getPoster(title){
 	
 	$.getJSON('http://www.imdbapi.com/?t=' + title + '&callback=?' ,
       function(data){
-		//alert(data.Poster);
 		var items = [];
 		var itemkeys = [];
 		$.each(data, function(key, val) {	
@@ -199,6 +210,8 @@ function getPoster(title){
 
 //Genre Input Filter Function
 function filter(filter){	
+
+	
 	movies = $.getAllMovies();	
 	var arr = new Array();
 	var j=0;
@@ -455,8 +468,8 @@ function createTableGuest(row, id) {
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/sortArrow.jpg";
-					mycurrent_img.style.width = "10px";
-					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.width = "8px";
+					mycurrent_img.style.height = "13px";
 					mycurrent_img.style.border = "0";	
 					mycurrent_img.setAttribute("id","YearSortClicked");
 					mycurrent_img.style.cursor = "pointer";
