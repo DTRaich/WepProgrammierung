@@ -87,17 +87,19 @@ $(document).on('click','#Ratingclicked',function(event){
 	var newrating;
 	while(rated === false){
 	newrating = prompt("Dein Rating:",movies[classn]["rating"]);
-	if(newrating>0&&newrating<6 || newrating === null){
-		rated = true;
-	}else{
-		alert("Gebe eine Bewertung von 1 bis 5 an!!!")
-	}
-	}
-	//change Rating in data.js
-	$.changeRating(movies[classn]["title"],movies[classn]["year"], newrating);
-	// change movie data to rebuild the same table as bevore
-	movies[classn]["rating"]= newrating;
-	selectedtablerebuild();
+		if(newrating>0&&newrating<6 ){
+			rated = true;
+			//change Rating in data.js
+			$.changeRating(movies[classn]["title"],movies[classn]["year"], newrating);
+			// change movie data to rebuild the same table as bevore
+			movies[classn]["rating"]= newrating;
+			selectedtablerebuild();
+		}else if(newrating === null){
+			rated = true;
+		}else{
+			alert("Gebe eine Bewertung von 1 bis 5 an!!!")
+		}
+	}	
 	
 });
 //detailsclicked
