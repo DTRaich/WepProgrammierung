@@ -21,21 +21,21 @@ movieArray[1]["seen"] = "0";
 movieArray[2] = new Object();
 movieArray[2]["title"] = "Der Soldat James Ryan";
 movieArray[2]["year"] = "1999";
-movieArray[2]["genre"] = "Comedy";
+movieArray[2]["genre"] = "Action";
 movieArray[2]["rating"] = "2";
 movieArray[2]["seen"] = "0";
 
 movieArray[3] = new Object();
 movieArray[3]["title"] = "Boondock Saints";
 movieArray[3]["year"] = "2003";
-movieArray[3]["genre"] = "Comedy";
+movieArray[3]["genre"] = "Action";
 movieArray[3]["rating"] = "5";
 movieArray[3]["seen"] = "1";
 
 movieArray[4] = new Object();
 movieArray[4]["title"] = "Saw 7";
 movieArray[4]["year"] = "2011";
-movieArray[4]["genre"] = "SciFi";
+movieArray[4]["genre"] = "Horror";
 movieArray[4]["rating"] = "4";
 movieArray[4]["seen"] = "1";
 
@@ -54,14 +54,14 @@ movieArray[6]["rating"] = "5";
 movieArray[6]["seen"] = "1";
 
 movieArray[7] = new Object();
-movieArray[7]["title"] = "Daniel Trefzer the Movie";
+movieArray[7]["title"] = "Mario Barth";
 movieArray[7]["year"] = "2013";
 movieArray[7]["genre"] = "Comedy";
 movieArray[7]["rating"] = "1";
 movieArray[7]["seen"] = "1";
 
 movieArray[8] = new Object();
-movieArray[8]["title"] = "Daniel Trefzer 2";
+movieArray[8]["title"] = "Star Wars";
 movieArray[8]["year"] = "2013";
 movieArray[8]["genre"] = "SciFi";
 movieArray[8]["rating"] = "1";
@@ -84,18 +84,20 @@ $.findLocationOfMovie = function(movie, year){
 	return location;
 }
 // proofing change insert
-$.proofChange = function(location, receivedData){
+$.proofChange = function(location, receivedData,movieTitle,year){
+	var valid= false;
 	// if not found
 	if(location === -1){
-	
-		alert('');
+	valid = false;
 	// if found	
 	}else{
-	
-	
+		if (receivedData['title'] === movieTitle && receivedData['year'] === year){
+			valid = false;
+		}else{
+			valid = true; 
+		}
 	}
-	
-
+	return valid;
 }
 
 //----------------------------------------------------------METHODS TO CALL------------------------------
@@ -103,26 +105,26 @@ $.proofChange = function(location, receivedData){
 // proofs if the movie exist ; same movie different year is OK!!!!
 $.proofMovieExists = function(movieTitle,year,isChange,receivedData ){
 	var location; 
-	var found = false;
+	var valid = false;
 	location = $.findLocationOfMovie(movieTitle,year);
 	
 	//section for movie changing
 	if(isChange == true){
-		$.proofChange(location,receivedData);
+		valid = $.proofChange(location,receivedData,movieTitle,year);
 		
 	// section for new adding
 	}else{
 		// if not found
 		if(location === -1){
-			found = false;
+			valid = false;
 			
 		// if found		
 		}else{
-			found = true;
+			valid = true;
 		}
 	}
 	
-	return found;
+	return valid;
 }
 
 // gets the MovieData of one Movie
@@ -169,13 +171,11 @@ $.deleteMovies = function(movie,year){
 	
 //---------------------------changeStuff------------------------
 // changes the parameters of the movie
-$.addChanges = function(movieObj){
+$.addChanges = function(movieObj,movielocation){
 
-	var movielocation = $.findLocationOfMovie(movieObj[0]["title"], movieObj[0]["year"]);
-	
-	for (var attribute in movieObj[0]){
+	for (var attribute in movieObj){
 		
-		movieArray[movielocation][attribute] = movieObj[0][attribute];	
+		movieArray[movielocation][attribute] = movieObj[attribute];	
 	}
 }
 

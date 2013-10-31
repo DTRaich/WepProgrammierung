@@ -155,7 +155,7 @@ $.collectFormData = function(){
 				$.addMovie(addMovieSet);
 				alert(' Neuer Film wurde erfolgreich gespeichert ' );
 			}else{
-				$.addChanges(addMovieSet);
+				$.addChanges(addMovieSet,receivedData['OriginalId']);
 				isChange=false;
 			} 
 			

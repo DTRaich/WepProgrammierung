@@ -5,7 +5,7 @@ var logedIn = false;
 // ----------------------------------TEMPLATES---------------------------
 
 //-----------------------------------Loginscreens----------------------
-var welcomeTemplate= _.template("<h2> Herzlich Willkommen , <%- id %> ! \n \n </h2><a id='logout' href='#' align='center'>Logout</a>")
+var welcomeTemplate= _.template("<h2> Herzlich Willkommen , <%- id %> ! \n \n </h2><div align = 'right'><a id='logout' href='#'>Logout</a></div>")
 
 var loginTemplate=_.template('<h1>Login</h1>'+
 								'<br>'+
@@ -18,8 +18,7 @@ var loginTemplate=_.template('<h1>Login</h1>'+
 								'<td><input id="PW" type="password" placeholder="Passwort" />'+
 								'</td></tr>'+
 								'<tr><td></td>'+
-								'<td><div align="right"><a id="loginLink" style="color: black;" href="#">Login</a>'+
-								'</div>'+
+								'<td><div align = "right"><a id="loginLink" href="#">Login</a></div>'+
 								'</td>'+
 								'</tr>'+
 								'</table>')
