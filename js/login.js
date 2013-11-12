@@ -18,7 +18,9 @@ var loginTemplate=_.template('<h1>Login</h1>'+
 								'</div>'+
 								'</td>'+
 								'</tr>'+
-								'</table>')
+								'</table>'+
+								'<br>' +
+								' Bla')
 		
 //----------------------------Navigation when logged in---------------------		
 var nav_login_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="nav_home">Home</a>  </li>'+ 
@@ -116,6 +118,37 @@ $.logOutMethod = function()
 	$.logOutFromDB();	
 }
 
+//Method for registration 
+$.checkRegistration = function(user, pswd1,pswd2){
+	var checkR = false;
+
+	if ( user =='' || user == 'undefined' || pswd1 =='' || pswd2 == 'undefined' || pswd2 =='' || pswd2 == 'undefined' ){
+		checkR = false;			
+	}else{
+		checkR = true;
+	}
+
+	if(user == ""){
+		$('#ID').addClass("inputError");
+	}else{
+		$('#ID').removeClass("inputError");
+	}
+	if(pswd1 == ""){
+		$('#PW1').addClass("inputError");
+	}else{
+		$('#PW1').removeClass("inputError");
+	}
+	if(pswd2 == ""){
+		$('#PW2').addClass("inputError");
+	}else{
+		$('#PW2').removeClass("inputError");
+	}
+		
+	
+	return checkR;
+}
+
+
 //--------------------------------CLICK AND KEYDOWN EVENTS-----------------------------		
 $(document).ready(function(){
 
@@ -164,10 +197,8 @@ $(document).ready(function(){
 		// click on "goBack"for providing new template
 		$(document).on('click', '#goBack', function(event) {
 		
-				$('#login').html(loginTemplate());
-			
+				$('#login').html(loginTemplate());	
 		});
-		
 		// registering now
 		$(document).on('click', '#registerNow', function(event) {
 		
@@ -175,24 +206,20 @@ $(document).ready(function(){
 			var pswd1 = $.trim($('#PW1').val());
 			var pswd2 = $.trim($('#PW2').val());
 			
-			// prüfung siehe care script 
-			//if(user == ""){
-				//addClasse
-			//}else{
-			//	if(pswd1 = ""){
-				//add Class
-			//	}
-		//	}
-			$.addUserDB(user,pswd1);
+			var checkR = $.checkRegistration(user,pswd1,pswd2);
 			
-
-
-			// get all
-			//überprüfen pswd gleich (Min max anforderungen)
-			//überprüfen ob Username schon vorhanden
-			// register -->datenbankfunktion
-			//popUp mit Daten
-			// soll jz neu einloggen load loginTemplate
+			if(checkR == true){
+			
+				if(pswd1 === pswd2){
+					result = confirm(" Möchten sie einen neuen Benutzer mit folgenden Daten erstellen? \n \n" + "Benutzername: " + user + "\n \n Passwort: " + pswd1 );
+					if( result == true){
+						$.addUserDB(user,pswd1);
+						$('#login').html(loginTemplate());						
+					}	
+				}else{
+					alert(' Die beiden Passwörter müssen übereinstimmen um einen Benutzer registrieren zu können ' );
+				}
+			}
 			
 		});
 })
