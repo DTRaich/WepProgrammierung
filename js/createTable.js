@@ -13,7 +13,7 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 								'</div></td></tr>'+
 								'</table>'+
 								'<div class="modal-footer">'+
-								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Back</button>'+
+								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Zurück</button>'+
 								'</div>');
 var movies;
 var backg="#C4C4C4";

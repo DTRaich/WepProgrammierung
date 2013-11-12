@@ -4,68 +4,16 @@ var movieArray = new Array();
 
 
 //------------------------DATA----------------------------------------
-movieArray[0] = new Object();
-movieArray[0]["title"] = "American History X";
-movieArray[0]["year"] = "1999";
-movieArray[0]["genre"] = "Thriller";
-movieArray[0]["rating"] = "5";
-movieArray[0]["seen"] = "1";
-
-movieArray[1] = new Object();
-movieArray[1]["title"] = "Lord of War";
-movieArray[1]["year"] = "1999";
-movieArray[1]["genre"] = "Horror";
-movieArray[1]["rating"] = "3";
-movieArray[1]["seen"] = "0";
-
-movieArray[2] = new Object();
-movieArray[2]["title"] = "Der Soldat James Ryan";
-movieArray[2]["year"] = "1999";
-movieArray[2]["genre"] = "Action";
-movieArray[2]["rating"] = "2";
-movieArray[2]["seen"] = "0";
-
-movieArray[3] = new Object();
-movieArray[3]["title"] = "Boondock Saints";
-movieArray[3]["year"] = "2003";
-movieArray[3]["genre"] = "Action";
-movieArray[3]["rating"] = "5";
-movieArray[3]["seen"] = "1";
-
-movieArray[4] = new Object();
-movieArray[4]["title"] = "Saw 7";
-movieArray[4]["year"] = "2011";
-movieArray[4]["genre"] = "Horror";
-movieArray[4]["rating"] = "4";
-movieArray[4]["seen"] = "1";
-
-movieArray[5] = new Object();
-movieArray[5]["title"] = "Pitch Black";
-movieArray[5]["year"] = "2007";
-movieArray[5]["genre"] = "Action";
-movieArray[5]["rating"] = "5";
-movieArray[5]["seen"] = "1";
-
-movieArray[6] = new Object();
-movieArray[6]["title"] = "Chronicles of Riddick";
-movieArray[6]["year"] = "2010";
-movieArray[6]["genre"] = "Action";
-movieArray[6]["rating"] = "5";
-movieArray[6]["seen"] = "1";
-
-movieArray[7] = new Object();
-movieArray[7]["title"] = "Mario Barth";
-movieArray[7]["year"] = "2013";
-movieArray[7]["genre"] = "Comedy";
-movieArray[7]["rating"] = "1";
-movieArray[7]["seen"] = "1";
-
-movieArray[8] = new Object();
-movieArray[8]["title"] = "Star Wars";
-movieArray[8]["year"] = "2013";
-movieArray[8]["genre"] = "SciFi";
-movieArray[8]["rating"] = "1";
-movieArray[8]["seen"] = "1";
+// how new array should look
+//movieArray[9] = new Object();
+//movieArray[9]["title"] = "Star Wars";
+//movieArray[9]["year"] = "2013";
+//movieArray[9]["genre"] = "SciFi";
+//movieArray[9]["rating"] = "1"; // gesammt rating
+//movieArray[9]["seen"] = "1"; 	// lsung suchen für nicht owner trotzdem changen von seen auf true damit das reine rating ausgeführt werden kann
+//movieArray[9]["myrating"] = "1"; // wenn eigenes vergeben
+//movieArray[9]["owner"] = "1"; // nur wenn owner generelles changen
+//movieArray[9]["originalDBID"] = "1"; // für delte und change 
 //--------------------------------------------------INTERN METHODS--------------------------------
 
 // searches for the movie and the year
@@ -83,6 +31,7 @@ $.findLocationOfMovie = function(movie, year){
 	}
 	return location;
 }
+
 // proofing change insert
 $.proofChange = function(location, receivedData,movieTitle,year){
 	var valid= false;
@@ -142,17 +91,20 @@ $.getOneMovieData =function(movieTitle,year){
 	
 	return movieData;
 }
-
 // returns all Movies without Filters
+	
 $.getAllMovies = function(){
-
-	return movieArray;
+	// getting the Movies from the DB.
+	//---> Into the movie array because right now its much faster.. maybe due to the internet connection and db specific parameters.
+	movieArray = new Array();
+	$.gettingAllDBMovies();	
+	return movieArray;	
 }
 
 //------------------------------add and delete-----------------------------
 // adds a new movie to the Array
-$.addMovie = function (movieArr){	
-	movieArray.push(movieArr);
+$.addMovie = function (movieObj){	
+	movieArray.push(movieObj);
 	
 }
 
@@ -194,6 +146,7 @@ $.changeRating = function(movieTitle, year, newRating){
 }
 
 //------------------sorting and filtering-----------------------------------
+
 //sort seen or not; seen= true/fals
 $.sortMovieSeen =  function(seen, preSortedArray){
 	var sortedArray = new Array();

@@ -7,7 +7,7 @@ var isChange = false;
 
 // ---------------------------------------standart care Form----------------------
 var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
-									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" id="movietitle"/> <br> <br> <br> ' +
+									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> <br> <br> ' +
 									'Erscheinungsjahr: &nbsp&nbsp <div id="yearddb"/> <br> <br>'+
 									'Genre: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <select id="genre_select">'+
 												'<option value="null">- Genre -</option>' +
@@ -47,11 +47,7 @@ $.changeMovie = function(title, year){
 		$('#ratingChb').attr('checked',true);
 		$('#main_middle').html(rateAndCommentTemplate());
 		$('#rating').val(receivedData['rating']);
-	}
-	
-	
-	
-// problem : normaler checkAblauf kann nicht 1:1 übernommen werden da der Film ja schon vorliegt oder durch schreibfehler korrektur erst danach vorliegt
+	}		
 }
 
 //--------------------------------------INTERN METHODS------------------------------
@@ -68,6 +64,7 @@ $.newFormular = function(){
 	}
 	isSeen = false;
 }
+
 //create DropDown Year
 $.createDropDownYear = function(){
 	node = document.getElementById("yearddb");
@@ -83,6 +80,7 @@ $.createDropDownYear = function(){
 	}
 	node.parentNode.insertBefore(selector,node);
 }
+
 // checks and colors fields
 $.checkFields = function(genre_input,title_input){;
 	var valid = false;
@@ -118,7 +116,8 @@ $.collectFormData = function(){
 		var rating_input;
 		var genreEl = document.getElementById("genre_select");
 		var genre_input = genreEl.options[genreEl.selectedIndex].value;
-		var result;	
+		var result;
+		var addMovieSet;		
 		
 		if(isSeen===true){
 			var ratingEl = document.getElementById("rating");
@@ -130,40 +129,40 @@ $.collectFormData = function(){
 		if($.checkFields(genre_input,title_input) == false){
 			alert('Bitte alle Felder richtig ausfüllen');
 		}else{
-			if($.proofMovieExists(title_input, year_input,isChange,receivedData) == true){
+		if($.proofMovieExists(title_input, year_input,isChange,receivedData) == true){
 				alert("Film schon vorhanden!");
 				$('#movietitle').addClass("inputError");
 			}else{
 				$('#movietitle').removeClass("inputError");
-			if (isSeen===true){
-				result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
-			}else{
-				result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
-			}
-			if ( result == true ){					
-				addMovieSet = new Object();
-				addMovieSet["title"] = title_input;
-				addMovieSet["year"] = year_input;
-				addMovieSet["genre"] = genre_input;
-				addMovieSet["rating"] = rating_input;
-
-				if (isSeen == true ){
-					addMovieSet["seen"] = "1";
+				if (isSeen===true){result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
 				}else{
-					addMovieSet["seen"] = "0";
+					result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
 				}
-			if ( isChange == false){
-				$.addMovie(addMovieSet);
-				alert(' Neuer Film wurde erfolgreich gespeichert ' );
-			}else{
-				$.addChanges(addMovieSet,receivedData['OriginalId']);
-				isChange=false;
-			} 
-			
-			$.newFormular();			
-					}	
+				if (result == true ){					
+					addMovieSet = new Object();
+					addMovieSet["title"] = title_input;
+					addMovieSet["year"] = year_input;
+					addMovieSet["genre"] = genre_input;
+					addMovieSet["rating"] = rating_input;
+
+					if (isSeen == true ){
+						addMovieSet["seen"] = "1";
+					}else{
+						addMovieSet["seen"] = "0";
+					}
+					if (isChange == false){
+					//$.addMovie(addMovieSet);
+					$.insertMovieInDB(addMovieSet); 
+				
+					}else{
+						//$.addChanges(addMovieSet,receivedData['OriginalId']);
+						$.addChangesToDB(addMovieSet,receivedData['OriginalIdDB'])
+						isChange=false;
+					} 			
+					$.newFormular();			
+				}	
 			}
-}			
+		}			
 }
 
 //------------------------------ CLICK AND KEYDOWN EVENTS----------------------------
@@ -188,11 +187,11 @@ $(document).ready(function(){
 			isSeen = false;			
 		}		
 	})
+	
 	//addMovie Method
 	$(document).on('click', '#addMovie', function(event) {		
 			$.collectFormData();
-			//$.changeMovie("Lord of War", "1999");
-			
+	
 			event.preventDefault();
 			event.stopImmediatePropagation();
 			});

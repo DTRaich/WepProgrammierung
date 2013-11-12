@@ -10,6 +10,7 @@ was uns so aufgefallen ist bitte abarbeiten und vorabgabe durchschauen!!!
 
 11)rating änderbar trotz nicht gesehen 
 12) afrage design von register
+13 ) infobutton in der tabelle hat weißen rand
 --------------------TALK---------------TALK-------------------------
 Tabellen struktur soweit da.
 Änderungen in der Tabelle.. (Abklärung Berehnds)
