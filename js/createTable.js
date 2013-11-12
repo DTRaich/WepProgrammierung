@@ -393,7 +393,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.width = "80px";
 					mycurrent_img.style.height = "20px";
 					mycurrent_img.style.border = "0";
-					if(id[j]["seen"]==='0'){
+					if(id[j]["seen"]==='1'){
 						mycurrent_img.setAttribute("id","Ratingclicked");
 						mycurrent_img.setAttribute("class",j);
 						mycurrent_img.style.cursor = "pointer";
