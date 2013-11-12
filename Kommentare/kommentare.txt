@@ -2,7 +2,7 @@
 was uns so aufgefallen ist bitte abarbeiten und vorabgabe durchschauen!!!
 
 -------------------------------NOCH OFFEN-------------------------------
-3) template Formatierungen löschen und per css lösen
+
 6) bei chrome und IE wird unter den menüpunkten ein strich angezeigt , eventuell border?
 --> muss raus!
 8) imdb filme not found handling  ---> Done für not found--- was bei mehrfach found?
@@ -28,3 +28,5 @@ angezeigt. (siehe screenshot)
 			---> Meinungen
 7) bei edit click btn Film hinzufügen zu Film editieren ändern.
 10) tabellen überschrift TITLE anstatt TITEL
+3) template Formatierungen löschen und per css lösen
+--> erledigt, ausser es kommen noch neue dazu

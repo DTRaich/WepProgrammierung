@@ -7,7 +7,7 @@ var isChange = false;
 
 // ---------------------------------------standart care Form----------------------
 var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
-									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> <br> <br> ' +
+									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" id="movietitle"/> <br> <br> <br> ' +
 									'Erscheinungsjahr: &nbsp&nbsp <div id="yearddb"/> <br> <br>'+
 									'Genre: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <select id="genre_select">'+
 												'<option value="null">- Genre -</option>' +
