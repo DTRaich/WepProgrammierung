@@ -18,9 +18,7 @@ var loginTemplate=_.template('<h1>Login</h1>'+
 								'</div>'+
 								'</td>'+
 								'</tr>'+
-								'</table>'+
-								'<br>' +
-								' Bla')
+								'</table>')
 		
 //----------------------------Navigation when logged in---------------------		
 var nav_login_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="nav_home">Home</a>  </li>'+ 
