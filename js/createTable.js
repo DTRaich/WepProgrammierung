@@ -467,7 +467,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
 					}else{
-					mycurrent_cell.appendChild(createTextNode(id[j]["owner"]));
+					mycurrent_cell.appendChild(currenttext(id[j]["owner"]));
 					}
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;	
@@ -484,7 +484,9 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.style.backgroundColor =backg2;
-					}
+					}else{
+					mycurrent_cell.appendChild(currenttext(""));
+					}					
 					break;						
 			}			
 			mycurrent_cell.appendChild(currenttext);
