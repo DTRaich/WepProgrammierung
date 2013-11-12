@@ -1,8 +1,14 @@
+//------------------------GLOBAL VARIABLES----------------------------
+
+// ----------------------------------TEMPLATES---------------------------
+
+// ----------------------------------MAINTEMPLATE---------------------------
 var maintemplate=_.template('<br><table class="mainTemplateTable" id="tabelle"></table>'+
 							'<div id="main_top"></div>'+
 							'<div id="main_middle"></div>'+	
 							'<div id="main_low"></div>');
-							
+
+// ----------------------------------IMDB-TEMPLATE---------------------------
 var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb Informationen</h1>'+
 								'</div>'+
 								'<table class="modal-body"><tr>'+  
@@ -15,6 +21,9 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 								'<div class="modal-footer">'+
 								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Zurück</button>'+
 								'</div>');
+
+//--------------------------------------------------INTERN VARIABELN--------------------------------
+
 var movies;
 var backg="#C4C4C4";
 var backg2 = "#E3E3E3";
@@ -22,39 +31,46 @@ var asc = true;
 var yearsort = true;
 var ratingsort = true;
 var seensort = true;
+//--------------------------------------------------INTERN METHODS--------------------------------
 
+//Click-Event Methods
 $(document).ready(function(){
+//homeClick - show the whole table
 $(document).on('click','#nav_home',function(event){			
 	preselecttable();	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
-
 //navigation Genre Input
+//show Aktion-Movies 
 $(document).on('click','#nav_action',function(event){	
 	movies = filter("Action");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+//show Comedy-Movies
 $(document).on('click','#nav_comedy',function(event){	
 	movies = filter("Comedy");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+//show Horror-Movies
 $(document).on('click','#nav_horror',function(event){	
 	movies = filter("Horror");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+//show SciFi-Movies
 $(document).on('click','#nav_scifi',function(event){	
 	movies = filter("SciFi");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+//show Thriller 
 $(document).on('click','#nav_thriller',function(event){	
 	movies = filter("Thriller");	
 	preselecttablefilter(movies);	
@@ -97,7 +113,7 @@ $(document).on('click','#Ratingclicked',function(event){
 		}else if(newrating === null){
 			rated = true;
 		}else{
-			alert("Gebe eine Bewertung von 1 bis 5 an!!!")
+			alert("Gebe eine Bewertung von 1 bis 5 an")
 		}
 	}	
 	
@@ -111,7 +127,7 @@ $(document).on('click','#detailsclicked',function(event){
 });
 
 //HeaderSort Clicks
-//TitleSortClicked
+//TitleSortClicked 
 $(document).on('click','#TitleSortClicked',function(event){
 
 	movies  = $.sortMovie(asc, movies, "title");
@@ -119,6 +135,7 @@ $(document).on('click','#TitleSortClicked',function(event){
 	if(asc === true){asc=false;}else{asc=true;}
 	
 });
+//YearSortClicked 
 $(document).on('click','#YearSortClicked',function(event){
 
 	movies  = $.sortMovieNumbers(yearsort, movies, "year");
@@ -126,6 +143,7 @@ $(document).on('click','#YearSortClicked',function(event){
 	if(yearsort === true){yearsort=false;}else{yearsort=true;}	
 	
 });
+//RatingSortClicked 
 $(document).on('click','#RatingSortClicked',function(event){
 
 	movies  = $.sortMovieNumbers(ratingsort, movies, "rating");
@@ -133,6 +151,7 @@ $(document).on('click','#RatingSortClicked',function(event){
 	if(ratingsort === true){ratingsort=false;}else{ratingsort=true;}
 	
 });
+//SeenSortClicked  
 $(document).on('click','#SeenSortClicked',function(event){
 
 	movies  = $.sortMovieNumbers(seensort, movies, "seen");
@@ -141,7 +160,7 @@ $(document).on('click','#SeenSortClicked',function(event){
 	
 });
 
-//modaldismiss
+//imdbinfo dismiss 
 $(document).on('click','#btndismiss',function(){
 	selectedtablerebuild();
 });
@@ -412,7 +431,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
-					mycurrent_cell.style.backgroundColor =backg2;
 					break;
 				case 6: 
 					mycurrent_img = document.createElement("img");	
@@ -561,7 +579,6 @@ function createTableGuest(row, id) {
 					mycurrent_img.caption = "Details";
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
-					mycurrent_cell.style.backgroundColor = backg2;
 					break;
 			}			
 			mycurrent_row.appendChild(mycurrent_cell);
