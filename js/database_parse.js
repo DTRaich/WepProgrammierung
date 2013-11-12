@@ -110,19 +110,21 @@ $.insertMovieInDB = function (movieObjadd){
 
 // addChanges to the DB 
 $.addChangesToDB = function(addMovieSet,originalDBID){
-	var user = Parse.User.current();
 	var movieObj;
+	var user = Parse.User.current();	
 	var ratedObj = new RatedObject();	
 	
 	// getting the Movie ParseObject
 	var query = new Parse.Query(MovieObject);
 	query.get(originalDBID, {
 		success: function(movieObj) {
-			alert("hab dich")
+		
+			movieObj.set("title",addMovieSet["title"]);
+			movieObj.set("year", addMovieSet["year"]);
+			movieObj.set("genre", addMovieSet["genre"]);
 		
 		}
 	});
-	
 	// Update the things
 	
 	movieObj.save(null, {
@@ -137,8 +139,38 @@ $.addChangesToDB = function(addMovieSet,originalDBID){
   }
 });
 }
+// getting the relations to the USer to find the "owner"
+$.gettingUserRelations = function(movieObject, currentUser, movie){
+	var relationQuery = new Parse.Query(Parse.User);
+	var promise = Parse.Promise.as();	
+	var movieOwner = movie.get("owner");
+	
+	relationQuery.equalTo("objectId",movieOwner.id );	
 
-// getting the relations to build up the hofle stuckture
+	promise= promise.then(function(){return relationQuery.find({				
+		success: function(results) {					
+					if(results.length != 0){
+						var foundUser = results[0];
+						
+						if(movie.get('owner').id == currentUser.id){
+							movieObject["owner"] = "1";	
+						}else{
+							movieObject["owner"] = foundUser.get('username');	
+						}
+					}
+					
+			},
+			error: function(error) {
+				alert('Fehler beim Laden der Benutzer');
+								
+			}
+		});
+	})
+	
+	return promise;	
+}
+
+// getting the relations to build up the whole stucture
 $.gettingRelations = function(movieObject, user){
 
 	var relationQuery = new Parse.Query(RatedObject);
@@ -220,18 +252,11 @@ $.gettingAllDBMovies = function(){
 				// now searching for the rating stuff
 				$.gettingRelations(movieObject,user).then(function(){});
 				
-				// checking for is User or Not --> because of change matters in the table script	
+				// checking for is User or Not --> because of change matters in the table script
 				if(user == null){
 					movieObject["owner"] = "0";	
-				}else{	
-					console.log(movie.get('owner').id);
-					console.log(user.id);
-					
-					if(movie.get('owner').id == user.id){
-						movieObject["owner"] = "1";	
-					}else{					
-						movieObject["owner"] = "0";	
-					}
+				}else{
+					$.gettingUserRelations(movieObject,user,movie).then(function(){});	
 				}				
 				movieObject["originalDBID"] = movie.id;		
 				
