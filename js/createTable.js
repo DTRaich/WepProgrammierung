@@ -19,7 +19,7 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 								'</div></td></tr>'+
 								'</table>'+
 								'<div class="modal-footer">'+
-								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Zurück</button>'+
+								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Back</button>'+
 								'</div>');
 
 //--------------------------------------------------INTERN VARIABELN--------------------------------
@@ -314,7 +314,7 @@ function createTablelogedIn(row, id) {
         mycurrent_row = document.createElement("tr");
 		mycurrent_row.style.textAlign = "left";
 		//Title Head
-		for(var i=0;i<5;i++){
+		for(var i=0;i<6;i++){
 			mycurrent_cell = document.createElement("th");
 			switch (i){
 				case 0:					  					
@@ -358,6 +358,18 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 4:
+					currenttext = document.createTextNode("eig. Bewertung");
+					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","RatingSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
+					break;
+				case 5:
 					currenttext = document.createTextNode("Bewertung");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -368,7 +380,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.setAttribute("id","RatingSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
-					break;			
+					break;						
 			}		
 			mycurrent_row.appendChild(mycurrent_cell);
 		}
@@ -382,7 +394,7 @@ function createTablelogedIn(row, id) {
 		//create Row
         mycurrent_row = document.createElement("tr");
         
-		for(var i=0;i<8;i++){
+		for(var i=0;i<9;i++){
 			mycurrent_cell = document.createElement("td");
 			switch (i){
 				case 0:					  					
@@ -408,6 +420,16 @@ function createTablelogedIn(row, id) {
 				case 4:
 					currenttext = document.createTextNode("");
 					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/stars-"+id[j]["myrating"]+".jpg";
+					mycurrent_img.style.width = "80px";
+					mycurrent_img.style.height = "20px";
+					mycurrent_img.style.border = "0";				
+					mycurrent_cell.style.width = "90px";
+					mycurrent_cell.appendChild(mycurrent_img);
+					break;	
+				case 5:
+					currenttext = document.createTextNode("");
+					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".jpg";
 					mycurrent_img.style.width = "80px";
 					mycurrent_img.style.height = "20px";
@@ -420,7 +442,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.style.width = "90px";
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;	
-				case 5:
+				case 6:
 					mycurrent_img =document.createElement("img");	
 					mycurrent_img.src="./img/small/details.jpg";
 					mycurrent_img.style.width = "20px";
@@ -432,7 +454,8 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
-				case 6: 
+				case 7: 
+					if(id[j]["owner"]==="1"){
 					mycurrent_img = document.createElement("img");	
 					mycurrent_img.src="./img/small/edit.png";
 					mycurrent_img.style.width = "20px";
@@ -443,9 +466,13 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
+					}else{
+					mycurrent_cell.appendChild(createTextNode(id[j]["owner"]));
+					}
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;	
-				case 7: 
+				case 8: 
+					if(id[j]["owner"]==="1"){
 					mycurrent_img = document.createElement("img");	
 					mycurrent_img.src="./img/small/Delete.png";
 					mycurrent_img.style.width = "20px";
@@ -457,6 +484,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.style.backgroundColor =backg2;
+					}
 					break;						
 			}			
 			mycurrent_cell.appendChild(currenttext);
