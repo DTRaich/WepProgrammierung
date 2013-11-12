@@ -86,7 +86,7 @@ $(document).on('click','#Ratingclicked',function(event){
 	var rated= false;
 	var newrating;
 	while(rated === false){
-	newrating = prompt("Dein Rating:",movies[classn]["rating"]);
+	newrating = prompt("Deine Bewertung:",movies[classn]["rating"]);
 		if(newrating>0&&newrating<6 ){
 			rated = true;
 			//change Rating in data.js
@@ -299,7 +299,7 @@ function createTablelogedIn(row, id) {
 			mycurrent_cell = document.createElement("th");
 			switch (i){
 				case 0:					  					
-					currenttext = document.createTextNode("Title");
+					currenttext = document.createTextNode("Titel");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/sortArrow.jpg";
@@ -339,7 +339,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 4:
-					currenttext = document.createTextNode("Rating");
+					currenttext = document.createTextNode("Bewertung");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/sortArrow.jpg";
@@ -465,7 +465,7 @@ function createTableGuest(row, id) {
 			mycurrent_cell = document.createElement("th");
 			switch (i){
 				case 0:					  					
-					currenttext = document.createTextNode("Title");
+					currenttext = document.createTextNode("Titel");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/sortArrow.jpg";
@@ -493,7 +493,7 @@ function createTableGuest(row, id) {
 					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 3:
-					currenttext = document.createTextNode("Rating");								
+					currenttext = document.createTextNode("Bewertung");								
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/sortArrow.jpg";

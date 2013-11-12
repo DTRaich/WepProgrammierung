@@ -130,14 +130,15 @@ $.collectFormData = function(){
 		if($.checkFields(genre_input,title_input) == false){
 			alert('Bitte alle Felder richtig ausfüllen');
 		}else{
-		if($.proofMovieExists(title_input, year_input,isChange,receivedData) == true){
+			if($.proofMovieExists(title_input, year_input,isChange,receivedData) == true){
 				alert("Film schon vorhanden!");
 				$('#movietitle').addClass("inputError");
 			}else{
 				$('#movietitle').removeClass("inputError");
-			if (isSeen===true){result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
+			if (isSeen===true){
+				result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
 			}else{
-			result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
+				result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
 			}
 			if ( result == true ){					
 				addMovieSet = new Object();

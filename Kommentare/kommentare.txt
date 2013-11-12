@@ -7,7 +7,7 @@ was uns so aufgefallen ist bitte abarbeiten und vorabgabe durchschauen!!!
 --> muss raus!
 8) imdb filme not found handling  ---> Done für not found--- was bei mehrfach found?
 9) sterne unterschiedlich groß!
-10) tabellen überschrift TITLE anstatt TITEL
+
 11)rating änderbar trotz nicht gesehen 
 12) afrage design von register
 --------------------TALK---------------TALK-------------------------
@@ -27,3 +27,4 @@ angezeigt. (siehe screenshot)
 -----> (DANIEL) angeschaut prblem identifizier "width " angaben in prozent.. zeit investieren erst am ende sonst so lassen... 
 			---> Meinungen
 7) bei edit click btn Film hinzufügen zu Film editieren ändern.
+10) tabellen überschrift TITLE anstatt TITEL
