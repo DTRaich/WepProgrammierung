@@ -24,7 +24,10 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 
 //--------------------------------------------------INTERN VARIABELN--------------------------------
 
-var movies;
+
+var loadedmovies = $.getAllMovies(); 
+var movies ;
+
 var backg="#C4C4C4";
 var backg2 = "#E3E3E3";
 var asc = true;
@@ -45,6 +48,7 @@ $(document).on('click','#nav_home',function(event){
 //navigation Genre Input
 //show Aktion-Movies 
 $(document).on('click','#nav_action',function(event){	
+	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Action");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
@@ -52,6 +56,7 @@ $(document).on('click','#nav_action',function(event){
 });
 //show Comedy-Movies
 $(document).on('click','#nav_comedy',function(event){	
+	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Comedy");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
@@ -59,6 +64,7 @@ $(document).on('click','#nav_comedy',function(event){
 });
 //show Horror-Movies
 $(document).on('click','#nav_horror',function(event){	
+	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Horror");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
@@ -66,6 +72,7 @@ $(document).on('click','#nav_horror',function(event){
 });
 //show SciFi-Movies
 $(document).on('click','#nav_scifi',function(event){	
+	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Sci-Fi");
 	preselecttablefilter(movies);	
 	event.preventDefault();
@@ -73,6 +80,7 @@ $(document).on('click','#nav_scifi',function(event){
 });
 //show Thriller 
 $(document).on('click','#nav_thriller',function(event){	
+	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Thriller");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
@@ -243,11 +251,10 @@ function getPoster(title){
 
 function preselecttable(){
 	$('#main').html(maintemplate());	
-	node = document.getElementById("tabelle");
+	node = document.getElementById("tabelle");	
 	
-	//load all Movies
-	movies = $.getAllMovies();
-	
+	//get all Movies in movies Array	
+	movies = loadedmovies;	
 	
 	//check: Logedin User
 	if($.getLogStatus()){
@@ -255,6 +262,7 @@ function preselecttable(){
 	}else{
     node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
 	}
+	loadedmovies = $.getAllMovies(); 	
 }
 
 function preselecttablefilter(filterArray){
@@ -270,6 +278,7 @@ function preselecttablefilter(filterArray){
 	}else{
     node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
 	}
+	loadedmovies = $.getAllMovies(); 
 }
 function selectedtablerebuild(){
 	movies = $.getAllMovies();
@@ -283,6 +292,7 @@ function selectedtablerebuild(){
 	}else{
     node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
 	}
+	loadedmovies = $.getAllMovies(); 
 }
 
 function createTablelogedIn(row, id) {		
