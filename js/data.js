@@ -190,7 +190,7 @@ $.sortMovieNumbers = function(asc,preSortedArray,filter){
 //Genre Input Filter Function
 $.filterMovies = function(preSortedArray,filter){		
 	var finalArray = new Array();
-	var j=0;
+	var i=0;
 	for(var j =0;i<movies.length;i++){
 		if(preSortedArray[i]["genre"]===filter){
 			finalArray[i] = new Object();
@@ -202,7 +202,7 @@ $.filterMovies = function(preSortedArray,filter){
 			finalArray[i]["myrating"] = preSortedArray[j]["myrating"];				
 			finalArray[i]["owner"] = preSortedArray[j]["owner"];
 			finalArray[i]["originalDBID"] = preSortedArray[j]["originalDBID"];
-			j++;
+			i++;
 		}		
 	}
 	return finalArray;
