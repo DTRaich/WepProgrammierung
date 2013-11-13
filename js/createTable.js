@@ -19,7 +19,7 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 								'</div></td></tr>'+
 								'</table>'+
 								'<div class="modal-footer">'+
-								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Back</button>'+
+								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Zurueck</button>'+
 								'</div>');
 
 //--------------------------------------------------INTERN VARIABELN--------------------------------
@@ -99,7 +99,7 @@ $(document).on('click','#Editclicked',function(event){
 $(document).on('click','#Deleteclicked',function(event){
 		
 	var classn = $(this).context.className;
-	$.deleteMovies(movies[classn]["title"],movies[classn]["year"]);	
+	$.delMovieFromDB(movies[classn]["originalDBID"]);	
 	movies = $.getAllMovies();
 	selectedtablerebuild();
 	
@@ -116,13 +116,15 @@ $(document).on('click','#Ratingclicked',function(event){
 			rated = true;
 			//change Rating in data.js
 			$.changeRating(movies[classn]["originalDBID"],movies[classn]["seen"], mynewrating);
-			// change movie data to rebuild the same table as bevore
-			selectedtablerebuild();
+			loadedmovies = $.getAllMovies(); 
+			
 		}else if(mynewrating === null){
 			rated = true;
 		}else{
 			alert("Gebe eine Bewertung von 1 bis 5 an");
 		}
+		//rebuild the same table as bevore
+		selectedtablerebuild();
 	}	
 	
 });
