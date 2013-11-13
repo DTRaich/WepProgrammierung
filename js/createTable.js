@@ -404,6 +404,9 @@ function createTablelogedIn(row, id) {
 					break;
 				case 4:
 					currenttext = document.createTextNode("");
+					mycurrent_link = document.createElement("a");
+					mycurrent_link.setAttribute("id","Ratinglink");
+					mycurrent_link.setAttribute("class","tooltip");
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".jpg";
 					mycurrent_img.style.width = "80px";
@@ -413,7 +416,19 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.setAttribute("class",j);
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.style.width = "90px";
-					mycurrent_cell.appendChild(mycurrent_img);
+					mycurrent_link.appendChild(mycurrent_img);
+					mycurrent_span = document.createElement("span");					
+					mycurrent_span.appendChild(document.createTextNode("Eigene Bewertung:"));
+					//own rating
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/stars-"+id[j]["myrating"]+".jpg";
+					mycurrent_img.style.width = "80px";
+					mycurrent_img.style.height = "20px";
+					mycurrent_img.style.border = "0";
+					mycurrent_span.appendChild(mycurrent_img);
+					//---
+					mycurrent_link.appendChild(mycurrent_span);
+					mycurrent_cell.appendChild(mycurrent_link);
 					mycurrent_cell.appendChild(currenttext);
 					break;	
 				case 5:
