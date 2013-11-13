@@ -19,7 +19,7 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 								'</div></td></tr>'+
 								'</table>'+
 								'<div class="modal-footer">'+
-								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Zurück</button>'+
+								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Zurueck</button>'+
 								'</div>');
 
 //--------------------------------------------------INTERN VARIABELN--------------------------------
@@ -99,7 +99,7 @@ $(document).on('click','#Editclicked',function(event){
 $(document).on('click','#Deleteclicked',function(event){
 		
 	var classn = $(this).context.className;
-	$.deleteMovies(movies[classn]["title"],movies[classn]["year"]);	
+	$.delMovieFromDB(movies[classn]["originalDBID"]);	
 	movies = $.getAllMovies();
 	selectedtablerebuild();
 	
