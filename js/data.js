@@ -112,7 +112,7 @@ $.changeRating = function(originalDBID, seenBeforeChange, newRating){
 	}else{
 		addMovieSet["seen"]= "1";
 	}	
-	$.ratedRelationHandler(originalDBID,seenBeforeChange,newRating,addMovieSet){
+	$.ratedRelationHandler(originalDBID,seenBeforeChange,newRating,addMovieSet);
 	// beachten für Nils neu array laden
 	
 }
@@ -184,5 +184,26 @@ $.sortMovieNumbers = function(asc,preSortedArray,filter){
 			}		
 		}	
 	}	
+	return finalArray;
+}
+
+//Genre Input Filter Function
+$.filterMovies = function(preSortedArray,filter){		
+	var finalArray = new Array();
+	var j=0;
+	for(var j =0;i<movies.length;i++){
+		if(preSortedArray[i]["genre"]===filter){
+			finalArray[i] = new Object();
+			finalArray[i]["title"] = preSortedArray[j]["title"];
+			finalArray[i]["year"] = preSortedArray[j]["year"];
+			finalArray[i]["genre"] = preSortedArray[j]["genre"];
+			finalArray[i]["rating"] = preSortedArray[j]["rating"];
+			finalArray[i]["seen"] = preSortedArray[j]["seen"];	
+			finalArray[i]["myrating"] = preSortedArray[j]["myrating"];				
+			finalArray[i]["owner"] = preSortedArray[j]["owner"];
+			finalArray[i]["originalDBID"] = preSortedArray[j]["originalDBID"];
+			j++;
+		}		
+	}
 	return finalArray;
 }
