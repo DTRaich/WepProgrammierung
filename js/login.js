@@ -18,8 +18,7 @@ var loginTemplate=_.template('<h1>Login</h1>'+
 								'</div>'+
 								'</td>'+
 								'</tr>'+
-								'</table>'+
-								'<a href="#" class="tooltip" id="tt" >Test<span><b>Meine Bewertung</b><img src= ./img/small/stars-2.jpg></img> <br> Eigene Bewertung ändern? Klick mich!</span></a>')
+								'</table>')
 		
 //----------------------------Navigation when logged in---------------------		
 var nav_login_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="nav_home">Home</a>  </li>'+ 
@@ -151,83 +150,75 @@ $.checkRegistration = function(user, pswd1,pswd2){
 //--------------------------------CLICK AND KEYDOWN EVENTS-----------------------------		
 $(document).ready(function(){
 
-		// click on the loginLink and providing the logout Link
-		$(document).on('click', '#loginLink', function(event) {
+	// click on the loginLink and providing the logout Link
+	$(document).on('click', '#loginLink', function(event) {
+			
+		$.loginMethod();		
 				
-			$.loginMethod();		
-				
-			event.preventDefault();
-			event.stopImmediatePropagation();
+		event.preventDefault();
+		event.stopImmediatePropagation();
 		
-		});	
+	});	
 		
-		// provides clicks on the logout Link
-		$(document).on('click','#logout', function(event){	
+	// provides clicks on the logout Link
+	$(document).on('click','#logout', function(event){	
 		
-			$.logOutMethod();	
-
-			event.preventDefault();
-			event.stopImmediatePropagation();		
+		$.logOutMethod();	
+		event.preventDefault();
+		event.stopImmediatePropagation();		
 		
-		});
+	});
 		
-		// login on keypress enter in password field
-		$(document).on('keypress', '#PW', function(event) {
+	// login on keypress enter in password field
+	$(document).on('keypress', '#PW', function(event) {
 		
-			if(event.which == 13) {
-				$.loginMethod();
-			}
-		});
+		if(event.which == 13) {
+			$.loginMethod();
+		}
+	});
 		
-		// login on keypress enter in ID field
-		$(document).on('keypress', '#ID', function(event) {
+	// login on keypress enter in ID field
+	$(document).on('keypress', '#ID', function(event) {
 		
-			if(event.which == 13) {
-				$.loginMethod();
-			}
-		});
-				// click on "Registrieren"for providing new template
-		$(document).on('click', '#register', function(event) {
+		if(event.which == 13) {
+			$.loginMethod();
+		}
+	});
+	
+	// click on "Registrieren"for providing new template
+	$(document).on('click', '#register', function(event) {
 		
-				$('#login').html(registrationTemplate());
+		$('#login').html(registrationTemplate());
 			
-		});
+	});
 		
-		// click on "goBack"for providing new template
-		$(document).on('click', '#goBack', function(event) {
+	// click on "goBack"for providing new template
+	$(document).on('click', '#goBack', function(event) {
 		
-				$('#login').html(loginTemplate());	
-		});
-		// registering now
-		$(document).on('click', '#registerNow', function(event) {
+		$('#login').html(loginTemplate());	
+	});
+	
+	// registering now
+	$(document).on('click', '#registerNow', function(event) {
 		
-			var user = $.trim($('#ID').val());
-			var pswd1 = $.trim($('#PW1').val());
-			var pswd2 = $.trim($('#PW2').val());
+		var user = $.trim($('#ID').val());
+		var pswd1 = $.trim($('#PW1').val());
+		var pswd2 = $.trim($('#PW2').val());
+		var checkR = $.checkRegistration(user,pswd1,pswd2);
 			
-			var checkR = $.checkRegistration(user,pswd1,pswd2);
+		if(checkR == true){
 			
-			if(checkR == true){
-			
-				if(pswd1 === pswd2){
-					result = confirm(" Möchten sie einen neuen Benutzer mit folgenden Daten erstellen? \n \n" + "Benutzername: " + user + "\n \n Passwort: " + pswd1 );
+			if(pswd1 === pswd2){
+				result = confirm(" Möchten sie einen neuen Benutzer mit folgenden Daten erstellen? \n \n" + "Benutzername: " + user + "\n \n Passwort: " + pswd1 );
 					if( result == true){
 						$.addUserDB(user,pswd1);
 						$('#login').html(loginTemplate());						
 					}	
-				}else{
-					alert(' Die beiden Passwörter müssen übereinstimmen um einen Benutzer registrieren zu können ' );
-				}
+			}else{
+				alert(' Die beiden Passwörter müssen übereinstimmen um einen Benutzer registrieren zu können ' );
 			}
+		}
 			
-		});$
+	});
 		
-		(document).on('click', '#tt', function(event) {
-		
-			result = prompt('Um die eigene Bewertung zu ändern, bitte hier die neue Bewertung zwischen 1 und 5 angeben.');
-			alert(result);
-					
-		});
-})
-
-
+});
