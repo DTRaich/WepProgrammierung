@@ -339,24 +339,26 @@ $.gettingAllDBMovies = function(){
 				
 				promises.push($.gettingRatedRelations(movieObject,user).then(function(){}));
 				
+				
 				if(user == null){
 					movieObject["owner"] = "0";	
 				}else{
-					$.gettingUserRelations(movieObject,user,movie).then(function(){});	
+					promises.push($.gettingUserRelations(movieObject,user,movie).then(function(){}));
+					//$.gettingUserRelations(movieObject,user,movie).then(function(){});	
 				}	
 				
 				movieObject["originalDBID"] = movie.id;		
+				//console.log(movieObject);
 				
 				// last fire object into the Array	
 				movieArray.push(movieObject);	
 	});
-  // Return a new promise that is resolved when all of the deletes are finished.
-  return Parse.Promise.when(promises);
+	// Return a new promise that is resolved when all of the deletes are finished.
+	return Parse.Promise.when(promises);
  
 	}).then(function() {
 	// Every comment was deleted.
-	});
-		
+	});	
 
 	
 }
