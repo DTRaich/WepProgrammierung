@@ -98,20 +98,20 @@ $(document).on('click','#Deleteclicked',function(event){
 });
 //Rating clicked
 $(document).on('click','#Ratingclicked',function(event){
-	
+
 	var classn = $(this).context.className;
 	var rated= false;
-	var newrating;
+	var mynewrating;
 	while(rated === false){
-	newrating = prompt("Deine Bewertung:",movies[classn]["rating"]);
-		if(newrating>0&&newrating<6 ){
+	mynewrating = prompt("Deine Bewertung:",movies[classn]["rating"]);
+		if(mynewrating>0&&mynewrating<6&&mynewrating.contains(",")===false&&mynewrating.contains(".")===false){
 			rated = true;
 			//change Rating in data.js
-			$.changeRating(movies[classn]["title"],movies[classn]["year"], newrating);
+			$.changeRating(movies[classn]["title"],movies[classn]["year"], mynewrating);
 			// change movie data to rebuild the same table as bevore
-			movies[classn]["myrating"]= newrating;
+			movies[classn]["myrating"]= mynewrating;
 			selectedtablerebuild();
-		}else if(newrating === null){
+		}else if(mynewrating === null){
 			rated = true;
 		}else{
 			alert("Gebe eine Bewertung von 1 bis 5 an")
@@ -301,6 +301,8 @@ function selectedtablerebuild(){
 	$('#main').html(maintemplate());	
 	node = document.getElementById("tabelle");
 	
+	movies = $.getAllMovies();
+	
 	//check: Logedin User
 	if($.getLogStatus()){
     node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
@@ -370,7 +372,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.width = "10px";
 					mycurrent_img.style.height = "15px";
 					mycurrent_img.style.border = "0";	
-					mycurrent_img.setAttribute("id","RatingSortClicked");
+					mycurrent_img.setAttribute("id","myRatingSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
@@ -404,14 +406,17 @@ function createTablelogedIn(row, id) {
 			switch (i){
 				case 0:					  					
 					currenttext = document.createTextNode(id[j]["title"]);
+					mycurrent_cell.appendChild(currenttext);
 					mycurrent_cell.style.backgroundColor = backg;
 					break;
 				case 1:				  					
 					currenttext = document.createTextNode(id[j]["year"]);
+					mycurrent_cell.appendChild(currenttext);
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;
 				case 2:
 					currenttext = document.createTextNode(id[j]["genre"]);
+					mycurrent_cell.appendChild(currenttext);
 					mycurrent_cell.style.backgroundColor =backg;
 					break;
 				case 3:
@@ -420,10 +425,10 @@ function createTablelogedIn(row, id) {
 					}else{		
 						currenttext = document.createTextNode("Ja");
 					}
+					mycurrent_cell.appendChild(currenttext);
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;
 				case 4:
-					currenttext = document.createTextNode("");
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/stars-"+id[j]["myrating"]+".jpg";
 					mycurrent_img.style.width = "80px";
@@ -446,6 +451,7 @@ function createTablelogedIn(row, id) {
 					}					
 					mycurrent_cell.style.width = "90px";
 					mycurrent_cell.appendChild(mycurrent_img);
+					mycurrent_cell.appendChild(currenttext);
 					break;	
 				case 6:
 					mycurrent_img =document.createElement("img");	
@@ -469,7 +475,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.setAttribute("id","Editclicked");
 					mycurrent_img.setAttribute("class",j);
 					mycurrent_img.style.cursor = "pointer";
-					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
 					mycurrent_img = document.createElement("img");	
 					mycurrent_img.src="./img/small/Delete.png";
@@ -482,11 +487,12 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					}else{
 					currenttext = document.createTextNode(id[j]["owner"]);
-					}
+					mycurrent_cell.appendChild(currenttext);
+					}					
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;						
 			}			
-			mycurrent_cell.appendChild(currenttext);
+			
 			mycurrent_row.appendChild(mycurrent_cell);
 		} 		
 		//complete Row
