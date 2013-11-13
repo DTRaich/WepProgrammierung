@@ -266,6 +266,7 @@ $.gettingRatedRelations = function(movieObject, user){
 				var avgRating = 0;
 				var	seen = 0;
 				var myRating = 0;
+				var round = 0;
 
 				if(results.length != 0){
 					for(var k = 0; k < results.length; k++){
@@ -289,8 +290,9 @@ $.gettingRatedRelations = function(movieObject, user){
 														
 						
 						}
-						avgRating = sumRating/results.length;						
-						movieObject["rating"] = avgRating;				
+						avgRating = sumRating/results.length;	
+						round = Math.round(avgRating);					
+						movieObject["rating"] = round;				
 						movieObject["seen"] = seen;	
 						movieObject["myrating"] = myRating;
 						
