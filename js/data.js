@@ -189,10 +189,11 @@ $.sortMovieNumbers = function(asc,preSortedArray,filter){
 
 //Genre Input Filter Function
 $.filterMovies = function(preSortedArray,filter){		
+	
 	var finalArray = new Array();
 	var i=0;
-	for(var j =0;i<movies.length;i++){
-		if(preSortedArray[i]["genre"]===filter){
+	for(var j =0;j<preSortedArray.length;j++){
+		if(preSortedArray[j]["genre"]===filter){
 			finalArray[i] = new Object();
 			finalArray[i]["title"] = preSortedArray[j]["title"];
 			finalArray[i]["year"] = preSortedArray[j]["year"];
