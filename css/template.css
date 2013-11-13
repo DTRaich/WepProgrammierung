@@ -16,33 +16,41 @@ width : 100%;
 height : 100%; 
 }
 
-/* CSS-Grundgerüst für Tooltip */
+/*--------------- rating tooltip---------------------------  */
+#tool{
+text-decoration:none,
+}
 
 a.tooltip:hover 
-{    position: relative;                        /* Bezug für span, IE: erst bei :hover setzen */
-     background: transparent;          
+{   position: relative;                     
+    background: transparent; 
+	text-decoration: none;
 }  
 
 a.tooltip span  
-{    position: absolute;                     /* aus Textfluß herausnehmen */
-     visibility: hidden;                        /* normal: unsichtbar */
-
-     width: 10em;                               /* FF: kein Leerzeichen vor Einheit */
-     top: 2em; left: 1em;                    /* Tooltip-Position, sollte man festlegen */
+{    position: absolute;                  
+     visibility: hidden;                     
+	text-decoration: none;
+     width: 10em;                         
+     top: 2em; left: 1em;                  
 }
 
 a.tooltip:hover span  
-{    visibility: visible;   }                     /* hover: sichtbar */
+{    visibility: visible;
+	text-decoration: none;
+}                    
 
 a.tooltip             
-{     text-decoration: none; 
+{    
       color: #444444;
-      border-bottom:1px solid blue;
+     /* border-bottom:1px solid blue;*/
+	  text-decoration: none;
 }
 
 a.tooltip span
 {
       /* ... */
+	  text-decoration: none;
       background: white;
       border: 1px solid #aaaaaa;
       padding: 7px;
@@ -54,8 +62,7 @@ a.tooltip span b
       border-bottom: 1px solid #888888;
       margin-bottom: 5px;
 }
+  
 
-.tt:span  
-{    visibility: visible;   } 
 
 
