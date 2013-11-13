@@ -37,6 +37,7 @@ var seensort = true;
 $(document).ready(function(){
 //homeClick - show the whole table
 $(document).on('click','#nav_home',function(event){			
+
 	preselecttable();	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
@@ -108,7 +109,7 @@ $(document).on('click','#Ratingclicked',function(event){
 			//change Rating in data.js
 			$.changeRating(movies[classn]["title"],movies[classn]["year"], newrating);
 			// change movie data to rebuild the same table as bevore
-			movies[classn]["rating"]= newrating;
+			movies[classn]["myrating"]= newrating;
 			selectedtablerebuild();
 		}else if(newrating === null){
 			rated = true;
@@ -255,6 +256,9 @@ function filter(filter){
 			arr[j]["genre"] = movies[i]["genre"];
 			arr[j]["rating"] = movies[i]["rating"];
 			arr[j]["Seen"] = movies[i]["seen"];	
+			arr[j]["myrating"] = movies[i]["myrating"];
+			arr[j]["owner"] = movies[i]["owner"];
+			arr[j]["originalDBID"] = movies[i]["originalDBID"];
 			j++;
 		}		
 	}
@@ -268,7 +272,8 @@ function preselecttable(){
 	node = document.getElementById("tabelle");
 	
 	//load all Movies
-	movies = $.getAllMovies();	
+	movies = $.getAllMovies();
+	
 	
 	//check: Logedin User
 	if($.getLogStatus()){
@@ -394,7 +399,7 @@ function createTablelogedIn(row, id) {
 		//create Row
         mycurrent_row = document.createElement("tr");
         
-		for(var i=0;i<9;i++){
+		for(var i=0;i<8;i++){
 			mycurrent_cell = document.createElement("td");
 			switch (i){
 				case 0:					  					
@@ -466,13 +471,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
-					}else{
-					currenttext = document.createTextNode(id[j]["owner"]);
-					}
-					mycurrent_cell.style.backgroundColor =backg2;
-					break;	
-				case 8: 
-					if(id[j]["owner"]==="1"){
 					mycurrent_img = document.createElement("img");	
 					mycurrent_img.src="./img/small/Delete.png";
 					mycurrent_img.style.width = "20px";
@@ -482,11 +480,10 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.setAttribute("class",j);
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
-					mycurrent_cell.style.width = "20px";
-					mycurrent_cell.style.backgroundColor =backg2;
 					}else{
-					currenttext = document.createTextNode("");
-					}					
+					currenttext = document.createTextNode(id[j]["owner"]);
+					}
+					mycurrent_cell.style.backgroundColor =backg2;
 					break;						
 			}			
 			mycurrent_cell.appendChild(currenttext);
