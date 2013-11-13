@@ -18,7 +18,8 @@ var loginTemplate=_.template('<h1>Login</h1>'+
 								'</div>'+
 								'</td>'+
 								'</tr>'+
-								'</table>')
+								'</table>'+
+								'<a href="#" class="tooltip" id="tt" >Test<span><b>Meine Bewertung</b><img src= ./img/small/stars-2.jpg></img> <br> Eigene Bewertung ändern? Klick mich!</span></a>')
 		
 //----------------------------Navigation when logged in---------------------		
 var nav_login_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="nav_home">Home</a>  </li>'+ 
@@ -219,5 +220,14 @@ $(document).ready(function(){
 				}
 			}
 			
+		});$
+		
+		(document).on('click', '#tt', function(event) {
+		
+			result = prompt('Um die eigene Bewertung zu ändern, bitte hier die neue Bewertung zwischen 1 und 5 angeben.');
+			alert(result);
+					
 		});
 })
+
+

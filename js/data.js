@@ -112,7 +112,7 @@ $.changeRating = function(originalDBID, seenBeforeChange, newRating){
 	}else{
 		addMovieSet["seen"]= "1";
 	}	
-	$.ratedRelationHandler(originalDBID,seenBeforeChange,newRating,addMovieSet){
+	$.ratedRelationHandler(originalDBID,seenBeforeChange,newRating,addMovieSet);
 	// beachten für Nils neu array laden
 	
 }

@@ -119,20 +119,38 @@ $.newRatingRelation = function(movieID,user,rating){
 
 // delete or Update Rating relation ---> one fucntion because we have to search for both movieId and userID due to the relation
 $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
-	//define query
-	var UserObject = new Parse.User();
-	var movieIdQuery = new Parse.Query(RatedObject);
-	var userIdQuery = new Parse.Query(RatedObject);
+	//define query	
+	var relationQuery = new Parse.Query(RatedObject);	
 	console.log("querydefine");
-	movieIdQuery.equalTo("movieID",movieID);
-	movieIdQuery.equalTo("userID",user);
-	//var mainQuery = Parse.Query.and(movieIdQuery, userIdQuery);
-	console.log(movieIdQuery);
-	console.log("queryadding");
+	
+	relationQuery.equalTo("movieID",movieID);
+	relationQuery.equalTo("userID",user);
+	
 	// find relation
-	movieIdQuery.find({
-		success: function(results) {
-			console.log(results[0].id);
+	relationQuery.find({
+		success: function(results){
+			var ratingRelation = results[0];			
+			// delete or update
+			if(isDel == true){
+			
+				ratingRelation.destroy({
+					success: function(ratingRelation) {
+						// relation deleted
+					}	
+				})
+				
+			}else{
+				ratingRelation.set("rating",rating);
+				
+				ratingRelation.save(null, {
+					success: function(ratingRelation){
+						// successfull updated
+					}
+				
+				})
+			
+			}
+			
 		},
 		error: function(error) {
 			// There was an error.
@@ -334,6 +352,7 @@ $.gettingAllDBMovies = function(){
 		
 		}		
 	});	
+	
 }
 
 // delete movies from the DB
