@@ -35,10 +35,13 @@ var rateAndCommentTemplate = _.template(' Bewertung : &nbsp&nbsp&nbsp&nbsp&nbsp&
 //------------------------------------ METHODS TO CALL--------------------------
 // fills formular when data needs to be changed
 $.changeMovie = function(title, year){
+	// we are in change mode
 	isChange = true;
-	receivedData = $.getOneMovieData(title,year);
+	
+	receivedData = $.getOneMovieData(title,year);	
 	$.newFormular();
-
+	
+	// insert the received movie data
 	$('#movietitle').val(receivedData['title']);
 	$('#year').val(receivedData['year']);
 	$('#genre_select').val(receivedData['genre']);
@@ -47,6 +50,8 @@ $.changeMovie = function(title, year){
 		$('#ratingChb').attr('checked',true);
 		$('#main_middle').html(rateAndCommentTemplate());
 		$('#rating').val(receivedData['rating']);
+		// is seen true is necessary to open up the rating stuff
+		isSeen = true;
 	}		
 }
 
@@ -57,6 +62,7 @@ $.newFormular = function(){
 	$('#main_top').html(careFormTemplate());
 	$.createDropDownYear(); 
 	
+	// define whether is in change mode or in adding new one
 	if(isChange==true){
 		$('#main_low').html(editButtonTemplate());
 	}else{
@@ -110,6 +116,7 @@ $.checkFields = function(genre_input,title_input){;
 
 // gets data from formular
 $.collectFormData = function(){
+		// getting all entries
 		var title_input = $.trim($('#movietitle').val());
 		var yearEl = document.getElementById("hallo");
 		var year_input  = yearEl.options[yearEl.selectedIndex].value;
@@ -117,8 +124,9 @@ $.collectFormData = function(){
 		var genreEl = document.getElementById("genre_select");
 		var genre_input = genreEl.options[genreEl.selectedIndex].value;
 		var result;
-		var addMovieSet;		
+		var addMovieSet;
 		
+		// if movie is seen get rating	
 		if(isSeen===true){
 			var ratingEl = document.getElementById("rating");
 			rating_input = ratingEl.options[ratingEl.selectedIndex].value;
@@ -126,41 +134,52 @@ $.collectFormData = function(){
 			rating_input = "0";
 		}
 		
+		//checking things --> also seen method in data.js
 		if($.checkFields(genre_input,title_input) == false){
 			alert('Bitte alle Felder richtig ausfüllen');
 		}else{
-		if($.proofMovieExists(title_input, year_input,isChange,receivedData) == true){
+			if($.proofMovieExists(title_input, year_input,isChange,receivedData) == true){
+				// movie is already there
 				alert("Film schon vorhanden!");
 				$('#movietitle').addClass("inputError");
 			}else{
 				$('#movietitle').removeClass("inputError");
-				if (isSeen===true){result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
+				
+				//let the user confirm his changes
+				if (isSeen===true){
+					result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input + "\n Bewertung: " + rating_input);
 				}else{
 					result = confirm(" Filmdaten speichern? \n \n " + "Titel: " + title_input + "\n Jahr: " + year_input + "\n Genre: " + genre_input);
 				}
+				// ok he did confirm
 				if (result == true ){					
 					addMovieSet = new Object();
 					addMovieSet["title"] = title_input;
 					addMovieSet["year"] = year_input;
 					addMovieSet["genre"] = genre_input;
 					addMovieSet["rating"] = rating_input;
-
+					
+					//seen yes no?
 					if (isSeen == true ){
 						addMovieSet["seen"] = "1";
 					}else{
 						addMovieSet["seen"] = "0";
 					}
-					if (isChange == false){
-					//$.addMovie(addMovieSet);
-					$.insertMovieInDB(addMovieSet); 
+					// procedure for change or to add a new movie
+					if (isChange == false){					
+						$.insertMovieInDB(addMovieSet); 
 				
 					}else{
-						//$.addChanges(addMovieSet,receivedData['OriginalId']);
-						$.addChangesToDB(addMovieSet,receivedData['OriginalIdDB'])
+						$.addChangesToDB(addMovieSet,receivedData)
 						isChange=false;
-					} 			
+					}
+
+					// provides new formular
 					$.newFormular();			
-				}	
+				}else{
+					//he did not confirm his entries, and is now able to edit again
+				}
+				
 			}
 		}			
 }

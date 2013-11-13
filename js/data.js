@@ -1,8 +1,6 @@
 //Datascript
 //------------------------GLOBAL VARIABLES----------------------------
 var movieArray = new Array();
-
-
 //------------------------DATA----------------------------------------
 // how new array should look
 //movieArray[9] = new Object();
@@ -14,6 +12,7 @@ var movieArray = new Array();
 //movieArray[9]["myrating"] = "1"; // wenn eigenes vergeben
 //movieArray[9]["owner"] = "1"; // nur wenn owner generelles changen
 //movieArray[9]["originalDBID"] = "1"; // für delte und change 
+
 //--------------------------------------------------INTERN METHODS--------------------------------
 
 // searches for the movie and the year
@@ -81,104 +80,60 @@ $.getOneMovieData =function(movieTitle,year){
 
 	var movieData = new Object();
 	var movielocation = $.findLocationOfMovie(movieTitle,year);
-
+	
 	movieData["title"] = movieArray[movielocation]["title"];
 	movieData["year"] = movieArray[movielocation]["year"];
 	movieData["genre"] = movieArray[movielocation]["genre"];
 	movieData["rating"] = movieArray[movielocation]["rating"];
 	movieData["seen"] = movieArray[movielocation]["seen"];
-	movieData["OriginalId"] = movielocation;
+	movieData["myrating"] = movieArray[movielocation]["myrating"];
+	movieData["owner"] = movieArray[movielocation]["owner"];	
+	movieData["originalDBID"] = movieArray[movielocation]["originalDBID"];
 	
 	return movieData;
 }
-// returns all Movies without Filters
-	
+
+// returns all Movies without Filters	
 $.getAllMovies = function(){
 	// getting the Movies from the DB.
 	//---> Into the movie array because right now its much faster.. maybe due to the internet connection and db specific parameters.
 	movieArray = new Array();
-	$.gettingAllDBMovies();	
+	$.gettingAllDBMovies();
+	
 	return movieArray;	
 }
-
-//------------------------------add and delete-----------------------------
-// adds a new movie to the Array
-$.addMovie = function (movieObj){	
-	movieArray.push(movieObj);
-	
-}
-
-//deletes a movie in the movieArray
-$.deleteMovies = function(movie,year){
-	var location = $.findLocationOfMovie(movie,year);
-	if(location !== -1){
-		delete_result = confirm('Soll dieser Film wirklich entfernt werden?');
-		if(delete_result == true){
-			movieArray.splice(location,1);
-		}
-		
+//changes the rating and the "seen" yes/ no matters
+$.changeRating = function(originalDBID, seenBeforeChange, newRating){
+	// db changing
+		// addMovieset object is neccessary for the relationHandler 
+	var addMovieSet = new Object();
+	if(newRating == "0"){
+		addMovieSet["seen"]= "0";
 	}else{
-		alert("Film konnte nicht gelöscht werden!");
-	
+		addMovieSet["seen"]= "1";
 	}	
-}
+	$.ratedRelationHandler(originalDBID,seenBeforeChange,newRating,addMovieSet){
+	// beachten für Nils neu array laden
 	
-//---------------------------changeStuff------------------------
-// changes the parameters of the movie
-$.addChanges = function(movieObj,movielocation){
-
-	for (var attribute in movieObj){
-		
-		movieArray[movielocation][attribute] = movieObj[attribute];	
-	}
-}
-
-// change rating
-
-$.changeRating = function(movieTitle, year, newRating){
-
-	var location = $.findLocationOfMovie(movieTitle,year);
-	if ( location !== -1 ){
-	movieArray[location]["rating"] = newRating;
-	}else{
-	alert('Änderung der Bewertung ist nicht möglich.');
-	}
 }
 
 //------------------sorting and filtering-----------------------------------
-
-//sort seen or not; seen= true/fals
-$.sortMovieSeen =  function(seen, preSortedArray){
-	var sortedArray = new Array();
-	if(preSortedArray == "null"){
-		//usemovieArray
-	}else{
-		//use preSorted
-	}
-
-}
-
-// sort rating best first or last;  best = true/false;
-$.sortMovieRating = function(best,preSortedArray){
-	var sortedArray = new Array();
-	
-	if(preSortedArray == "null"){
-		//usemovieArray
-	}else{
-		//use preSorted
-	}
-}
-
 //sort Alphabet asc= true/false
 $.sortMovie = function(asc,preSortedArray,filter){
+	//define the working arrays
 	var sortedArray = new Array();
 	var finalArray = new Array();
+	
+	// creating sorting key
 	for(var i = 0 ; i < preSortedArray.length ; i++){
 		sortedArray.push(preSortedArray[i][filter]);	
 	}	
+	// SORT!
 	sortedArray.sort();
+	// asc or dec
 	if(asc === true){sortedArray.sort();}else{sortedArray.reverse();}
 	
+	// fill new sorted array
 	for(var i = 0; i < sortedArray.length ; i++ ){
 		for(var j = 0; j< preSortedArray.length ; j++){
 			if(sortedArray[i] === preSortedArray[j][filter]){
@@ -188,22 +143,30 @@ $.sortMovie = function(asc,preSortedArray,filter){
 				finalArray[i]["genre"] = preSortedArray[j]["genre"];
 				finalArray[i]["rating"] = preSortedArray[j]["rating"];
 				finalArray[i]["seen"] = preSortedArray[j]["seen"];				
-				
+				finalArray[i]["myrating"] = preSortedArray[j]["myrating"];				
+				finalArray[i]["owner"] = preSortedArray[j]["owner"];
+				finalArray[i]["originalDBID"] = preSortedArray[j]["originalDBID"];
 			}		
 		}	
 	}	
 	return finalArray;
 }
+
 //sort Alphabet asc= true/false
 $.sortMovieNumbers = function(asc,preSortedArray,filter){
+	//define the working arrays
 	var sortedArray = new Array();
 	var finalArray = new Array();
+	// creating sorting key
 	for(var i = 0 ; i < preSortedArray.length ; i++){
 		sortedArray.push(preSortedArray[i][filter]+preSortedArray[i]["title"]);	
 	}	
+	// SORT!
 	sortedArray.sort();
+	// asc or dec
 	if(asc === true){sortedArray.sort();}else{sortedArray.reverse();}
 	
+	// fill new sorted array
 	for(var i = 0; i < sortedArray.length ; i++ ){
 		for(var j = 0; j< preSortedArray.length ; j++){
 			var test= preSortedArray[j][filter]+preSortedArray[j]["title"];
@@ -213,14 +176,13 @@ $.sortMovieNumbers = function(asc,preSortedArray,filter){
 				finalArray[i]["year"] = preSortedArray[j]["year"];
 				finalArray[i]["genre"] = preSortedArray[j]["genre"];
 				finalArray[i]["rating"] = preSortedArray[j]["rating"];
-				finalArray[i]["seen"] = preSortedArray[j]["seen"];				
-				
+				finalArray[i]["seen"] = preSortedArray[j]["seen"];	
+				finalArray[i]["myrating"] = preSortedArray[j]["myrating"];				
+				finalArray[i]["owner"] = preSortedArray[j]["owner"];
+				finalArray[i]["originalDBID"] = preSortedArray[j]["originalDBID"];
+
 			}		
 		}	
 	}	
 	return finalArray;
 }
-
-
-
-

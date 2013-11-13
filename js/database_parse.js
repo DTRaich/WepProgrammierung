@@ -40,7 +40,7 @@ $.loginToDB = function(username,pswd){
 				
 		},
 		error: function(user, error) {
-			alert('Login Fehlgeschlagen! \n \nBitte überprüfen Sie Ihre Eingaben.');
+			alert('Login fehlgeschlagen! \n \nBitter vergewissern Sie sich, dass Ihre Eingaben korrekt sind.');
 		}	
 	});
 }
@@ -86,19 +86,11 @@ $.insertMovieInDB = function (movieObjadd){
 			// create rated object with current movieObj id --- if movie is seen ---else not
 			if(movieObjadd["seen"] === "1"){
 			
-				ratedObj.set("movieID", movieObj.id);
-				ratedObj.set("userID", user);
-				ratedObj.set("rating", movieObjadd["rating"]);
-				
-				// save the rating obj
-				ratedObj.save(null, {
-					success: function(ratedObj){
-						// relation  also saved
-					}
-				
-				})
+				//adding new relation
+				$.newRatingRelation(movieObj.id,user,movieObjadd["rating"]);
+				alert('Neuer Film wurde erfolgreich gespeichert ' );	
 			}
-			alert('Neuer Film wurde erfolgreich gespeichert ' );	
+			
 		},
 		error: function(movieObj, error) {
 			
@@ -108,37 +100,109 @@ $.insertMovieInDB = function (movieObjadd){
 	});
 }
 
-// addChanges to the DB 
-$.addChangesToDB = function(addMovieSet,originalDBID){
-	var movieObj;
-	var user = Parse.User.current();	
-	var ratedObj = new RatedObject();	
+//new Seen and Rating Relations 
+$.newRatingRelation = function(movieID,user,rating){
+	var ratedObj = new RatedObject();
+	ratedObj.set("movieID", movieID);
+	ratedObj.set("userID", user);
+	ratedObj.set("rating", rating);
 	
-	// getting the Movie ParseObject
-	var query = new Parse.Query(MovieObject);
-	query.get(originalDBID, {
+	// save the rating obj
+	ratedObj.save(null, {
+		success: function(ratedObj){
+			// relation  also saved
+			//console.log("savedrelation");
+		}
+				
+	})	
+}
+
+// delete or Update Rating relation ---> one fucntion because we have to search for both movieId and userID due to the relation
+$.deleteOrUpdateRating = function(movieID,user,rating,isDel){
+	//define query
+	var UserObject = new Parse.User();
+	var movieIdQuery = new Parse.Query(RatedObject);
+	var userIdQuery = new Parse.Query(RatedObject);
+	console.log("querydefine");
+	movieIdQuery.equalTo("movieID",movieID);
+	movieIdQuery.equalTo("userID",user);
+	//var mainQuery = Parse.Query.and(movieIdQuery, userIdQuery);
+	console.log(movieIdQuery);
+	console.log("queryadding");
+	// find relation
+	movieIdQuery.find({
+		success: function(results) {
+			console.log(results[0].id);
+		},
+		error: function(error) {
+			// There was an error.
+		}
+	});
+	
+	// delete or updated
+
+}
+
+//handles all cases of relation changeing
+$.ratedRelationHandler = function(movieID,seenBeforeChange,rating,addMovieSet){
+	var user = Parse.User.current();
+	if(seenBeforeChange == "1"){	
+		if(addMovieSet["seen"] == "0"){
+			//delete
+			$.deleteOrUpdateRating(movieID,user,rating,true);
+		}else{
+			//update
+			$.deleteOrUpdateRating(movieID,user,rating,false);		
+		}
+	
+	}else{	
+		if(addMovieSet["seen"] == "1"){
+			//add new relation		
+			$.newRatingRelation(movieID,user,rating);
+		}
+	
+	}
+}
+
+// addChanges to the DB (changes from carescript complete editing mode)
+$.addChangesToDB = function(addMovieSet,receivedData){	
+	var movieObj;	
+	var user = Parse.User.current();
+	var movieID = receivedData["originalDBID"];
+	var user = Parse.User.current();
+	var seenBeforeChange = receivedData["seen"];
+	var rating  = addMovieSet["rating"];
+	console.log(rating);
+	
+	// getting the Movie
+	var query = new Parse.Query(MovieObject);	
+	query.get(movieID, {
 		success: function(movieObj) {
-		
 			movieObj.set("title",addMovieSet["title"]);
 			movieObj.set("year", addMovieSet["year"]);
 			movieObj.set("genre", addMovieSet["genre"]);
+			movieObj.set("changed", user);
+			
+			movieObj.save(null, {
+					success: function(movieObj){
+						// successfull updated
+					}
+				
+				})
 		
+			
+		},
+		error: function(error) {
+			alert('Fehler beim Laden der Benutzer');
+							
 		}
-	});
-	// Update the things
+	});	
+	// relation handling	
+	$.ratedRelationHandler(movieID,seenBeforeChange,rating,addMovieSet);
 	
-	movieObj.save(null, {
-	success: function(movieObj) {
-		// create movieObj
-		movieObj.set("title",addMovieSet["title"]);
-		movieObj.set("year", addMovieSet["year"]);
-		movieObj.set("genre", addMovieSet["genre"]);	
-		//movieObj.set("owner", addMovieSet["owner"]));
-		movieObj.set("changed", user);
-		movieObj.save();
-  }
-});
+			
 }
+
 // getting the relations to the USer to find the "owner"
 $.gettingUserRelations = function(movieObject, currentUser, movie){
 	var relationQuery = new Parse.Query(Parse.User);
@@ -171,7 +235,7 @@ $.gettingUserRelations = function(movieObject, currentUser, movie){
 }
 
 // getting the relations to build up the whole stucture
-$.gettingRelations = function(movieObject, user){
+$.gettingRatedRelations = function(movieObject, user){
 
 	var relationQuery = new Parse.Query(RatedObject);
 	var promise = Parse.Promise.as();				
@@ -212,12 +276,12 @@ $.gettingRelations = function(movieObject, user){
 						movieObject["seen"] = seen;	
 						movieObject["myrating"] = myRating;
 						
-						}else{							
-							movieObject["rating"] = "0";				
-							movieObject["seen"] = "0";	
-							movieObject["myrating"] = "0";
+				}else{							
+					movieObject["rating"] = "0";				
+					movieObject["seen"] = "0";	
+					movieObject["myrating"] = "0";
 						
-						}	
+				}	
 						
 							
 			},
@@ -250,7 +314,7 @@ $.gettingAllDBMovies = function(){
 				movieObject["genre"] = movie.get('genre');								
 								
 				// now searching for the rating stuff
-				$.gettingRelations(movieObject,user).then(function(){});
+				$.gettingRatedRelations(movieObject,user).then(function(){});
 				
 				// checking for is User or Not --> because of change matters in the table script
 				if(user == null){
@@ -290,15 +354,16 @@ $.delMovieFromDB = function(originalDBID){
 					
 				}
 			});	
-		// The object was deleted from the Parse Cloud.
+		// The object has been deleted from the Parse Cloud.
 		}
 	});	
 	
-	// Relation to be deleted.
+	// Relations to be deleted.
 	relationQuery.equalTo("movieID", originalDBID);
 	relationQuery.find({
 		success: function(results) {
 			for( var i = 0; i < results.length;i++){
+			console.log("delete");
 				var relation = results[i];
 				relation.destroy({
 					success: function(relation) {
