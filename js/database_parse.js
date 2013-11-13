@@ -321,39 +321,43 @@ $.gettingAllDBMovies = function(){
 	var queryAllMovies = new Parse.Query(MovieObject);	
 	var user = Parse.User.current();
 	
-	queryAllMovies.find({
-		success: function(results) {		
-			for(var i = 0; i < results.length; i++){
-				
+	
+	queryAllMovies.find().then(function(results) {
+  // Collect one promise for each delete into an array.
+	var promises = [];
+	
+		_.each(results, function(result) {
 				movieObject	= new Object();		
-				movie = results[i];	
+				movie = result;					
+				//movie = results[i];	
 				
 				// fill with "movieClassDATA"							
 				movieObject["title"] = movie.get('title');				
 				movieObject["year"] = movie.get('year');
-				movieObject["genre"] = movie.get('genre');								
-								
-				// now searching for the rating stuff
-				$.gettingRatedRelations(movieObject,user).then(function(){});
+				movieObject["genre"] = movie.get('genre');	
+				// Start this delete immediately and add its promise to the list.
 				
-				// checking for is User or Not --> because of change matters in the table script
+				promises.push($.gettingRatedRelations(movieObject,user).then(function(){}));
+				
 				if(user == null){
 					movieObject["owner"] = "0";	
 				}else{
 					$.gettingUserRelations(movieObject,user,movie).then(function(){});	
-				}				
+				}	
+				
 				movieObject["originalDBID"] = movie.id;		
 				
 				// last fire object into the Array	
 				movieArray.push(movieObject);	
-			}
-			
-		},
-		error: function(error) {
-			alert("Fehler beim Laden der Anwendung.\nWir bitten um Ihr Verständnis.")
+	});
+  // Return a new promise that is resolved when all of the deletes are finished.
+  return Parse.Promise.when(promises);
+ 
+	}).then(function() {
+	// Every comment was deleted.
+	});
 		
-		}		
-	});	
+
 	
 }
 
