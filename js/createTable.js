@@ -45,35 +45,35 @@ $(document).on('click','#nav_home',function(event){
 //navigation Genre Input
 //show Aktion-Movies 
 $(document).on('click','#nav_action',function(event){	
-	movies = filter("Action");	
+	movies = $.filterMovies(movies,"Action");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
 //show Comedy-Movies
 $(document).on('click','#nav_comedy',function(event){	
-	movies = filter("Comedy");	
+	movies = $.filterMovies(movies,"Comedy");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
 //show Horror-Movies
 $(document).on('click','#nav_horror',function(event){	
-	movies = filter("Horror");	
+	movies = $.filterMovies(movies,"Horror");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
 //show SciFi-Movies
 $(document).on('click','#nav_scifi',function(event){	
-	movies = filter("SciFi");	
+	movies = $.filterMovies(movies,"Sci-Fi");
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
 //show Thriller 
 $(document).on('click','#nav_thriller',function(event){	
-	movies = filter("Thriller");	
+	movies = $.filterMovies(movies,"Thriller");	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
@@ -104,17 +104,16 @@ $(document).on('click','#Ratingclicked',function(event){
 	var mynewrating;
 	while(rated === false){
 	mynewrating = prompt("Deine Bewertung:",movies[classn]["rating"]);
-		if(mynewrating>0&&mynewrating<6&&mynewrating.contains(",")===false&&mynewrating.contains(".")===false){
+		if(mynewrating>=0&&mynewrating<6&&mynewrating.contains(",")===false&&mynewrating.contains(".")===false){
 			rated = true;
 			//change Rating in data.js
-			$.changeRating(movies[classn]["title"],movies[classn]["year"], mynewrating);
+			$.changeRating(movies[classn]["originalDBID"],movies[classn]["seen"], mynewrating);
 			// change movie data to rebuild the same table as bevore
-			movies[classn]["myrating"]= mynewrating;
 			selectedtablerebuild();
 		}else if(mynewrating === null){
 			rated = true;
 		}else{
-			alert("Gebe eine Bewertung von 1 bis 5 an")
+			alert("Gebe eine Bewertung von 1 bis 5 an");
 		}
 	}	
 	
@@ -241,31 +240,6 @@ function getPoster(title){
 //-------------------------------------------------
 
 
-//Genre Input Filter Function
-function filter(filter){	
-
-	
-	movies = $.getAllMovies();	
-	var arr = new Array();
-	var j=0;
-	for(var i =0;i<movies.length;i++){
-		if(movies[i]["genre"]===filter){
-			arr[j] = new Object();
-			arr[j]["title"] = movies[i]["title"];
-			arr[j]["year"] = movies[i]["year"];
-			arr[j]["genre"] = movies[i]["genre"];
-			arr[j]["rating"] = movies[i]["rating"];
-			arr[j]["Seen"] = movies[i]["seen"];	
-			arr[j]["myrating"] = movies[i]["myrating"];
-			arr[j]["owner"] = movies[i]["owner"];
-			arr[j]["originalDBID"] = movies[i]["originalDBID"];
-			j++;
-		}		
-	}
-	return arr;
-}
-
-
 
 function preselecttable(){
 	$('#main').html(maintemplate());	
@@ -298,10 +272,10 @@ function preselecttablefilter(filterArray){
 	}
 }
 function selectedtablerebuild(){
-	$('#main').html(maintemplate());	
-	node = document.getElementById("tabelle");
-	
 	movies = $.getAllMovies();
+	
+	$('#main').html(maintemplate());	
+	node = document.getElementById("tabelle");	
 	
 	//check: Logedin User
 	if($.getLogStatus()){
@@ -321,7 +295,7 @@ function createTablelogedIn(row, id) {
         mycurrent_row = document.createElement("tr");
 		mycurrent_row.style.textAlign = "left";
 		//Title Head
-		for(var i=0;i<6;i++){
+		for(var i=0;i<5;i++){
 			mycurrent_cell = document.createElement("th");
 			switch (i){
 				case 0:					  					
@@ -365,18 +339,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 4:
-					currenttext = document.createTextNode("eig. Bewertung");
-					mycurrent_cell.appendChild(currenttext);
-					mycurrent_img = document.createElement("img");			
-					mycurrent_img.src="./img/small/sortArrow.jpg";
-					mycurrent_img.style.width = "10px";
-					mycurrent_img.style.height = "15px";
-					mycurrent_img.style.border = "0";	
-					mycurrent_img.setAttribute("id","myRatingSortClicked");
-					mycurrent_img.style.cursor = "pointer";
-					mycurrent_cell.appendChild(mycurrent_img);
-					break;
-				case 5:
 					currenttext = document.createTextNode("Bewertung");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -401,7 +363,7 @@ function createTablelogedIn(row, id) {
 		//create Row
         mycurrent_row = document.createElement("tr");
         
-		for(var i=0;i<8;i++){
+		for(var i=0;i<7;i++){
 			mycurrent_cell = document.createElement("td");
 			switch (i){
 				case 0:					  					
@@ -429,31 +391,20 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;
 				case 4:
-					mycurrent_img = document.createElement("img");			
-					mycurrent_img.src="./img/small/stars-"+id[j]["myrating"]+".jpg";
-					mycurrent_img.style.width = "80px";
-					mycurrent_img.style.height = "20px";
-					mycurrent_img.style.border = "0";				
-					mycurrent_cell.style.width = "90px";
-					mycurrent_cell.appendChild(mycurrent_img);
-					break;	
-				case 5:
 					currenttext = document.createTextNode("");
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".jpg";
 					mycurrent_img.style.width = "80px";
 					mycurrent_img.style.height = "20px";
 					mycurrent_img.style.border = "0";
-					if(id[j]["seen"]==='1'){
-						mycurrent_img.setAttribute("id","Ratingclicked");
-						mycurrent_img.setAttribute("class",j);
-						mycurrent_img.style.cursor = "pointer";
-					}					
+					mycurrent_img.setAttribute("id","Ratingclicked");
+					mycurrent_img.setAttribute("class",j);
+					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.style.width = "90px";
 					mycurrent_cell.appendChild(mycurrent_img);
 					mycurrent_cell.appendChild(currenttext);
 					break;	
-				case 6:
+				case 5:
 					mycurrent_img =document.createElement("img");	
 					mycurrent_img.src="./img/small/details.jpg";
 					mycurrent_img.style.width = "20px";
@@ -465,7 +416,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
-				case 7: 
+				case 6: 
 					if(id[j]["owner"]==="1"){
 					mycurrent_img = document.createElement("img");	
 					mycurrent_img.src="./img/small/edit.png";
