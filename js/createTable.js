@@ -103,7 +103,7 @@ $(document).on('click','#Editclicked',function(event){
 
 	var classn = $(this).context.className;
 	$.changeMovie(movies[classn]["title"],movies[classn]["year"]);
-	loadedmovies = $.getAllMovies();	
+	
 	
 });
 //deletebutton clicked
