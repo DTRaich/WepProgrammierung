@@ -115,13 +115,8 @@ $(document).on('click','#Deleteclicked',function(event){
 	$.delMovieFromDB(movies[classn]["originalDBID"]);	
 	movies = $.getAllMovies();
 	selectedtablerebuild();
-<<<<<<< HEAD
-
 	loadedmovies = $.getAllMovies(); 
-=======
 	}
->>>>>>> fb53e9194f2428dcb7219a11763e135609483b6b
-	
 });
 //Rating clicked
 $(document).on('click','#Ratingclicked',function(event){
@@ -273,8 +268,7 @@ function preselecttable(){
 	node = document.getElementById("tabelle");	
 	
 	//get all Movies in movies Array	
-	movies = loadedmovies;
-	
+	movies = loadedmovies;	
 	
 	//check: Logedin User
 	if($.getLogStatus()){
