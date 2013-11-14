@@ -112,7 +112,7 @@ $(document).on('click','#Ratingclicked',function(event){
 	var mynewrating;
 	while(rated === false){
 	mynewrating = prompt("Deine Bewertung:",movies[classn]["rating"]);
-		if(mynewrating>=0&&mynewrating<6&&mynewrating.lastIndesxOf(",")> -1 && mynewrating.lastIndesxOf(",")> -1 &&mynewrating!==""){
+		if(mynewrating>=0&&mynewrating<6&&mynewrating.lastIndexOf(",")> -1 && mynewrating.lastIndexOf(",")> -1 &&mynewrating!==""){
 			rated = true;
 			//change Rating in data.js
 			$.changeRating(movies[classn]["originalDBID"],movies[classn]["seen"], mynewrating);
