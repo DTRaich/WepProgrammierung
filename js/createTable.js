@@ -24,10 +24,20 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 
 //--------------------------------------------------INTERN VARIABELN--------------------------------
 
-
-var loadedmovies = $.getAllMovies(); 
-var movies ;
-
+//init startuparray-struckture
+var startuparray = new Array(); 
+startuparray[0] = new Object();
+startuparray[0]["title"] = "N/A";
+startuparray[0]["year"] = "N/A";
+startuparray[0]["genre"] = "N/A";
+startuparray[0]["rating"] = "0";
+startuparray[0]["seen"] = "0"; 	
+startuparray[0]["myrating"] = "0"; 
+startuparray[0]["owner"] = "X"; 
+startuparray[0]["originalDBID"] = "0"; 
+//---
+var loadedmovies = startuparray;
+var movies;
 var backg="#C4C4C4";
 var backg2 = "#E3E3E3";
 var asc = true;
@@ -282,11 +292,11 @@ function preselecttablefilter(filterArray){
 	}
 	loadedmovies = $.getAllMovies(); 
 }
-function selectedtablerebuild(){
-	movies = $.getAllMovies();
-	
+function selectedtablerebuild(){	
 	$('#main').html(maintemplate());	
 	node = document.getElementById("tabelle");	
+	
+	movies = loadedmovies;
 	
 	//check: Logedin User
 	if($.getLogStatus()){
