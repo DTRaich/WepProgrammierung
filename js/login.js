@@ -2,7 +2,7 @@
 // ----------------------------------TEMPLATES---------------------------
 
 //-----------------------------------Loginscreens----------------------
-var welcomeTemplate= _.template("<h2> Herzlich Willkommen , <br> <%- id %> ! </h2><div align = 'left'><a id='logout' href='#'>Logout</a></div>")
+var welcomeTemplate= _.template("<h2> Herzlich Willkommen, <br> <%- id %> ! </h2><div align = 'left'><a id='logout' href='#'>Logout</a></div>")
 
 var loginTemplate=_.template('<h1>Login</h1>'+
 								'<table border= "0">'+
@@ -210,10 +210,10 @@ $(document).ready(function(){
 			
 			if(pswd1 === pswd2){
 				result = confirm(" Möchten sie einen neuen Benutzer mit folgenden Daten erstellen? \n \n" + "Benutzername: " + user + "\n \n Passwort: " + pswd1 );
-					if( result == true){
-						$.addUserDB(user,pswd1);
-						$('#login').html(loginTemplate());						
-					}	
+				if( result == true){
+					$.addUserDB(user,pswd1);
+					$('#login').html(loginTemplate());						
+				}	
 			}else{
 				alert(' Die beiden Passwörter müssen übereinstimmen um einen Benutzer registrieren zu können ' );
 			}
