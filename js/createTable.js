@@ -22,7 +22,7 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Zurück</button>'+
 								'</div>');
 
-//--------------------------------------------------INTERN VARIABELN--------------------------------
+//--------------------------------------------------VARIABELS--------------------------------
 
 //init startuparray-struckture
 var startuparray = new Array(); 
@@ -107,14 +107,18 @@ $(document).on('click','#Editclicked',function(event){
 	
 });
 //deletebutton clicked
-$(document).on('click','#Deleteclicked',function(event){
-		
+$(document).on('click','#Deleteclicked',function(event){		
 	var classn = $(this).context.className;
 	var result = confirm('Sind sie sich sicher, dass sie den Film löschen möchten?');
 	if(result == true){
-	$.delMovieFromDB(movies[classn]["originalDBID"]);	
-	loadedmovies = $.getAllMovies(); 
-	}
+		$.delMovieFromDB(movies[classn]["originalDBID"]);	
+		//rebuild the same table without the deleted movie manualy to prevent loading lacks		
+		var location = $.findLocationOfMovie(movies[classn]["title"],movies[classn]["year"]);
+		if(location !== -1){
+			movies.splice(location,1);
+		}
+		selectedtablerebuild();
+	} 
 });
 //Rating clicked
 $(document).on('click','#Ratingclicked',function(event){
@@ -124,11 +128,12 @@ $(document).on('click','#Ratingclicked',function(event){
 	var mynewrating;
 	while(rated === false){
 	mynewrating = prompt("Deine Bewertung:",movies[classn]["rating"]);
+		//use the informations from the promt window
 		if(mynewrating==="0" || mynewrating==="1" || mynewrating==="2" || mynewrating==="3" || mynewrating==="4" || mynewrating==="5"){
 			rated = true;
 			//change Rating in data.js
 			$.changeRating(movies[classn]["originalDBID"],movies[classn]["seen"], mynewrating);
-			movies[classn]["myrating"]=mynewrating;			
+					
 		}else if(mynewrating === null){
 			rated = true;
 		}else{
@@ -200,35 +205,35 @@ function detailview(title){
 	node.parentNode.insertBefore(getPoster(title), node);	
 	
 }
-
+//get informations from imdb and create the details view
 function getPoster(title){	
     
 	var myTable = document.createElement("table");
 	var mytablebody = document.createElement("tbody");
 	
 	$.getJSON('http://www.imdbapi.com/?t=' + title + '&callback=?' ,
-      function(data){
-	  if(data.Poster == undefined){
-		//default picture
-		mycurrent_img = document.createElement("img");		
-		mycurrent_img.src = "./img/big/img-not-found.gif";	
-		titlepic = document.getElementById("modal-pic");
-		titlepic.appendChild(mycurrent_img);
+		function(data){
+		if(data.Poster == undefined){
+			//default picture
+			mycurrent_img = document.createElement("img");		
+			mycurrent_img.src = "./img/big/img-not-found.gif";	
+			titlepic = document.getElementById("modal-pic");
+			titlepic.appendChild(mycurrent_img);
 	  
-		alert("Fimdaten von imdb nicht abrufbar. \n\nBitte stellen Sie sicher, dass der Filmtitel korrekt eingegeben wurde.")
+			alert("Fimdaten von imdb nicht abrufbar. \n\nBitte stellen Sie sicher, dass der Filmtitel korrekt eingegeben wurde.")
 		
-	  }else{
-		var items = [];
-		var itemkeys = [];
-		$.each(data, function(key, val) {	
-			itemkeys.push(key);
-			items.push(val);
+		}else{
+			var items = [];
+			var itemkeys = [];
+			$.each(data, function(key, val) {	
+				itemkeys.push(key);
+				items.push(val);
 		});
 		mycurrent_img = document.createElement("img");
 		if(data.Poster == 'N/A'){
-		mycurrent_img.src = "./img/big/img-not-found.gif";
+			mycurrent_img.src = "./img/big/img-not-found.gif";
 		}else{				
-		mycurrent_img.src = data.Poster;	
+			mycurrent_img.src = data.Poster;	
 		}	
 		titlepic = document.getElementById("modal-pic");
 		titlepic.appendChild(mycurrent_img);		
@@ -261,6 +266,7 @@ function getPoster(title){
 
 //-------------------------------------------------
 
+//call method for the table creation at body onload
 function preselecttable(){
 	$('#main').html(maintemplate());	
 	node = document.getElementById("tabelle");	
@@ -270,13 +276,13 @@ function preselecttable(){
 	
 	//check: Logedin User
 	if($.getLogStatus()){
-    node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
+		node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
 	}else{
-    node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
+		node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
 	}	
 	loadedmovies = $.getAllMovies();
 }
-
+//call method for the table creation with filters
 function preselecttablefilter(filterArray){
 	$('#main').html(maintemplate());	
 	node = document.getElementById("tabelle");
@@ -286,11 +292,12 @@ function preselecttablefilter(filterArray){
 	
 	//check: Logedin User
 	if($.getLogStatus()){
-    node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
+		node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
 	}else{
-    node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
+		node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
 	}
 }
+//call method for the table creation
 function selectedtablerebuild(){	
 	$('#main').html(maintemplate());	
 	node = document.getElementById("tabelle");	
@@ -299,12 +306,12 @@ function selectedtablerebuild(){
 	
 	//check: Logedin User
 	if($.getLogStatus()){
-    node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
+		node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
 	}else{
-    node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
+		node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
 	}
 }
-
+//create a table for logged in Users
 function createTablelogedIn(row, id) {		
 		
     var myTable = document.createElement("table");
@@ -318,7 +325,8 @@ function createTablelogedIn(row, id) {
 		for(var i=0;i<5;i++){
 			mycurrent_cell = document.createElement("th");
 			switch (i){
-				case 0:					  					
+				case 0:	
+					//Title Header
 					currenttext = document.createTextNode("Titel");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -330,7 +338,8 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
-				case 1:				  					
+				case 1:	
+					//Year Header
 					currenttext = document.createTextNode("Jahr");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -343,10 +352,12 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 2:
+					//Genre Header
 					currenttext = document.createTextNode("Genre");
 					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 3:
+					//Seen Header 
 					currenttext = document.createTextNode("Gesehen");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -359,6 +370,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 4:
+					//Rating Header 
 					currenttext = document.createTextNode("Bewertung");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -386,22 +398,26 @@ function createTablelogedIn(row, id) {
 		for(var i=0;i<7;i++){
 			mycurrent_cell = document.createElement("td");
 			switch (i){
-				case 0:					  					
+				case 0:	
+					//Title Cell
 					currenttext = document.createTextNode(id[j]["title"]);
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_cell.style.backgroundColor = backg;
 					break;
-				case 1:				  					
+				case 1:	
+					//Year Cell
 					currenttext = document.createTextNode(id[j]["year"]);
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;
 				case 2:
+					//Genre Cell
 					currenttext = document.createTextNode(id[j]["genre"]);
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_cell.style.backgroundColor =backg;
 					break;
 				case 3:
+					//Seen Cell
 					if(id[j]["seen"]==='0'){
 						currenttext = document.createTextNode("Nein");
 					}else{		
@@ -411,6 +427,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;
 				case 4:
+					//Rating Cell
 					currenttext = document.createTextNode("");
 					mycurrent_link = document.createElement("a");
 					mycurrent_link.setAttribute("id","Ratinglink");
@@ -425,6 +442,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.style.width = "90px";
 					mycurrent_link.appendChild(mycurrent_img);
+					//Hover Event
 					mycurrent_span = document.createElement("span");					
 					mycurrent_span.appendChild(document.createTextNode("Eigene Bewertung:"));
 					//own rating
@@ -440,6 +458,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(currenttext);
 					break;	
 				case 5:
+					//Details Cell
 					mycurrent_img =document.createElement("img");	
 					mycurrent_img.src="./img/small/details.jpg";
 					mycurrent_img.style.width = "20px";
@@ -452,6 +471,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 6: 
+					//Owner Cell
 					if(id[j]["owner"]==="1"){
 					//Editbutton
 					mycurrent_img = document.createElement("img");	
@@ -476,6 +496,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
 					}else{
+					//if currentuser not owner -> display owner name
 					currenttext = document.createTextNode(id[j]["owner"]);
 					mycurrent_cell.appendChild(currenttext);
 					}					
@@ -495,6 +516,7 @@ function createTablelogedIn(row, id) {
 	myTable.style.width="95%";
     return myTable;
 } 
+//Create a Table for Guests or logged out users
 function createTableGuest(row, id) {	
 		
     var myTable = document.createElement("table");
@@ -507,7 +529,8 @@ function createTableGuest(row, id) {
 		for(var i=0;i<4;i++){
 			mycurrent_cell = document.createElement("th");
 			switch (i){
-				case 0:					  					
+				case 0:		
+					//Title Header
 					currenttext = document.createTextNode("Titel");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -519,7 +542,8 @@ function createTableGuest(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
-				case 1:				  					
+				case 1:	
+					//Year Header
 					currenttext = document.createTextNode("Jahr");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -532,10 +556,12 @@ function createTableGuest(row, id) {
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 2:
+					//Genre Header
 					currenttext = document.createTextNode("Genre");
 					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 3:
+					//Rating Header
 					currenttext = document.createTextNode("Bewertung");								
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -564,22 +590,26 @@ function createTableGuest(row, id) {
 		for(var i=0;i<5;i++){
 			mycurrent_cell = document.createElement("td");
 			switch (i){
-				case 0:					  					
+				case 0:		
+					//Title Cell
 					currenttext = document.createTextNode(id[j]["title"]);
 					mycurrent_cell.style.backgroundColor = backg;
 					mycurrent_cell.appendChild(currenttext);
 					break;
-				case 1:				  					
+				case 1:	
+					//Year Cell
 					currenttext = document.createTextNode(id[j]["year"]);
 					mycurrent_cell.style.backgroundColor =backg2;
 					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 2:
+					//Genre Cell
 					currenttext = document.createTextNode(id[j]["genre"]);
 					mycurrent_cell.style.backgroundColor =backg;
 					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 3:
+					//Rating Cell
 					currenttext = document.createTextNode("");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
@@ -590,7 +620,8 @@ function createTableGuest(row, id) {
 					mycurrent_cell.style.width = "90px";
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;		
-				case 4:					
+				case 4:		
+					//Details Cell
 					mycurrent_img =document.createElement("img");	
 					mycurrent_img.src="./img/small/details.jpg";
 					mycurrent_img.style.width = "20px";
