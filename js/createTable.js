@@ -113,7 +113,6 @@ $(document).on('click','#Deleteclicked',function(event){
 	var result = confirm('Sind sie sich sicher, dass sie den Film löschen möchten?');
 	if(result == true){
 	$.delMovieFromDB(movies[classn]["originalDBID"]);	
-	movies = $.getAllMovies();
 	loadedmovies = $.getAllMovies(); 
 	}
 });
