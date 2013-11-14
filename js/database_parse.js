@@ -394,7 +394,7 @@ $.delMovieFromDB = function(originalDBID){
 				var relation = results[i];
 				relation.destroy({
 					success: function(relation) {
-						// nothing on delete
+						// nothing on delete^
 					}	
 				})
 			}
@@ -403,6 +403,6 @@ $.delMovieFromDB = function(originalDBID){
 			alert("Error: " + error.code + " " + error.message);
 		}
 	});
-	selectedtablerebuild();
+	
 }
 
