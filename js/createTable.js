@@ -465,7 +465,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
 					//freespace between
-					mycurrent_cell.appendChild(document.createTextNode(""));					
+					mycurrent_cell.appendChild(document.createTextNode(" "));					
 					//Deletebutton
 					mycurrent_img = document.createElement("img");	
 					mycurrent_img.src="./img/small/Delete.png";
