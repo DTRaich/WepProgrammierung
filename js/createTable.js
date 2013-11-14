@@ -115,9 +115,8 @@ $(document).on('click','#Ratingclicked',function(event){
 		if(mynewrating==="0" || mynewrating==="1" || mynewrating==="2" || mynewrating==="3" || mynewrating==="4" || mynewrating==="5"){
 			rated = true;
 			//change Rating in data.js
-			alert(movies[classn]["title"]);
 			$.changeRating(movies[classn]["originalDBID"],movies[classn]["seen"], mynewrating);
-			loadedmovies = $.getAllMovies(); 			
+			movies[classn]["myrating"]=mynewrating;			
 		}else if(mynewrating === null){
 			rated = true;
 		}else{
