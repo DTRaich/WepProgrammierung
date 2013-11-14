@@ -211,8 +211,7 @@ $.addChangesToDB = function(addMovieSet,receivedData){
 			
 		},
 		error: function(error) {
-			alert('Fehler beim Laden der Benutzer');
-							
+			alert('Fehler beim Laden der Benutzer');							
 		}
 	});	
 	// relation handling	
