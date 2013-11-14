@@ -1,9 +1,9 @@
 //InitializeDataBase
 // behrends
-//Parse.initialize("OCbRi66SwZ7d0xAik7xZXNZoRdLvSE87GSyw3zxJ", "Wb5Ul5lZhMH0Bhs8tTgvFqTKUZhjXR9cDa7zx3As");
+Parse.initialize("OCbRi66SwZ7d0xAik7xZXNZoRdLvSE87GSyw3zxJ", "Wb5Ul5lZhMH0Bhs8tTgvFqTKUZhjXR9cDa7zx3As");
 
 // Unsere
-Parse.initialize("1mwLhaHUhEnrZBlvwgHHy93PsixYFLeHmXTkl15v", "p6vQ9vyGS5XuFceJVgMBjr2T5YxCohqLdRTzSkKU");
+//Parse.initialize("1mwLhaHUhEnrZBlvwgHHy93PsixYFLeHmXTkl15v", "p6vQ9vyGS5XuFceJVgMBjr2T5YxCohqLdRTzSkKU");
 
 //Define ParseObject
 var MovieObject = Parse.Object.extend("MovieObject");
