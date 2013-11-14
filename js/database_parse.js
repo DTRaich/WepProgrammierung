@@ -36,7 +36,7 @@ $.loginToDB = function(username,pswd){
 			//loged IN
 			$('#login').html(welcomeTemplate({id:username}));
 			$('#menu').html(nav_login_Template());
-			selectedtablerebuild();
+			loadedmovies = $.getAllMovies(); 
 				
 		},
 		error: function(user, error) {
@@ -54,7 +54,7 @@ $.logOutFromDB =  function(){
 	$('#main').html('');
 	
 	//table reload
-	selectedtablerebuild();
+	loadedmovies = $.getAllMovies(); 
 }
 
 //gets current User returns null if no user is logedIn
@@ -358,6 +358,7 @@ $.gettingAllDBMovies = function(){
  
 	}).then(function() {
 	// Every comment was deleted.
+	selectedtablerebuild();
 	});	
 
 	

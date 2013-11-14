@@ -24,10 +24,20 @@ var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb
 
 //--------------------------------------------------INTERN VARIABELN--------------------------------
 
-
-var loadedmovies = $.getAllMovies(); 
-var movies ;
-
+//init startuparray-struckture
+var startuparray = new Array(); 
+startuparray[0] = new Object();
+startuparray[0]["title"] = "N/A";
+startuparray[0]["year"] = "N/A";
+startuparray[0]["genre"] = "N/A";
+startuparray[0]["rating"] = "0";
+startuparray[0]["seen"] = "0"; 	
+startuparray[0]["myrating"] = "0"; 
+startuparray[0]["owner"] = "X"; 
+startuparray[0]["originalDBID"] = "0"; 
+//---
+var loadedmovies = startuparray;
+var movies;
 var backg="#C4C4C4";
 var backg2 = "#E3E3E3";
 var asc = true;
@@ -92,16 +102,25 @@ $(document).on('click','#nav_thriller',function(event){
 $(document).on('click','#Editclicked',function(event){
 
 	var classn = $(this).context.className;
-	$.changeMovie(movies[classn]["title"],movies[classn]["year"]);	
+	$.changeMovie(movies[classn]["title"],movies[classn]["year"]);
+	loadedmovies = $.getAllMovies();	
 	
 });
 //deletebutton clicked
 $(document).on('click','#Deleteclicked',function(event){
 		
 	var classn = $(this).context.className;
+	var result = confirm('Sind sie sich sicher, dass sie den Film löschen möchten?');
+	if(result == true){
 	$.delMovieFromDB(movies[classn]["originalDBID"]);	
 	movies = $.getAllMovies();
 	selectedtablerebuild();
+<<<<<<< HEAD
+
+	loadedmovies = $.getAllMovies(); 
+=======
+	}
+>>>>>>> fb53e9194f2428dcb7219a11763e135609483b6b
 	
 });
 //Rating clicked
@@ -123,7 +142,8 @@ $(document).on('click','#Ratingclicked',function(event){
 			alert("Gebe eine Bewertung von 1 bis 5 an");
 		}
 		//rebuild the same table as bevore
-		selectedtablerebuild();
+		selectedtablerebuild();		
+		loadedmovies = $.getAllMovies(); 
 	}	
 	
 });
@@ -171,7 +191,7 @@ $(document).on('click','#SeenSortClicked',function(event){
 
 //imdbinfo dismiss 
 $(document).on('click','#btndismiss',function(){
-	selectedtablerebuild();
+	selectedtablerebuild();	
 });
 });
 
@@ -248,8 +268,6 @@ function getPoster(title){
 
 //-------------------------------------------------
 
-
-
 function preselecttable(){
 	$('#main').html(maintemplate());	
 	node = document.getElementById("tabelle");	
@@ -263,8 +281,8 @@ function preselecttable(){
     node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
 	}else{
     node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
-	}
-	loadedmovies = $.getAllMovies(); 	
+	}	
+	loadedmovies = $.getAllMovies();
 }
 
 function preselecttablefilter(filterArray){
@@ -280,13 +298,12 @@ function preselecttablefilter(filterArray){
 	}else{
     node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
 	}
-	loadedmovies = $.getAllMovies(); 
 }
-function selectedtablerebuild(){
-	movies = $.getAllMovies();
-	
+function selectedtablerebuild(){	
 	$('#main').html(maintemplate());	
 	node = document.getElementById("tabelle");	
+	
+	movies = loadedmovies;
 	
 	//check: Logedin User
 	if($.getLogStatus()){
@@ -294,7 +311,6 @@ function selectedtablerebuild(){
 	}else{
     node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
 	}
-	loadedmovies = $.getAllMovies(); 
 }
 
 function createTablelogedIn(row, id) {		
