@@ -403,5 +403,6 @@ $.delMovieFromDB = function(originalDBID){
 			alert("Error: " + error.code + " " + error.message);
 		}
 	});
+	selectedtablerebuild();
 }
 
