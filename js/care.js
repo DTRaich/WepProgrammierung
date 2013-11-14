@@ -43,7 +43,7 @@ $.changeMovie = function(title, year){
 	
 	// insert the received movie data
 	$('#movietitle').val(receivedData['title']);
-	$('#year').val(receivedData['year']);
+	$('#hallo').val(receivedData['year']);
 	$('#genre_select').val(receivedData['genre']);
 
 	if (receivedData['seen'] === '1' ){
