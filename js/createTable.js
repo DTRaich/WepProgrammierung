@@ -114,7 +114,6 @@ $(document).on('click','#Deleteclicked',function(event){
 	if(result == true){
 	$.delMovieFromDB(movies[classn]["originalDBID"]);	
 	movies = $.getAllMovies();
-	selectedtablerebuild();
 	loadedmovies = $.getAllMovies(); 
 	}
 });
@@ -455,6 +454,7 @@ function createTablelogedIn(row, id) {
 					break;
 				case 6: 
 					if(id[j]["owner"]==="1"){
+					//Editbutton
 					mycurrent_img = document.createElement("img");	
 					mycurrent_img.src="./img/small/edit.png";
 					mycurrent_img.style.width = "20px";
@@ -464,6 +464,9 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.setAttribute("class",j);
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
+					//freespace between
+					mycurrent_cell.appendChild(document.createTextNode(""));					
+					//Deletebutton
 					mycurrent_img = document.createElement("img");	
 					mycurrent_img.src="./img/small/Delete.png";
 					mycurrent_img.style.width = "20px";
