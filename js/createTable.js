@@ -112,7 +112,7 @@ $(document).on('click','#Ratingclicked',function(event){
 	var mynewrating;
 	while(rated === false){
 	mynewrating = prompt("Deine Bewertung:",movies[classn]["rating"]);
-		if(mynewrating>=0&&mynewrating<6&&mynewrating.contains(",")===false&&mynewrating.contains(".")===false){
+		if(mynewrating>=0&&mynewrating<6&&mynewrating.contains(",")===false&&mynewrating.contains(".")===false&&mynewrating!==""){
 			rated = true;
 			//change Rating in data.js
 			$.changeRating(movies[classn]["originalDBID"],movies[classn]["seen"], mynewrating);
@@ -256,7 +256,8 @@ function preselecttable(){
 	node = document.getElementById("tabelle");	
 	
 	//get all Movies in movies Array	
-	movies = loadedmovies;	
+	movies = loadedmovies;
+	
 	
 	//check: Logedin User
 	if($.getLogStatus()){
