@@ -112,12 +112,11 @@ $(document).on('click','#Ratingclicked',function(event){
 	var mynewrating;
 	while(rated === false){
 	mynewrating = prompt("Deine Bewertung:",movies[classn]["rating"]);
-		if(mynewrating>=0&&mynewrating<6&&mynewrating.contains(",")===false&&mynewrating.contains(".")===false&&mynewrating!==""){
+		if(mynewrating>=0&&mynewrating<6&&mynewrating.contains(",")===false&&mynewrating.contains(".")===false&&mynewrating!==""&&mynewrating!==null){
 			rated = true;
 			//change Rating in data.js
 			$.changeRating(movies[classn]["originalDBID"],movies[classn]["seen"], mynewrating);
-			loadedmovies = $.getAllMovies(); 
-			
+			loadedmovies = $.getAllMovies(); 			
 		}else if(mynewrating === null){
 			rated = true;
 		}else{
