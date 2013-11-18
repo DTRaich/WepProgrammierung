@@ -62,6 +62,32 @@ a.tooltip span b
       border-bottom: 1px solid #888888;
       margin-bottom: 5px;
 }
+
+/*--------------loading DIV--------------*/
+#loadding{
+	background-color: white;
+	position: fixed;
+	top:0;
+	left:0;
+	bottom:0; 
+	right:0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;	
+	filter:alpha(opacity=50); 
+	opacity: 0.5; 
+	-moz-opacity:0.5;		
+ }
+ 
+#loadingGif{
+ margin-top: 10%;
+ margin-left: 30%;
+ border: 0px;
+ 
+}
+
+
+
   
 
 

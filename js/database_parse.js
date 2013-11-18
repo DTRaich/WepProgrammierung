@@ -9,6 +9,8 @@ Parse.initialize("OCbRi66SwZ7d0xAik7xZXNZoRdLvSE87GSyw3zxJ", "Wb5Ul5lZhMH0Bhs8tT
 var MovieObject = Parse.Object.extend("MovieObject");
 var RatedObject = Parse.Object.extend("RatedObject");
 
+var loadTemplate= _.template('<div id="loadding"><img id="loadingGif"src="./img/small/loading.gif"></div>')
+ 
 //----------------------LogIn/LogOut/Register/GetLogStat---------------------- 
 //add User to the DB-
 $.addUserDB = function(username,pswd){
@@ -35,7 +37,7 @@ $.loginToDB = function(username,pswd){
 		success: function(user) {
 			//loged IN
 			$('#login').html(welcomeTemplate({id:username}));
-			$('#menu').html(nav_login_Template());
+			$('#menu').html(nav_login_Template());						
 			loadedmovies = $.getAllMovies(); 
 				
 		},
@@ -257,7 +259,9 @@ $.gettingRatedRelations = function(movieObject, user){
 	var relationQuery = new Parse.Query(RatedObject);
 	var promise = Parse.Promise.as();				
 	relationQuery.equalTo("movieID", movie.id);
-				
+	// to prevend multiple alerts
+	var errorWasThere = false;		
+	
 	promise= promise.then(function(){return relationQuery.find({				
 		success: function(results) {					
 				// now finding the rest of the parameters										
@@ -305,7 +309,15 @@ $.gettingRatedRelations = function(movieObject, user){
 							
 			},
 			error: function(error) {
-				alert('Fehler beim Laden der Anwendung.\nWir bitten um Ihr Verständnis.');
+				// to prevend multiple alerts
+				if(errorWasThere == false){
+					alert('Fehler beim Laden der Anwendung.\nWir bitten um Ihr Verständnis.');
+					errorWasThere = true;
+				}else{
+					// do nothing
+				}
+			
+				
 								
 			}
 		});
@@ -316,6 +328,9 @@ $.gettingRatedRelations = function(movieObject, user){
 
 // gets all the Movies from the DB
 $.gettingAllDBMovies = function(){
+	// vor providing the loading div
+	$('#main').html(loadTemplate());	
+	//variables
 	var movieObject;
 	var queryAllMovies = new Parse.Query(MovieObject);	
 	var user = Parse.User.current();
@@ -357,7 +372,7 @@ $.gettingAllDBMovies = function(){
  
 	}).then(function() {
 	// Every comment was deleted.
-	selectedtablerebuild();
+		selectedtablerebuild();
 	});	
 
 	
