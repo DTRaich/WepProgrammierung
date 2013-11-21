@@ -191,6 +191,18 @@ $(document).on('click','#SeenSortClicked',function(event){
 $(document).on('click','#btndismiss',function(){
 	selectedtablerebuild();	
 });
+
+//Searchinput enter
+$(document).on('keypress','#searchinginput',function(event){
+	if(event.which== 13){
+		var input = $.trim($('#searchinginput').val());
+		movies = $.Searchformovies(loadedmovies,input);
+		if(movies.length==0){
+			movies = startuparray;
+		}
+		preselecttablefilter(movies);
+	}	
+})
 });
 
 //-------------------------------------------------
@@ -337,6 +349,20 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.setAttribute("id","TitleSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
+										
+					mycurrent_link = document.createElement("a");
+					mycurrent_link.setAttribute("id","Seachinglink");
+					mycurrent_link.setAttribute("class","tooltip");
+					mycurrent_input = document.createElement("input");
+					mycurrent_input.setAttribute("id","searchinginput");
+					mycurrent_input.setAttribute("placeholder","Suchfeld");
+					//Hover Event
+					mycurrent_link.appendChild(mycurrent_input);
+					mycurrent_span = document.createElement("span");					
+					mycurrent_span.appendChild(document.createTextNode("Enter drücken um zu suchen"));
+					
+					mycurrent_link.appendChild(mycurrent_span);
+					mycurrent_cell.appendChild(mycurrent_link);
 					break;
 				case 1:	
 					//Year Header
@@ -541,6 +567,20 @@ function createTableGuest(row, id) {
 					mycurrent_img.setAttribute("id","TitleSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
+					//
+					mycurrent_link = document.createElement("a");
+					mycurrent_link.setAttribute("id","Seachinglink");
+					mycurrent_link.setAttribute("class","tooltip");
+					mycurrent_input = document.createElement("input");
+					mycurrent_input.setAttribute("id","searchinginput");
+					mycurrent_input.setAttribute("placeholder","Suchfeld");
+					//Hover Event
+					mycurrent_link.appendChild(mycurrent_input);
+					mycurrent_span = document.createElement("span");					
+					mycurrent_span.appendChild(document.createTextNode("Enter drücken um zu suchen"));
+					
+					mycurrent_link.appendChild(mycurrent_span);
+					mycurrent_cell.appendChild(mycurrent_link);
 					break;
 				case 1:	
 					//Year Header

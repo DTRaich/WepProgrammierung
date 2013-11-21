@@ -208,3 +208,25 @@ $.filterMovies = function(preSortedArray,filter){
 	}
 	return finalArray;
 }
+
+//Search Input Filter Function
+$.Searchformovies = function(preSortedArray,filter){		
+	
+	var finalArray = new Array();
+	var i=0;
+	for(var j =0;j<preSortedArray.length;j++){
+		if(preSortedArray[j]["title"].indexOf(filter)!= -1){
+			finalArray[i] = new Object();
+			finalArray[i]["title"] = preSortedArray[j]["title"];
+			finalArray[i]["year"] = preSortedArray[j]["year"];
+			finalArray[i]["genre"] = preSortedArray[j]["genre"];
+			finalArray[i]["rating"] = preSortedArray[j]["rating"];
+			finalArray[i]["seen"] = preSortedArray[j]["seen"];	
+			finalArray[i]["myrating"] = preSortedArray[j]["myrating"];				
+			finalArray[i]["owner"] = preSortedArray[j]["owner"];
+			finalArray[i]["originalDBID"] = preSortedArray[j]["originalDBID"];
+			i++;
+		}		
+	}
+	return finalArray;
+}
