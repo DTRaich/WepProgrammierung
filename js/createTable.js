@@ -263,6 +263,7 @@ function getPoster(title){
 			
 			mycurrent_cell.appendChild(document.createTextNode(items[i]));
 			mycurrent_cell.style.backgroundColor = backg2;
+			mycurrent_cell.setAttribute("id",itemkeys[i]);
 			
 			mycurrent_row.appendChild(mycurrent_cell);		
 			mytablebody.appendChild(mycurrent_row);	

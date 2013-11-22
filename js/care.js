@@ -202,7 +202,7 @@ function getimdbmovies(title){
 		function(data){
 		
 		items = new Array();
-		//if data.Response has a value 
+		//if-data.Response has a value else-data.Response is undefined
 		if(data.Response){
 			mycurrent_row = document.createElement("tr");
 			mycurrent_cell = document.createElement("td");
