@@ -3,7 +3,8 @@
 // ----------------------------------TEMPLATES---------------------------
 
 // ----------------------------------MAINTEMPLATE---------------------------
-var maintemplate=_.template('<br><table class="mainTemplateTable" id="tabelle"></table>'+
+var maintemplate=_.template('<br><div><h1>Filmliste<h1></div>'+
+							'<table class="mainTemplateTable" id="tabelle"></table>'+
 							'<div id="main_top"></div>'+
 							'<div id="main_middle"></div>'+	
 							'<div id="main_low"></div>');
@@ -349,7 +350,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.setAttribute("id","TitleSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
-										
+					//					
 					mycurrent_link = document.createElement("a");
 					mycurrent_link.setAttribute("id","Seachinglink");
 					mycurrent_link.setAttribute("class","tooltip");
