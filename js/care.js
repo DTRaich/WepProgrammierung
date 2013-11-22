@@ -198,6 +198,7 @@ function getimdbmovies(title){
 	var myTable = document.createElement("table");
 	var mytablebody = document.createElement("tbody");
 	
+	//head
     mycurrent_row = document.createElement("tr");
 	mycurrent_row.style.textAlign = "left";
 	mycurrent_cell = document.createElement("th");
@@ -236,8 +237,7 @@ function getimdbmovies(title){
 			
 		}else{
 			for(var i=0;i<data.Search.length;i++){
-				if(data.Search.Type = "movie"){
-				
+				if(data.Search[i].Type = "movie"){				
 					items[i]=new Object();
 					items[i]["title"] = data.Search[i].Title;
 					items[i]["year"] = data.Search[i].Year;
