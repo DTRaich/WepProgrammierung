@@ -3,11 +3,12 @@
 var isSeen = false;
 var receivedData;
 var isChange = false;
+var items;
 //-------------------------------------------TEMPLATES-------------------------------
 
 // ---------------------------------------standart care Form----------------------
 var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+ 
-									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" size="50" id="movietitle"/> <br> <br> <br> ' +
+									'Filmtitel: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" placeholder="Filmtitel" size="50" id="movietitle"/><input type="button" name="imdbmoviebtn" id="imdbmovies" value="Filme vorschlagen" / > <br> <br> <br> ' +
 									'Erscheinungsjahr: &nbsp&nbsp <div id="yearddb"/> <br> <br>'+
 									'Genre: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <select id="genre_select">'+
 												'<option value="null">- Genre -</option>' +
@@ -31,6 +32,12 @@ var rateAndCommentTemplate = _.template(' Bewertung : &nbsp&nbsp&nbsp&nbsp&nbsp&
 										'  <option  value ="4"> &#9733 &#9733 &#9733 &#9733</option> '+
 										'  <option  value ="5"> &#9733 &#9733 &#9733 &#9733 &#9733</option> '+	  
 										' </select> <br><br>');
+
+var imdbmovietemplate=_.template('<br><table class="mainTemplateTable" id="tabelle"></table>'+
+							'<div id="main_top"></div>'+
+							'<div id="main_middle"></div>'+	
+							'<div id="main_low"><button type="button" class="btn btn-primary" id="movdismiss" align="right" data-dismiss="modal" align = "right">Abbrechen</button>'+
+							'</div>');
 										
 //------------------------------------ METHODS TO CALL--------------------------
 // fills formular when data needs to be changed
@@ -184,6 +191,63 @@ $.collectFormData = function(){
 		}			
 }
 
+//get imdbmovies
+function getimdbmovies(title){	
+	
+	
+	var myTable = document.createElement("table");
+	var mytablebody = document.createElement("tbody");
+	
+	$.getJSON('http://www.imdbapi.com/?s=' + title + '&callback=?' ,
+		function(data){
+		
+		items = new Array();
+		
+		for(var i=0;i<data.Search.length;i++){
+			items[i]=new Object();
+			items[i]["title"] = data.Search[i].Title;
+			items[i]["year"] = data.Search[i].Year;
+		}
+			
+		for(var i = 0 ; i < items.length ; i++){
+			
+			mycurrent_row = document.createElement("tr");
+			mycurrent_cell = document.createElement("td");
+			
+			mycurrent_cell.appendChild(document.createTextNode(items[i]["title"]));
+			mycurrent_cell.style.backgroundColor = backg;	
+			
+			mycurrent_row.appendChild(mycurrent_cell);	
+			mycurrent_cell = document.createElement("td");
+			
+			mycurrent_cell.appendChild(document.createTextNode(items[i]["year"]));
+			mycurrent_cell.style.backgroundColor = backg2;
+			
+			mycurrent_row.appendChild(mycurrent_cell);	
+			mycurrent_cell = document.createElement("td");
+			
+			mycurrent_img = document.createElement("img");			
+			mycurrent_img.src="./img/small/hand-point-left.jpg";
+			mycurrent_img.style.height = "15px";
+			mycurrent_img.style.border = "0";	
+			mycurrent_img.setAttribute("id","AcceptedMovieClicked");
+			mycurrent_img.setAttribute("class",i);
+			mycurrent_img.style.cursor = "pointer";
+			mycurrent_cell.appendChild(mycurrent_img);
+			mycurrent_cell.style.width = "30px";
+			mycurrent_cell.style.backgroundColor = backg;
+			
+			mycurrent_row.appendChild(mycurrent_cell);	
+			mytablebody.appendChild(mycurrent_row);				
+		}			
+	  
+		myTable.appendChild(mytablebody);
+		} 
+    );	
+	myTable.style.width="95%";
+	return myTable;
+}
+
 //------------------------------ CLICK AND KEYDOWN EVENTS----------------------------
 		
 $(document).ready(function(){
@@ -214,4 +278,33 @@ $(document).ready(function(){
 			event.preventDefault();
 			event.stopImmediatePropagation();
 			});
+			
+	//imdbmoviebtn method
+	$(document).on('click','#imdbmovies',function(event){
+				
+		var mov = $.trim($('#movietitle').val());
+		$('#main').html(loadTemplate());	
+		myTable = document.createElement("table");
+		myTable = getimdbmovies(mov);
+		
+		$('#main').html(imdbmovietemplate());	
+		//Tabelle
+		node = document.getElementById("tabelle");				
+		node.parentNode.insertBefore(myTable, node);
+	
+	})
+	//AcceptedMovieClicked method
+	$(document).on('click','#AcceptedMovieClicked',function(event){
+		var classn = $(this).context.className;
+		
+		$.newFormular();
+		$('#movietitle').val(items[classn]["title"]);
+		$('#hallo').val(items[classn]["year"]);
+	})
+	//movdismiss method
+	$(document).on('click','#movdismiss',function(event){
+		
+		$.newFormular();
+	})
+	
 })

@@ -3,14 +3,13 @@
 // ----------------------------------TEMPLATES---------------------------
 
 // ----------------------------------MAINTEMPLATE---------------------------
-var maintemplate=_.template('<br><div><h1>Filmliste<h1></div>'+
-							'<table class="mainTemplateTable" id="tabelle"></table>'+
+var maintemplate=_.template('<br><table class="mainTemplateTable" id="tabelle"></table>'+
 							'<div id="main_top"></div>'+
 							'<div id="main_middle"></div>'+	
 							'<div id="main_low"></div>');
 
 // ----------------------------------IMDB-TEMPLATE---------------------------
-var modalTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb Informationen</h1>'+
+var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb Informationen</h1>'+
 								'</div>'+
 								'<table class="modal-body"><tr>'+  
 								'<td><div id="modal-pic">'+  
@@ -210,7 +209,7 @@ $(document).on('keypress','#searchinginput',function(event){
 
 //detailview
 function detailview(title){
-	$('#main').html(modalTemplate());
+	$('#main').html(imdbinfoTemplate());
 	
 	//Tabelle
 	node = document.getElementById("tabelle");
