@@ -198,6 +198,18 @@ function getimdbmovies(title){
 	var myTable = document.createElement("table");
 	var mytablebody = document.createElement("tbody");
 	
+    mycurrent_row = document.createElement("tr");
+	mycurrent_row.style.textAlign = "left";
+	mycurrent_cell = document.createElement("th");
+	currenttext = document.createTextNode("Titel");
+	mycurrent_cell.appendChild(currenttext);
+	mycurrent_row.appendChild(mycurrent_cell);
+	mycurrent_cell = document.createElement("th");
+	currenttext = document.createTextNode("Jahr");
+	mycurrent_cell.appendChild(currenttext);
+	mycurrent_row.appendChild(mycurrent_cell);
+	mytablebody.appendChild(mycurrent_row);
+	
 	$.getJSON('http://www.imdbapi.com/?s=' + title + '&callback=?' ,
 		function(data){
 		
@@ -251,7 +263,7 @@ function getimdbmovies(title){
 				mycurrent_cell = document.createElement("td");
 			
 				mycurrent_img = document.createElement("img");			
-				mycurrent_img.src="./img/small/hand-point-left.jpg";
+				mycurrent_img.src="./img/small/hand-point-left.png";
 				mycurrent_img.style.height = "15px";
 				mycurrent_img.style.border = "0";	
 				mycurrent_img.setAttribute("id","AcceptedMovieClicked");
