@@ -202,25 +202,25 @@ function getimdbmovies(title){
 		function(data){
 		
 		items = new Array();
-
-		if(data.Response == false){
-		
+		//if data.Response has a value 
+		if(data.Response){
 			mycurrent_row = document.createElement("tr");
 			mycurrent_cell = document.createElement("td");
 			
-			mycurrent_cell.appendChild(document.createTextNode("Kein Titel gefunden"));
+			currenttext = document.createTextNode("Kein Titel gefunden");
+			mycurrent_cell.appendChild(currenttext);
 			mycurrent_cell.style.backgroundColor = backg;	
 			
 			mycurrent_row.appendChild(mycurrent_cell);	
 			mycurrent_cell = document.createElement("td");
 			
-			mycurrent_cell.appendChild(document.createTextNode("N/A"));
+			currenttext = document.createTextNode("N/A");
+			mycurrent_cell.appendChild(currenttext);
 			mycurrent_cell.style.backgroundColor = backg2;
-			mycurrent_row.appendChild(mycurrent_cell);	
 			
+			mycurrent_row.appendChild(mycurrent_cell);	
 			mytablebody.appendChild(mycurrent_row);	
 			myTable.appendChild(mytablebody);
-
 			
 		}else{
 			for(var i=0;i<data.Search.length;i++){
