@@ -20,7 +20,9 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">i
 								'</table>'+
 								'<div class="modal-footer" id= backBtnDiv>'+
 								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal">Zurück</button></div>'+
-								'<div id= trailerBtnDiv><button type="button" class="btn btn-primary" id="trailerListbtn" aling="right" data-dismiss="modal">Trailer Liste</button> </div>');
+								'<div id= trailerBtnDiv> <a href ="#" class="tooltip"> '+
+								'<button type="button" class="btn btn-primary" id="trailerListbtn" aling="right" data-dismiss="modal">Trailer Liste</button>'+
+								'<span>Liste der Trailer auf Youtube</span></a> </div>');
 
 //--------------------------------------------------VARIABELS--------------------------------
 
