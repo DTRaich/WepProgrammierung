@@ -191,10 +191,8 @@ $.collectFormData = function(){
 		}			
 }
 
-//get imdbmovies
-function getimdbmovies(title){	
-	
-	
+//get imdbmovies for suggestions
+function getimdbmovies(title){		
 	var myTable = document.createElement("table");
 	var mytablebody = document.createElement("tbody");
 	
@@ -211,76 +209,79 @@ function getimdbmovies(title){
 	mycurrent_row.appendChild(mycurrent_cell);
 	mytablebody.appendChild(mycurrent_row);
 	
+	// getting the stuff from imdb
 	$.getJSON('http://www.imdbapi.com/?s=' + title + '&callback=?' ,
 		function(data){
 		
 		items = new Array();
 		//if-data.Response has a value else-data.Response is undefined
-		if(data.Response){
-			mycurrent_row = document.createElement("tr");
-			mycurrent_cell = document.createElement("td");
-			
-			currenttext = document.createTextNode("Kein Titel gefunden");
-			mycurrent_cell.appendChild(currenttext);
-			mycurrent_cell.style.backgroundColor = backg;	
-			
-			mycurrent_row.appendChild(mycurrent_cell);	
-			mycurrent_cell = document.createElement("td");
-			
-			currenttext = document.createTextNode("N/A");
-			mycurrent_cell.appendChild(currenttext);
-			mycurrent_cell.style.backgroundColor = backg2;
-			
-			mycurrent_row.appendChild(mycurrent_cell);	
-			mytablebody.appendChild(mycurrent_row);	
-			myTable.appendChild(mytablebody);
-			
-		}else{
-			for(var i=0;i<data.Search.length;i++){
-				if(data.Search[i].Type = "movie"){				
-					items[i]=new Object();
-					items[i]["title"] = data.Search[i].Title;
-					items[i]["year"] = data.Search[i].Year;
-				}
-				
-			}
-			
-			for(var i = 0 ; i < items.length ; i++){
-			
+			if(data.Response){
 				mycurrent_row = document.createElement("tr");
 				mycurrent_cell = document.createElement("td");
 			
-				mycurrent_cell.appendChild(document.createTextNode(items[i]["title"]));
+				currenttext = document.createTextNode("Kein Titel gefunden");
+				mycurrent_cell.appendChild(currenttext);
 				mycurrent_cell.style.backgroundColor = backg;	
 			
 				mycurrent_row.appendChild(mycurrent_cell);	
 				mycurrent_cell = document.createElement("td");
 			
-				mycurrent_cell.appendChild(document.createTextNode(items[i]["year"]));
+				currenttext = document.createTextNode("N/A");
+				mycurrent_cell.appendChild(currenttext);
 				mycurrent_cell.style.backgroundColor = backg2;
 			
 				mycurrent_row.appendChild(mycurrent_cell);	
-				mycurrent_cell = document.createElement("td");
+				mytablebody.appendChild(mycurrent_row);	
+				myTable.appendChild(mytablebody);
 			
-				mycurrent_img = document.createElement("img");			
-				mycurrent_img.src="./img/small/hand-point-left.png";
-				mycurrent_img.style.height = "15px";
-				mycurrent_img.style.border = "0";	
-				mycurrent_img.setAttribute("id","AcceptedMovieClicked");
-				mycurrent_img.setAttribute("class",i);
-				mycurrent_img.style.cursor = "pointer";
-				mycurrent_cell.appendChild(mycurrent_img);
-				mycurrent_cell.style.width = "30px";
-				mycurrent_cell.style.backgroundColor = backg;
+			}else{
+		
+				for(var i=0;i<data.Search.length;i++){
+					if(data.Search[i].Type = "movie"){				
+					items[i]=new Object();
+					items[i]["title"] = data.Search[i].Title;
+					items[i]["year"] = data.Search[i].Year;
+					}
+				
+				}
 			
-				mycurrent_row.appendChild(mycurrent_cell);	
-				mytablebody.appendChild(mycurrent_row);				
-			}			
+				for(var i = 0 ; i < items.length ; i++){
+			
+					mycurrent_row = document.createElement("tr");
+					mycurrent_cell = document.createElement("td");
+			
+					mycurrent_cell.appendChild(document.createTextNode(items[i]["title"]));
+					mycurrent_cell.style.backgroundColor = backg;	
+			
+					mycurrent_row.appendChild(mycurrent_cell);	
+					mycurrent_cell = document.createElement("td");
+			
+					mycurrent_cell.appendChild(document.createTextNode(items[i]["year"]));
+					mycurrent_cell.style.backgroundColor = backg2;
+			
+					mycurrent_row.appendChild(mycurrent_cell);	
+					mycurrent_cell = document.createElement("td");
+			
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/hand-point-left.png";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","AcceptedMovieClicked");
+					mycurrent_img.setAttribute("class",i);
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
+					mycurrent_cell.style.width = "30px";
+					mycurrent_cell.style.backgroundColor = backg;
+			
+					mycurrent_row.appendChild(mycurrent_cell);	
+					mytablebody.appendChild(mycurrent_row);				
+				}			
 	  
-		myTable.appendChild(mytablebody);
-		}
+			myTable.appendChild(mytablebody);
+			}
 		} 
     );	
+	
 	myTable.style.width="95%";
 	return myTable;
 }
@@ -293,6 +294,7 @@ $(document).ready(function(){
 	$(document).on('click', '#nav_care', function(event) {
 	isChange = false;
 		$.newFormular();
+		
 		event.preventDefault();
 		event.stopImmediatePropagation();
 	});	
@@ -305,8 +307,11 @@ $(document).ready(function(){
 		}else{
 			$('#main_middle').html('');
 			isSeen = false;			
-		}		
-	})
+		}	
+		event.preventDefault();
+		event.stopImmediatePropagation();
+			
+	});
 	
 	//addMovie Method
 	$(document).on('click', '#addMovie', function(event) {		
@@ -314,7 +319,7 @@ $(document).ready(function(){
 	
 			event.preventDefault();
 			event.stopImmediatePropagation();
-			});
+	});
 			
 	//imdbmoviebtn method
 	$(document).on('click','#imdbmovies',function(event){
@@ -328,8 +333,12 @@ $(document).ready(function(){
 		//Tabelle
 		node = document.getElementById("tabelle");				
 		node.parentNode.insertBefore(myTable, node);
+		
+		event.preventDefault();
+		event.stopImmediatePropagation();
 	
-	})
+	});
+	
 	//AcceptedMovieClicked method
 	$(document).on('click','#AcceptedMovieClicked',function(event){
 		var classn = $(this).context.className;
@@ -337,11 +346,20 @@ $(document).ready(function(){
 		$.newFormular();
 		$('#movietitle').val(items[classn]["title"]);
 		$('#hallo').val(items[classn]["year"]);
-	})
+		
+		event.preventDefault();
+		event.stopImmediatePropagation();
+	
+	});
+	
 	//movdismiss method
 	$(document).on('click','#movdismiss',function(event){
 		
 		$.newFormular();
-	})
+		
+		event.preventDefault();
+		event.stopImmediatePropagation();
+	
+	});
 	
 })
