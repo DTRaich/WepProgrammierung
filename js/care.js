@@ -202,23 +202,44 @@ function getimdbmovies(title){
 		function(data){
 		
 		items = new Array();
+
+		if(data.Response == false){
 		
-		for(var i=0;i<data.Search.length;i++){
-			items[i]=new Object();
-			items[i]["title"] = data.Search[i].Title;
-			items[i]["year"] = data.Search[i].Year;
-		}
-			
-		for(var i = 0 ; i < items.length ; i++){
-			
 			mycurrent_row = document.createElement("tr");
 			mycurrent_cell = document.createElement("td");
 			
-			mycurrent_cell.appendChild(document.createTextNode(items[i]["title"]));
+			mycurrent_cell.appendChild(document.createTextNode("Kein Titel gefunden"));
 			mycurrent_cell.style.backgroundColor = backg;	
 			
 			mycurrent_row.appendChild(mycurrent_cell);	
 			mycurrent_cell = document.createElement("td");
+			
+			mycurrent_cell.appendChild(document.createTextNode("N/A"));
+			mycurrent_cell.style.backgroundColor = backg2;
+			mycurrent_row.appendChild(mycurrent_cell);	
+
+			
+		}else{
+			for(var i=0;i<data.Search.length;i++){
+				if(data.Search.Type = "movie"){
+				
+					items[i]=new Object();
+					items[i]["title"] = data.Search[i].Title;
+					items[i]["year"] = data.Search[i].Year;
+				}
+				
+			}
+			
+			for(var i = 0 ; i < items.length ; i++){
+			
+				mycurrent_row = document.createElement("tr");
+				mycurrent_cell = document.createElement("td");
+			
+				mycurrent_cell.appendChild(document.createTextNode(items[i]["title"]));
+				mycurrent_cell.style.backgroundColor = backg;	
+			
+				mycurrent_row.appendChild(mycurrent_cell);	
+				mycurrent_cell = document.createElement("td");
 			
 			mycurrent_cell.appendChild(document.createTextNode(items[i]["year"]));
 			mycurrent_cell.style.backgroundColor = backg2;
@@ -242,6 +263,7 @@ function getimdbmovies(title){
 		}			
 	  
 		myTable.appendChild(mytablebody);
+		}
 		} 
     );	
 	myTable.style.width="95%";
