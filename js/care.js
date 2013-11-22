@@ -217,6 +217,9 @@ function getimdbmovies(title){
 			mycurrent_cell.appendChild(document.createTextNode("N/A"));
 			mycurrent_cell.style.backgroundColor = backg2;
 			mycurrent_row.appendChild(mycurrent_cell);	
+			
+			mytablebody.appendChild(mycurrent_row);	
+			myTable.appendChild(mytablebody);
 
 			
 		}else{
@@ -241,26 +244,26 @@ function getimdbmovies(title){
 				mycurrent_row.appendChild(mycurrent_cell);	
 				mycurrent_cell = document.createElement("td");
 			
-			mycurrent_cell.appendChild(document.createTextNode(items[i]["year"]));
-			mycurrent_cell.style.backgroundColor = backg2;
+				mycurrent_cell.appendChild(document.createTextNode(items[i]["year"]));
+				mycurrent_cell.style.backgroundColor = backg2;
 			
-			mycurrent_row.appendChild(mycurrent_cell);	
-			mycurrent_cell = document.createElement("td");
+				mycurrent_row.appendChild(mycurrent_cell);	
+				mycurrent_cell = document.createElement("td");
 			
-			mycurrent_img = document.createElement("img");			
-			mycurrent_img.src="./img/small/hand-point-left.jpg";
-			mycurrent_img.style.height = "15px";
-			mycurrent_img.style.border = "0";	
-			mycurrent_img.setAttribute("id","AcceptedMovieClicked");
-			mycurrent_img.setAttribute("class",i);
-			mycurrent_img.style.cursor = "pointer";
-			mycurrent_cell.appendChild(mycurrent_img);
-			mycurrent_cell.style.width = "30px";
-			mycurrent_cell.style.backgroundColor = backg;
+				mycurrent_img = document.createElement("img");			
+				mycurrent_img.src="./img/small/hand-point-left.jpg";
+				mycurrent_img.style.height = "15px";
+				mycurrent_img.style.border = "0";	
+				mycurrent_img.setAttribute("id","AcceptedMovieClicked");
+				mycurrent_img.setAttribute("class",i);
+				mycurrent_img.style.cursor = "pointer";
+				mycurrent_cell.appendChild(mycurrent_img);
+				mycurrent_cell.style.width = "30px";
+				mycurrent_cell.style.backgroundColor = backg;
 			
-			mycurrent_row.appendChild(mycurrent_cell);	
-			mytablebody.appendChild(mycurrent_row);				
-		}			
+				mycurrent_row.appendChild(mycurrent_cell);	
+				mytablebody.appendChild(mycurrent_row);				
+			}			
 	  
 		myTable.appendChild(mytablebody);
 		}
