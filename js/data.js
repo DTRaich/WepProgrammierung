@@ -7,11 +7,11 @@ var movieArray = new Array();
 //movieArray[9]["title"] = "Star Wars";
 //movieArray[9]["year"] = "2013";
 //movieArray[9]["genre"] = "SciFi";
-//movieArray[9]["rating"] = "1"; // gesammt rating
-//movieArray[9]["seen"] = "1"; 	// lsung suchen für nicht owner trotzdem changen von seen auf true damit das reine rating ausgeführt werden kann
-//movieArray[9]["myrating"] = "1"; // wenn eigenes vergeben
-//movieArray[9]["owner"] = "1"; // nur wenn owner generelles changen
-//movieArray[9]["originalDBID"] = "1"; // für delte und change 
+//movieArray[9]["rating"] = "1"; // avg rating
+//movieArray[9]["seen"] = "1"; 	// 
+//movieArray[9]["myrating"] = "1"; // 
+//movieArray[9]["owner"] = "1"; //
+//movieArray[9]["originalDBID"] = "1"; // 
 
 //--------------------------------------------------INTERN METHODS--------------------------------
 
@@ -96,12 +96,13 @@ $.getOneMovieData =function(movieTitle,year){
 // returns all Movies without Filters	
 $.getAllMovies = function(){
 	// getting the Movies from the DB.
-	//---> Into the movie array because right now its much faster.. maybe due to the internet connection and db specific parameters.
+		//---> Into the movie array because right now its much faster.. maybe due to the internet connection and db specific parameters.
 	movieArray = new Array();
 	$.gettingAllDBMovies();
 	
 	return movieArray;	
 }
+
 //changes the rating and the "seen" yes/ no matters
 $.changeRating = function(originalDBID, seenBeforeChange, newRating){
 	// db changing
