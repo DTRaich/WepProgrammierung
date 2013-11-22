@@ -62,6 +62,7 @@ $(document).on('click','#nav_home',function(event){
 $(document).on('click','#nav_action',function(event){	
 	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Action");	
+	if(movies.length==0){movies = startuparray;}
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
@@ -69,7 +70,8 @@ $(document).on('click','#nav_action',function(event){
 //show Comedy-Movies
 $(document).on('click','#nav_comedy',function(event){	
 	movies = loadedmovies;
-	movies = $.filterMovies(movies,"Comedy");	
+	movies = $.filterMovies(movies,"Comedy");
+	if(movies.length==0){movies = startuparray;}	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
@@ -78,6 +80,7 @@ $(document).on('click','#nav_comedy',function(event){
 $(document).on('click','#nav_horror',function(event){	
 	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Horror");	
+	if(movies.length==0){movies = startuparray;}	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
@@ -86,6 +89,7 @@ $(document).on('click','#nav_horror',function(event){
 $(document).on('click','#nav_scifi',function(event){	
 	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Sci-Fi");
+	if(movies.length==0){movies = startuparray;}		
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
@@ -94,6 +98,7 @@ $(document).on('click','#nav_scifi',function(event){
 $(document).on('click','#nav_thriller',function(event){	
 	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Thriller");	
+	if(movies.length==0){movies = startuparray;}	
 	preselecttablefilter(movies);	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
