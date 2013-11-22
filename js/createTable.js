@@ -18,9 +18,9 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">i
 								'<table border="1" id="tabelle"></table>'+
 								'</div></td></tr>'+
 								'</table>'+
-								'<div class="modal-footer">'+
-								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal" align = "right">Zurück</button>'+
-								'</div>');
+								'<div class="modal-footer" id= backBtnDiv>'+
+								'<button type="button" class="btn btn-primary" id="btndismiss" aling="right" data-dismiss="modal">Zurück</button></div>'+
+								'<div id= trailerBtnDiv><button type="button" class="btn btn-primary" id="trailerListbtn" aling="right" data-dismiss="modal">Trailer Liste</button> </div>');
 
 //--------------------------------------------------VARIABELS--------------------------------
 
@@ -190,6 +190,11 @@ $(document).on('click','#SeenSortClicked',function(event){
 //imdbinfo dismiss 
 $(document).on('click','#btndismiss',function(){
 	selectedtablerebuild();	
+});
+
+$(document).on('click','#trailerListbtn',function(){
+	var testtitle = document.getElementById("Title").textContent;
+	window.open("http://www.youtube.com/results?search_query="+ testtitle +" trailer&sm=3");
 });
 
 //Searchinput enter
