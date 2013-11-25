@@ -401,7 +401,6 @@ $.delMovieFromDB = function(originalDBID){
 	relationQuery.find({
 		success: function(results) {
 			for( var i = 0; i < results.length;i++){
-			console.log("delete");
 				var relation = results[i];
 				relation.destroy({
 					success: function(relation) {
