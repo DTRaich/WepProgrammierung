@@ -215,6 +215,16 @@ $(document).on('keypress','#searchinginput',function(event){
 		preselecttablefilter(movies);
 	}	
 })
+
+//Searchbuttonclicked 
+$(document).on('click','#Searchbuttonclicked',function(){
+	var input = $.trim($('#searchinginput').val());
+	movies = $.Searchformovies(loadedmovies,input);
+	if(movies.length==0){
+		movies = startuparray;
+	}
+	preselecttablefilter(movies);		
+})
 });
 
 //-------------------------------------------------
@@ -376,6 +386,16 @@ function createTablelogedIn(row, id) {
 					
 					mycurrent_link.appendChild(mycurrent_span);
 					mycurrent_cell.appendChild(mycurrent_link);
+					//Searchbutton
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/suchlupe.gif";
+					mycurrent_img.style.width = "15px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","Searchbuttonclicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
+				
 					break;
 				case 1:	
 					//Year Header
@@ -595,6 +615,16 @@ function createTableGuest(row, id) {
 					
 					mycurrent_link.appendChild(mycurrent_span);
 					mycurrent_cell.appendChild(mycurrent_link);
+					//Searchbutton
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/suchlupe.gif";
+					mycurrent_img.style.width = "15px";
+					mycurrent_img.style.height = "15px";
+					mycurrent_img.style.border = "0";	
+					mycurrent_img.setAttribute("id","Searchbuttonclicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
+					
 					break;
 				case 1:	
 					//Year Header
