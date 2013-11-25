@@ -442,6 +442,7 @@ function createTablelogedIn(row, id) {
 					currenttext = document.createTextNode(id[j]["title"]);
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_cell.style.backgroundColor = backg;
+					mycurrent_cell.style.width = "230px";
 					break;
 				case 1:	
 					//Year Cell
