@@ -2,7 +2,11 @@
 // ----------------------------------TEMPLATES---------------------------
 
 //-----------------------------------Loginscreens----------------------
-var welcomeTemplate= _.template("<h2> Herzlich Willkommen, <br> <%- id %> ! </h2><div align = 'left'><a id='logout' href='#'>Logout</a></div>")
+var welcomeTemplate= _.template("<h2> Herzlich Willkommen, <br> "+
+								"<%- id %> ! </h2><div align = 'left'>"+
+								"<a id='logout' href='#'>Logout</a></div>"+
+								"<div> <br> <br> Lust auf Kino?<br>Hier die <a href='#' id='InTheaters'>aktuellen Kinofilme</a> "+
+								"<br><br> Nichts dabei?<br>Diese Filme kommen <a href='#' id='ComingSoon'>demnächst ins Kino</a></div>")
 
 var loginTemplate=_.template('<h1>Login</h1>'+
 								'<table border= "0">'+
@@ -18,7 +22,9 @@ var loginTemplate=_.template('<h1>Login</h1>'+
 								'</div>'+
 								'</td>'+
 								'</tr>'+
-								'</table>')
+								'</table>'+
+								"<div> <br> <br> Lust auf Kino?<br>Hier die <a href='#' id='InTheaters'>aktuellen Kinofilme</a> "+
+								"<br><br> Nichts dabei?<br>Diese Filme kommen <a href='#' id='ComingSoon'>demnächst ins Kino</a></div>")
 		
 //----------------------------Navigation when logged in---------------------		
 var nav_login_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="nav_home">Home</a>  </li>'+ 
@@ -220,5 +226,26 @@ $(document).ready(function(){
 		}
 			
 	});
+	
+	//Coming Soon
+	$(document).on('click','#ComingSoon',function(){
+		if(gar<3){
+			window.open("http://www.imdb.com/movies-coming-soon/");
+			gar++;
+		}else{
+			alert("gah gah");
+			gar = 0;
+		}
+	});
 		
+	//In Theaters
+	$(document).on('click','#InTheaters',function(){
+		if(gar<3){
+			window.open("http://www.imdb.com/movies-in-theaters/");
+			gar++;
+		}else{
+			alert("gah gah");
+			gar = 0;
+		}
+	});
 });

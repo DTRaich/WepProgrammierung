@@ -46,6 +46,7 @@ var asc = true;
 var yearsort = true;
 var ratingsort = true;
 var seensort = true;
+var gar = 0;
 //--------------------------------------------------INTERN METHODS--------------------------------
 
 //Click-Event Methods
