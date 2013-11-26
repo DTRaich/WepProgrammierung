@@ -24,6 +24,8 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">i
 								'<button type="button" class="btn btn-primary" id="trailerListbtn" aling="right" data-dismiss="modal">Trailer Liste</button>'+
 								'<span>Liste der Trailer auf Youtube</span></a> </div>');
 
+var gahTemplate= _.template('<div align="left" id="gahgah"><img id="loadingGif"src="./img/small/nibbler-eating-turkey.gif"></div>')
+ 
 //--------------------------------------------------VARIABELS--------------------------------
 
 //init startuparray-struckture

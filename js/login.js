@@ -5,7 +5,7 @@
 var welcomeTemplate= _.template("<h2> Herzlich Willkommen, <br> "+
 								"<%- id %> ! </h2><div align = 'left'>"+
 								"<a id='logout' href='#'>Logout</a></div>"+
-								"<div> <br> <br> Lust auf Kino?<br>Hier die <a href='#' id='InTheaters'>aktuellen Kinofilme</a> "+
+								"<div id='imdbLinks'> <br> <br> Lust auf Kino?<br>Hier die <a href='#' id='InTheaters'>aktuellen Kinofilme</a> "+
 								"<br><br> Nichts dabei?<br>Diese Filme kommen <a href='#' id='ComingSoon'>demnächst ins Kino</a></div>")
 
 var loginTemplate=_.template('<h1>Login</h1>'+
@@ -23,7 +23,7 @@ var loginTemplate=_.template('<h1>Login</h1>'+
 								'</td>'+
 								'</tr>'+
 								'</table>'+
-								"<div> <br> <br> Lust auf Kino?<br>Hier die <a href='#' id='InTheaters'>aktuellen Kinofilme</a> "+
+								"<div id='imdbLinks'> <br> <br> Lust auf Kino?<br>Hier die <a href='#' id='InTheaters'>aktuellen Kinofilme</a> "+
 								"<br><br> Nichts dabei?<br>Diese Filme kommen <a href='#' id='ComingSoon'>demnächst ins Kino</a></div>")
 		
 //----------------------------Navigation when logged in---------------------		
@@ -233,7 +233,7 @@ $(document).ready(function(){
 			window.open("http://www.imdb.com/movies-coming-soon/");
 			gar++;
 		}else{
-			alert("gah gah");
+			$('#imdbLinks').html(gahTemplate());
 			gar = 0;
 		}
 	});
@@ -244,7 +244,7 @@ $(document).ready(function(){
 			window.open("http://www.imdb.com/movies-in-theaters/");
 			gar++;
 		}else{
-			alert("gah gah");
+			$('#imdbLinks').html(gahTemplate());
 			gar = 0;
 		}
 	});
