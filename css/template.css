@@ -104,7 +104,7 @@ a.tooltip span b
 
 #innerRating{
 	background-color:white;
-	width:250px;
+	width:200px;
     height:250px;
     position:fixed;
     margin-left:-150px; /* half of width */

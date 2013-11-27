@@ -25,13 +25,13 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">D
 								'<span>Liste der Trailer auf Youtube</span></a> </div>');
 
 								
-var ratingTemplate= _.template('<div id="outerRating"> <div id="innerRating"><br><table class="ratingbox"><tr><th><div id="ratingTitle"></div></th></tr>'+
-								'<tr><td align="center"><img id="SelectedNewRating" class="1" src="./img/small/stars-1.jpg" width = "80px" height="20px"></td> </tr>'+
-								'<tr><td align="center"><img id="SelectedNewRating" class="2" src="./img/small/stars-2.jpg" width = "80px" height="20px"></td> </tr>'+
-								'<tr><td align="center"><img id="SelectedNewRating" class="3" src="./img/small/stars-3.jpg" width = "80px" height="20px"></td> </tr>'+
-								'<tr><td align="center"><img id="SelectedNewRating" class="4" src="./img/small/stars-4.jpg" width = "80px" height="20px"></td> </tr>'+
-								'<tr><td align="center"><img id="SelectedNewRating" class="5" src="./img/small/stars-5.jpg" width = "80px" height="20px"></td> </tr>'+
-								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="0">nicht Gesehen/Keine Bewertung abgeben</a></td></tr>'+
+var ratingTemplate= _.template('<div id="outerRating"> <div id="innerRating"><table align="center"><tr><th><div id="ratingTitle"></div></th></tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="1" src="./img/small/stars-1.jpg" width = "80px" height="20px" style="cursor: pointer;"></td> </tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="2" src="./img/small/stars-2.jpg" width = "80px" height="20px" style="cursor: pointer;"></td> </tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="3" src="./img/small/stars-3.jpg" width = "80px" height="20px" style="cursor: pointer;"></td> </tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="4" src="./img/small/stars-4.jpg" width = "80px" height="20px" style="cursor: pointer;"></td> </tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="5" src="./img/small/stars-5.jpg" width = "80px" height="20px" style="cursor: pointer;"></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="0">nicht Gesehen/<br>Keine Bewertung abgeben</a></td></tr>'+
 								'<tr><td align="center"><button type="button" id="btndismiss" align="right" data-dismiss="modal">Zurück</button></td></tr>'+
 								'</table></div></div>')
  
@@ -406,7 +406,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.src="./img/small/sortArrow.jpg";
 					mycurrent_img.style.width = "10px";
 					mycurrent_img.style.height = "15px";
-					mycurrent_img.style.border = "0";	
 					mycurrent_img.setAttribute("id","TitleSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
@@ -420,7 +419,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.src="./img/small/suchlupe.gif";
 					mycurrent_img.style.width = "15px";
 					mycurrent_img.style.height = "15px";
-					mycurrent_img.style.border = "0";	
 					mycurrent_img.setAttribute("id","Searchbuttonclicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
@@ -433,8 +431,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/sortArrow.jpg";
 					mycurrent_img.style.width = "10px";
-					mycurrent_img.style.height = "15px";
-					mycurrent_img.style.border = "0";	
+					mycurrent_img.style.height = "15px";	
 					mycurrent_img.setAttribute("id","YearSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
@@ -452,7 +449,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.src="./img/small/sortArrow.jpg";
 					mycurrent_img.style.width = "10px";
 					mycurrent_img.style.height = "15px";
-					mycurrent_img.style.border = "0";	
 					mycurrent_img.setAttribute("id","SeenSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
@@ -465,7 +461,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.src="./img/small/sortArrow.jpg";
 					mycurrent_img.style.width = "10px";
 					mycurrent_img.style.height = "15px";
-					mycurrent_img.style.border = "0";	
 					mycurrent_img.setAttribute("id","RatingSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
@@ -525,7 +520,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".jpg";
 					mycurrent_img.style.width = "80px";
 					mycurrent_img.style.height = "20px";
-					mycurrent_img.style.border = "0";
 					mycurrent_img.setAttribute("id","Ratingclicked");
 					mycurrent_img.setAttribute("class",j);
 					mycurrent_img.style.cursor = "pointer";
@@ -539,7 +533,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.src="./img/small/stars-"+id[j]["myrating"]+".jpg";
 					mycurrent_img.style.width = "80px";
 					mycurrent_img.style.height = "20px";
-					mycurrent_img.style.border = "0";
 					mycurrent_span.appendChild(mycurrent_img);
 					//---
 					mycurrent_link.appendChild(mycurrent_span);
@@ -552,7 +545,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.src="./img/small/details.jpg";
 					mycurrent_img.style.width = "20px";
 					mycurrent_img.style.height = "20px";
-					mycurrent_img.style.border = "0";
 					mycurrent_img.setAttribute("id","detailsclicked");
 					mycurrent_img.setAttribute("class",j);
 					mycurrent_img.style.cursor = "pointer";
@@ -567,7 +559,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.src="./img/small/edit.png";
 					mycurrent_img.style.width = "20px";
 					mycurrent_img.style.height = "20px";
-					mycurrent_img.style.border = "0";
 					mycurrent_img.setAttribute("id","Editclicked");
 					mycurrent_img.setAttribute("class",j);
 					mycurrent_img.style.cursor = "pointer";
@@ -579,7 +570,6 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.src="./img/small/Delete.png";
 					mycurrent_img.style.width = "20px";
 					mycurrent_img.style.height = "20px";
-					mycurrent_img.style.border = "0";
 					mycurrent_img.setAttribute("id","Deleteclicked");
 					mycurrent_img.setAttribute("class",j);
 					mycurrent_img.style.cursor = "pointer";
@@ -632,7 +622,6 @@ function createTableGuest(row, id) {
 					mycurrent_img.src="./img/small/sortArrow.jpg";
 					mycurrent_img.style.width = "10px";
 					mycurrent_img.style.height = "15px";
-					mycurrent_img.style.border = "0";	
 					mycurrent_img.setAttribute("id","TitleSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
@@ -646,7 +635,6 @@ function createTableGuest(row, id) {
 					mycurrent_img.src="./img/small/suchlupe.gif";
 					mycurrent_img.style.width = "15px";
 					mycurrent_img.style.height = "15px";
-					mycurrent_img.style.border = "0";	
 					mycurrent_img.setAttribute("id","Searchbuttonclicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
@@ -660,7 +648,6 @@ function createTableGuest(row, id) {
 					mycurrent_img.src="./img/small/sortArrow.jpg";
 					mycurrent_img.style.width = "8px";
 					mycurrent_img.style.height = "13px";
-					mycurrent_img.style.border = "0";	
 					mycurrent_img.setAttribute("id","YearSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
@@ -678,7 +665,6 @@ function createTableGuest(row, id) {
 					mycurrent_img.src="./img/small/sortArrow.jpg";
 					mycurrent_img.style.width = "10px";
 					mycurrent_img.style.height = "15px";
-					mycurrent_img.style.border = "0";	
 					mycurrent_img.setAttribute("id","RatingSortClicked");
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
@@ -726,7 +712,6 @@ function createTableGuest(row, id) {
 					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".jpg";
 					mycurrent_img.style.width = "80px";
 					mycurrent_img.style.height = "20px";
-					mycurrent_img.style.border = "0";	
 					mycurrent_cell.style.width = "90px";
 					mycurrent_cell.appendChild(mycurrent_img);
 					break;		
@@ -736,7 +721,6 @@ function createTableGuest(row, id) {
 					mycurrent_img.src="./img/small/details.jpg";
 					mycurrent_img.style.width = "20px";
 					mycurrent_img.style.height = "20px";
-					mycurrent_img.style.border = "0";
 					mycurrent_img.setAttribute("id","detailsclicked");
 					mycurrent_img.setAttribute("class",j);
 					mycurrent_img.style.cursor = "pointer";
