@@ -106,6 +106,15 @@ $(document).on('click','#nav_thriller',function(event){
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+//show own movies
+$(document).on('click','#nav_ownMovies',function(event){	
+	movies = loadedmovies;
+	movies = $.findUserFilms(movies,"1");
+	if(movies.length==0){movies = startuparray;}	
+	preselecttablefilter(movies);	
+	event.preventDefault();
+	event.stopImmediatePropagation();	
+});
 
 //Table Button click events
 //Editbutton clicked
