@@ -583,7 +583,8 @@ function createTablelogedIn(row, id) {
 					//if currentuser not owner -> display owner name					
 					mycurrent_link = document.createElement("a");
 					mycurrent_link.setAttribute("id","Ownerclicked");					
-					mycurrent_link.setAttribute("class",j);
+					mycurrent_link.setAttribute("class",j);					
+					mycurrent_link.style.cursor = "pointer";
 					currenttext = document.createTextNode(id[j]["owner"]);
 					mycurrent_link.appendChild(currenttext);
 					mycurrent_cell.appendChild(mycurrent_link);
