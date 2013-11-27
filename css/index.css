@@ -8,8 +8,11 @@ body {
   font-size: 100.01%; 
   font-family: arial ;
   }
+  
 a { color: #0B4D8C; text-decoration: underline; } 
+
 a:visited { color: black; } 
+
 .skip { 
   position: absolute;
   margin-left: -999px;
@@ -143,8 +146,8 @@ img {
   border: 0;
 }
 #loginLink{
-color: black;
-text-align: right;
+	color: black;
+	text-align: right;
 }
 /* --------------- Mainpart ---place for templates; IDs are in the specific templates in their .js files -------------------- */
 
