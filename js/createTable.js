@@ -24,6 +24,17 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">D
 								'<button type="button" class="btn btn-primary" id="trailerListbtn" aling="right" data-dismiss="modal">Trailer Liste</button>'+
 								'<span>Liste der Trailer auf Youtube</span></a> </div>');
 
+								
+var ratingTemplate= _.template('<div><br><table class="ratingbox"><tr><th>Rating</th></tr>'+
+								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-1.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="1" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
+								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-2.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="2" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
+								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-3.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="3" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
+								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-4.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="4" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
+								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-5.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="5" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
+								'<tr><td>nicht Gesehen/Keine Bewertung abgeben</td> <td> <img id="SelectedNewRating" class="0" src="./img/small/hand-point-left.png" height = "15px"></td></tr>'+
+								'<tr><td></td><td><button type="button" id="btndismiss" align="right" data-dismiss="modal">Zurück</button></td></tr>'+
+								'</table></div>')
+ 
 
 //--------------------------------------------------VARIABELS--------------------------------
 
@@ -47,6 +58,7 @@ var asc = true;
 var yearsort = true;
 var ratingsort = true;
 var seensort = true;
+var lineRating;
 
 //--------------------------------------------------INTERN METHODS--------------------------------
 
@@ -140,27 +152,10 @@ $(document).on('click','#Deleteclicked',function(event){
 });
 //Rating clicked
 $(document).on('click','#Ratingclicked',function(event){
-
-	var classn = $(this).context.className;
-	var rated= false;
-	var mynewrating;
-	while(rated === false){
-	mynewrating = prompt("Deine Bewertung:",movies[classn]["rating"]);
-		//use the informations from the promt window
-		if(mynewrating==="0" || mynewrating==="1" || mynewrating==="2" || mynewrating==="3" || mynewrating==="4" || mynewrating==="5"){
-			rated = true;
-			//change Rating in data.js
-			$.changeRating(movies[classn]["originalDBID"],movies[classn]["seen"], mynewrating);
-					
-		}else if(mynewrating === null){
-			rated = true;
-		}else{
-			alert("Gebe eine Bewertung von 1 bis 5 an");
-		}
-		//rebuild the same table as bevore
-		selectedtablerebuild();		
-		loadedmovies = $.getAllMovies(); 
-	}	
+	
+	lineRating = $(this).context.className;
+	$('#main').html(ratingTemplate());	
+	
 	
 });
 //detailsclicked
@@ -246,7 +241,22 @@ $(document).on('click','#Ownerclicked',function(){
 	if(movies.length==0){movies = startuparray;}	
 	preselecttablefilter(movies);			
 })
+
+//SelectedNewRating
+$(document).on('click','#SelectedNewRating',function(){
+	var classn = $(this).context.className;
+		
+	$.changeRating(movies[lineRating]["originalDBID"],movies[lineRating]["seen"], classn);
+	
+	selectedtablerebuild();
+	loadedmovies = $.getAllMovies(); 
+})
+
+
 });
+//-------------------------------------------------
+
+
 
 //-------------------------------------------------
 
