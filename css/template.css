@@ -1,34 +1,40 @@
+/* Css file for the templates */
 #rating {
-width: 100px;
+	width: 100px;
 }
 
 #logout {
-text-align : center;
-}
-	 
-.inputError{
-border: solid 2px red;
-}
-
-.mainTemplateTable{
-border : 0;
-width : 100%; 
-height : 100%; 
+	text-align : center;
 }
 
 #backBtnDiv{
-float : left;
+	float : left;
 }
 
 #trailerBtnDiv{
-align: right;
-margin-right: 3.7%;
-float : right;
+	text-align: right;
+	margin-right: 3.7%;
+	float : right;
 }
+
+#Ownerclicked{
+	color: black;
+}
+	 
+.inputError{
+	border: solid 2px red;
+}
+
+.mainTemplateTable{
+	border : 0;
+	width : 100%; 
+	height : 100%; 
+}
+
 
 /*--------------- rating tooltip---------------------------  */
 #tool{
-text-decoration:none,
+	text-decoration:none,
 }
 
 a.tooltip:hover 
