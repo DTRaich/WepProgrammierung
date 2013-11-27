@@ -323,7 +323,7 @@ $.gettingRatedRelations = function(movieObject, user){
 // gets all the Movies from the DB
 $.gettingAllDBMovies = function(){
 	// vor providing the loading div
-	$('#main').html(loadTemplate());	
+	$('#main_middle').html(loadTemplate());	
 	//variables
 	var movieObject;
 	var queryAllMovies = new Parse.Query(MovieObject);	
