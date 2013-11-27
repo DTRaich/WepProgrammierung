@@ -119,8 +119,6 @@ $.newRatingRelation = function(movieID,user,rating){
 $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 	//define query	
 	var relationQuery = new Parse.Query(RatedObject);	
-	console.log("querydefine");
-	
 	relationQuery.equalTo("movieID",movieID);
 	relationQuery.equalTo("userID",user);
 	
