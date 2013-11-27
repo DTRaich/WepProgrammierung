@@ -404,13 +404,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_input = document.createElement("input");
 					mycurrent_input.setAttribute("id","searchinginput");
 					mycurrent_input.setAttribute("placeholder","Suchfeld");
-					//Hover Event
-					mycurrent_link.appendChild(mycurrent_input);
-					mycurrent_span = document.createElement("span");					
-					mycurrent_span.appendChild(document.createTextNode("Enter drücken um zu suchen"));
-					
-					mycurrent_link.appendChild(mycurrent_span);
-					mycurrent_cell.appendChild(mycurrent_link);
+					mycurrent_cell.appendChild(mycurrent_input);
 					//Searchbutton
 					mycurrent_img = document.createElement("img");			
 					mycurrent_img.src="./img/small/suchlupe.gif";
