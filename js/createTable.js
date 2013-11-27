@@ -25,7 +25,7 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">D
 								'<span>Liste der Trailer auf Youtube</span></a> </div>');
 
 								
-var ratingTemplate= _.template('<div id="outerRating"> <div id="innerRating"><br><table class="ratingbox"><tr><th>Rating</th></tr>'+
+var ratingTemplate= _.template('<div id="outerRating"> <div id="innerRating"><br><table class="ratingbox"><tr><th><div id="ratingTitle"></div></th></tr>'+
 								'<tr><td align="center"><img id="SelectedNewRating" class="1" src="./img/small/stars-1.jpg" width = "80px" height="20px"></td> </tr>'+
 								'<tr><td align="center"><img id="SelectedNewRating" class="2" src="./img/small/stars-2.jpg" width = "80px" height="20px"></td> </tr>'+
 								'<tr><td align="center"><img id="SelectedNewRating" class="3" src="./img/small/stars-3.jpg" width = "80px" height="20px"></td> </tr>'+
@@ -155,6 +155,10 @@ $(document).on('click','#Ratingclicked',function(event){
 	
 	lineRating = $(this).context.className;
 	$('#main_middle').html(ratingTemplate());	
+	rTitle = document.getElementById("ratingTitle");
+	currenttext = document.createTextNode(movies[lineRating]["title"]);
+	rTitle.appendChild(currenttext);
+	
 	
 	
 });
