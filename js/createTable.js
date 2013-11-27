@@ -26,13 +26,13 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">D
 
 								
 var ratingTemplate= _.template('<div id="outerRating"> <div id="innerRating"><br><table class="ratingbox"><tr><th>Rating</th></tr>'+
-								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-1.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="1" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
-								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-2.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="2" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
-								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-3.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="3" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
-								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-4.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="4" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
-								'<tr><td><img id="ratingStarsClicked"src="./img/small/stars-5.jpg" width = "80px" height="20px"></td> <td> <img id="SelectedNewRating" class="5" src="./img/small/hand-point-left.png" height = "15px" cursor="pointer"></td></tr>'+
-								'<tr><td>nicht Gesehen/Keine Bewertung abgeben</td> <td> <img id="SelectedNewRating" class="0" src="./img/small/hand-point-left.png" height = "15px"></td></tr>'+
-								'<tr><td></td><td><button type="button" id="btndismiss" align="right" data-dismiss="modal">Zurück</button></td></tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="1" src="./img/small/stars-1.jpg" width = "80px" height="20px"></td> </tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="2" src="./img/small/stars-2.jpg" width = "80px" height="20px"></td> </tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="3" src="./img/small/stars-3.jpg" width = "80px" height="20px"></td> </tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="4" src="./img/small/stars-4.jpg" width = "80px" height="20px"></td> </tr>'+
+								'<tr><td align="center"><img id="SelectedNewRating" class="5" src="./img/small/stars-5.jpg" width = "80px" height="20px"></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="0">nicht Gesehen/Keine Bewertung abgeben</a></td></tr>'+
+								'<tr><td align="center"><button type="button" id="btndismiss" align="right" data-dismiss="modal">Zurück</button></td></tr>'+
 								'</table></div></div>')
  
 
