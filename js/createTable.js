@@ -238,6 +238,14 @@ $(document).on('click','#Searchbuttonclicked',function(){
 	preselecttablefilter(movies);		
 })
 
+//Ownerclicked
+$(document).on('click','#Ownerclicked',function(){
+	var classn = $(this).context.className;
+	movies = loadedmovies;
+	movies = $.findUserFilms(movies,movies[classn]["owner"]);
+	if(movies.length==0){movies = startuparray;}	
+	preselecttablefilter(movies);			
+})
 });
 
 //-------------------------------------------------
@@ -572,9 +580,13 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
 					}else{
-					//if currentuser not owner -> display owner name
+					//if currentuser not owner -> display owner name					
+					mycurrent_link = document.createElement("a");
+					mycurrent_link.setAttribute("id","Ownerclicked");					
+					mycurrent_link.setAttribute("class",j);
 					currenttext = document.createTextNode(id[j]["owner"]);
-					mycurrent_cell.appendChild(currenttext);
+					mycurrent_link.appendChild(currenttext);
+					mycurrent_cell.appendChild(mycurrent_link);
 					}					
 					mycurrent_cell.style.backgroundColor =backg2;
 					break;						
