@@ -9,7 +9,7 @@ var maintemplate=_.template('<br><table class="mainTemplateTable" id="tabelle"><
 							'<div id="main_low"></div>');
 
 // ----------------------------------IMDB-TEMPLATE---------------------------
-var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">imdb Informationen</h1>'+
+var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">Details</h1>'+
 								'</div>'+
 								'<table class="modal-body"><tr>'+  
 								'<td><div id="modal-pic">'+  
@@ -228,6 +228,7 @@ $(document).on('click','#Searchbuttonclicked',function(){
 	}
 	preselecttablefilter(movies);		
 })
+
 });
 
 //-------------------------------------------------
@@ -242,6 +243,7 @@ function detailview(title){
 	node.parentNode.insertBefore(getPoster(title), node);	
 	
 }
+
 //get informations from imdb and create the details view
 function getPoster(title){	
     
@@ -320,6 +322,7 @@ function preselecttable(){
 	}	
 	loadedmovies = $.getAllMovies();
 }
+
 //call method for the table creation with filters
 function preselecttablefilter(filterArray){
 	$('#main').html(maintemplate());	
@@ -335,6 +338,7 @@ function preselecttablefilter(filterArray){
 		node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
 	}
 }
+
 //call method for the table creation
 function selectedtablerebuild(){	
 	$('#main').html(maintemplate());	
@@ -579,6 +583,7 @@ function createTablelogedIn(row, id) {
 	myTable.style.width="95%";
     return myTable;
 } 
+
 //Create a Table for Guests or logged out users
 function createTableGuest(row, id) {	
 		
