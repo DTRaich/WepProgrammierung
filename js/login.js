@@ -230,23 +230,11 @@ $(document).ready(function(){
 	
 	//Coming Soon
 	$(document).on('click','#ComingSoon',function(){
-		if(gar<3){
-			window.open("http://www.imdb.com/movies-coming-soon/");
-			gar++;
-		}else{
-			$('#imdbLinks').html(gahTemplate());
-			gar = 0;
-		}
+		window.open("http://www.imdb.com/movies-coming-soon/");
 	});
 		
 	//In Theaters
 	$(document).on('click','#InTheaters',function(){
-		if(gar<3){
-			window.open("http://www.imdb.com/movies-in-theaters/");
-			gar++;
-		}else{
-			$('#imdbLinks').html(gahTemplate());
-			gar = 0;
-		}
+		window.open("http://www.imdb.com/movies-in-theaters/");
 	});
 });

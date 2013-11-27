@@ -24,8 +24,7 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">D
 								'<button type="button" class="btn btn-primary" id="trailerListbtn" aling="right" data-dismiss="modal">Trailer Liste</button>'+
 								'<span>Liste der Trailer auf Youtube</span></a> </div>');
 
-var gahTemplate= _.template('<img id="loadingGif" align="left" src="./img/small/riddick.jpg">')
- 
+
 //--------------------------------------------------VARIABELS--------------------------------
 
 //init startuparray-struckture
@@ -48,7 +47,7 @@ var asc = true;
 var yearsort = true;
 var ratingsort = true;
 var seensort = true;
-var gar = 0;
+
 //--------------------------------------------------INTERN METHODS--------------------------------
 
 //Click-Event Methods
@@ -381,7 +380,7 @@ function createTablelogedIn(row, id) {
 		//initialize Head Row
         mycurrent_row = document.createElement("tr");
 		mycurrent_row.style.textAlign = "left";
-		//Title Head
+		//Table Head
 		for(var i=0;i<5;i++){
 			mycurrent_cell = document.createElement("th");
 			switch (i){
@@ -607,7 +606,7 @@ function createTableGuest(row, id) {
 		//initialize Head Row
         mycurrent_row = document.createElement("tr");
 		mycurrent_row.style.textAlign = "left";
-		//Title Head
+		//Table Head
 		for(var i=0;i<4;i++){
 			mycurrent_cell = document.createElement("th");
 			switch (i){
