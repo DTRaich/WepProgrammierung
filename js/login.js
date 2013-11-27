@@ -4,7 +4,7 @@
 //-----------------------------------Loginscreens----------------------
 var welcomeTemplate= _.template("<h2> Herzlich Willkommen, <br> "+
 								"<%- id %> ! </h2><div align = 'left'>"+
-								"<a id='logout' href='#'>Logout</a><a href='#' id='changePswd'>Passwort ändern</a></div>"+
+								"<a id='logout' href='#'>Logout</a></div>"+
 								"<div id='imdbLinks'> <br> <br> Lust auf Kino?<br>Hier die <a href='#' id='InTheaters'>aktuellen Kinofilme</a> "+
 								"<br><br> Nichts dabei?<br>Diese Filme kommen <a href='#' id='ComingSoon'>demnächst ins Kino</a></div>")
 
