@@ -1,9 +1,9 @@
 //------------------------GLOBAL VARIABLES----------------------------
 
 // ----------------------------------TEMPLATES---------------------------
-
+//<br><br><div id="headline" align="center"><h1>Filmliste</h1></div>'+
 // ----------------------------------MAINTEMPLATE---------------------------
-var maintemplate=_.template('<br><table class="mainTemplateTable" id="tabelle"></table>'+
+var maintemplate=_.template('<br><br><table class="mainTemplateTable" id="tabelle"></table>'+
 							'<div id="main_top"></div>'+
 							'<div id="main_middle"></div>'+	
 							'<div id="main_low"></div>');

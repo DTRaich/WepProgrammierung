@@ -36,6 +36,7 @@ var nav_login_Template=_.template('<ul> <li class="topmenu">  <a href="#" id="na
 									' <li class="submenu"><a href="#" id="nav_horror">Horror</a></li> '+
 								    ' <li class="submenu"><a href="#" id="nav_scifi">Sci-Fi</a></li> '+
 									' <li class="submenu"><a href="#" id="nav_thriller">Thriller</a></li> '+
+									' <li class="submenu"><a href="#" id="nav_ownMovies">Meine Filme</a></li> '+
 									' </ul> </li>' +
 									' <li class="topmenu">' +
 									'  <a href="#" id="nav_care">Verwaltung</a></li> ' + 
