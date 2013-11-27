@@ -38,7 +38,7 @@ h2 {
   font-size: 28px;
 }
 img { 
-  border: solid 1px #aaa;
+  border: 0;
   padding: 1px;
   max-width: 95%;
 }
