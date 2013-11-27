@@ -24,7 +24,7 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">D
 								'<button type="button" class="btn btn-primary" id="trailerListbtn" aling="right" data-dismiss="modal">Trailer Liste</button>'+
 								'<span>Liste der Trailer auf Youtube</span></a> </div>');
 
-var gahTemplate= _.template('<div align="left" id="gahgah"><img id="loadingGif"src="./img/small/nibbler-eating-turkey.gif"></div>')
+var gahTemplate= _.template('<img id="loadingGif" align="left" src="./img/small/riddick.jpg">')
  
 //--------------------------------------------------VARIABELS--------------------------------
 
@@ -241,8 +241,9 @@ $(document).on('click','#Searchbuttonclicked',function(){
 //Ownerclicked
 $(document).on('click','#Ownerclicked',function(){
 	var classn = $(this).context.className;
+	var selowner = movies[classn]["owner"];
 	movies = loadedmovies;
-	movies = $.findUserFilms(movies,movies[classn]["owner"]);
+	movies = $.findUserFilms(movies,selowner);
 	if(movies.length==0){movies = startuparray;}	
 	preselecttablefilter(movies);			
 })
