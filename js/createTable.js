@@ -65,8 +65,7 @@ var lineRating;
 //Click-Event Methods
 $(document).ready(function(){
 //homeClick - show the whole table
-$(document).on('click','#nav_home',function(event){			
-
+$(document).on('click','#nav_home',function(event){		
 	preselecttable();	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
@@ -130,11 +129,10 @@ $(document).on('click','#nav_ownMovies',function(event){
 //Table Button click events
 //Editbutton clicked
 $(document).on('click','#Editclicked',function(event){
-
 	var classn = $(this).context.className;
 	$.changeMovie(movies[classn]["title"],movies[classn]["year"]);
-	
-	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
 });
 //deletebutton clicked
 $(document).on('click','#Deleteclicked',function(event){		
@@ -149,69 +147,73 @@ $(document).on('click','#Deleteclicked',function(event){
 		}
 		selectedtablerebuild();
 	} 
+	event.preventDefault();
+	event.stopImmediatePropagation();	
 });
 //Rating clicked
-$(document).on('click','#Ratingclicked',function(event){
-	
+$(document).on('click','#Ratingclicked',function(event){	
 	lineRating = $(this).context.className;
 	$('#main_middle').html(ratingTemplate());	
 	rTitle = document.getElementById("ratingTitle");
 	currenttext = document.createTextNode(movies[lineRating]["title"]);
 	rTitle.appendChild(currenttext);
-	
-	
-	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
 });
 //detailsclicked
-$(document).on('click','#detailsclicked',function(event){
-	
+$(document).on('click','#detailsclicked',function(event){	
 	var classn = $(this).context.className;
 	detailview(movies[classn]["title"]);
-	
+	event.preventDefault();
+	event.stopImmediatePropagation();	
 });
 
 //HeaderSort Clicks
 //TitleSortClicked 
 $(document).on('click','#TitleSortClicked',function(event){
-
 	movies  = $.sortMovie(asc, movies, "title");
 	preselecttablefilter(movies);
 	if(asc === true){asc=false;}else{asc=true;}
-	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
 });
 //YearSortClicked 
 $(document).on('click','#YearSortClicked',function(event){
-
 	movies  = $.sortMovieNumbers(yearsort, movies, "year");
 	preselecttablefilter(movies);
 	if(yearsort === true){yearsort=false;}else{yearsort=true;}	
-	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
 });
 //RatingSortClicked 
 $(document).on('click','#RatingSortClicked',function(event){
-
 	movies  = $.sortMovieNumbers(ratingsort, movies, "rating");
 	preselecttablefilter(movies);
 	if(ratingsort === true){ratingsort=false;}else{ratingsort=true;}
-	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
 });
 //SeenSortClicked  
 $(document).on('click','#SeenSortClicked',function(event){
-
 	movies  = $.sortMovieNumbers(seensort, movies, "seen");
 	preselecttablefilter(movies);
 	if(seensort === true){seensort=false;}else{seensort=true;}
-	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
 });
 
 //imdbinfo dismiss 
 $(document).on('click','#btndismiss',function(){
 	selectedtablerebuild();	
+	event.preventDefault();
+	event.stopImmediatePropagation();	
 });
 
 $(document).on('click','#trailerListbtn',function(){
 	var testtitle = document.getElementById("Title").textContent;
 	window.open("http://www.youtube.com/results?search_query="+ testtitle +" trailer&sm=3");
+	event.preventDefault();
+	event.stopImmediatePropagation();	
 });
 
 //Searchinput enter
@@ -224,6 +226,8 @@ $(document).on('keypress','#searchinginput',function(event){
 		}
 		preselecttablefilter(movies);
 	}	
+	event.preventDefault();
+	event.stopImmediatePropagation();	
 })
 
 //Searchbuttonclicked 
@@ -233,7 +237,9 @@ $(document).on('click','#Searchbuttonclicked',function(){
 	if(movies.length==0){
 		movies = startuparray;
 	}
-	preselecttablefilter(movies);		
+	preselecttablefilter(movies);	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
 })
 
 //Ownerclicked
@@ -243,21 +249,21 @@ $(document).on('click','#Ownerclicked',function(){
 	movies = loadedmovies;
 	movies = $.findUserFilms(movies,selowner);
 	if(movies.length==0){movies = startuparray;}	
-	preselecttablefilter(movies);			
+	preselecttablefilter(movies);		
+	event.preventDefault();
+	event.stopImmediatePropagation();		
 })
 
 //SelectedNewRating
 $(document).on('click','#SelectedNewRating',function(){
 	var classn = $(this).context.className;
-	var dialogStyl;
-	
+	var dialogStyl;	
 	// moving into dialog style
 	if(classn != 0){
 		dialogStyl = classn;
 	}else{
 		dialogStyl = "Keine Bewertung"
-	}
-	
+	}	
 	// ask for right choice
 	var result = confirm('Ihre Bewertung zu "'+ dialogStyl +'" ändern?');
 	if(result){
@@ -266,18 +272,13 @@ $(document).on('click','#SelectedNewRating',function(){
 		loadedmovies = $.getAllMovies(); 
 	}else{
 		$('#main_middle').html('');
-
 	}
-	
-	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
 })
 
 
 });
-//-------------------------------------------------
-
-
-
 //-------------------------------------------------
 
 //detailview
