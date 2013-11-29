@@ -2,7 +2,15 @@
 #rating {
 	width: 100px;
 }
+#ratingElement{
+text-decoration: none;
+}
+#ratingElement:hover{
+border:2px;
+border-color: green;
+text-decoration: underline;
 
+}
 #logout {
 	text-align : center;
 }
