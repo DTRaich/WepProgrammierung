@@ -45,14 +45,14 @@ img {
 }
 /*---------------------------------- table matters------------------------ */
 #hoverID:hover td{
-	background-color:LightGray/*lightsteelblue*/;
+	background-color:#E3E3E3/*lightsteelblue*/;
 
 }
 .light{
-	background-color: LightGray;
+	background-color: #E3E3E3;
 }
 .dark{
-	background-color: silver;
+	background-color: #C4C4C4 ;
 }
 /* ------------------------------------------------ Layout ---------------------- */
 #container { 
