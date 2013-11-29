@@ -110,7 +110,6 @@ $.newRatingRelation = function(movieID,user,rating){
 		success: function(ratedObj){
 			// relation  also saved
 			//console.log("savedrelation");
-			loadedmovies = $.getAllMovies(); 
 		}
 				
 	})	
@@ -133,7 +132,6 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 				ratingRelation.destroy({
 					success: function(ratingRelation) {
 						// relation deleted
-						loadedmovies = $.getAllMovies(); 
 					}	
 				})
 				
@@ -143,7 +141,6 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 				ratingRelation.save(null, {
 					success: function(ratingRelation){
 						// successfull updated
-						loadedmovies = $.getAllMovies(); 
 					}
 				
 				})
