@@ -49,10 +49,10 @@ $.logOutFromDB =  function(){
 	Parse.User.logOut();	
 	$('#login').html(loginTemplate());
 	$('#menu').html(nav_logout_Template());
-	$('#main').html('');
-	
-	//table reload
+		
+	//table reload	
 	loadedmovies = $.getAllMovies(); 
+
 }
 
 //gets current User returns null if no user is logedIn
@@ -101,18 +101,22 @@ $.insertMovieInDB = function (movieObjadd){
 //new Seen and Rating Relations 
 $.newRatingRelation = function(movieID,user,rating){
 	var ratedObj = new RatedObject();
+	var done= $.Deferred();
+	
 	ratedObj.set("movieID", movieID);
 	ratedObj.set("userID", user);
 	ratedObj.set("rating", rating);
 	
 	// save the rating obj
-	ratedObj.save(null, {
-		success: function(ratedObj){
-			// relation  also saved
-			console.log("savedrelation");
-		}
-				
-	})	
+	ratedObj.save().then(function(ratedObj) {
+		// the object was saved successfully.
+		console.log("savedrelation");
+		loadedmovies = $.getAllMovies(); 
+
+	}, function(error) {
+		// the save failed.
+	});	
+	
 }
 
 // delete or Update Rating relation ---> one fucntion because we have to search for both movieId and userID due to the relation
@@ -130,23 +134,27 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 			// delete or update
 			if(isDel == true){
 			
-				ratingRelation.destroy({
-					success: function(ratingRelation) {
-						// relation deleted
-						console.log("delted")
-					}	
-				})
+				ratingRelation.destroy().then(function(ratingRelation) {
+					// the object was saved successfully.
+					console.log("delete"+ rating);
+					loadedmovies = $.getAllMovies(); 
+
+				}, function(error) {
+					// the save failed.
+				});	
 				
 			}else{
 				ratingRelation.set("rating",rating);
 				
-				ratingRelation.save(null, {
-					success: function(ratingRelation){
-						// successfull updated
-						console.log("update"+ rating)
-					}
-				
-				})
+				// save the rating obj
+				ratingRelation.save().then(function(ratingRelation) {
+					// the object was saved successfully.
+					console.log("updated"+ rating);
+					loadedmovies = $.getAllMovies(); 
+
+				}, function(error) {
+					// the save failed.
+				});	
 			
 			}
 			
@@ -159,6 +167,10 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 	// delete or updated
 
 }
+// tes
+var FunctionTwo = function () {
+  console.log('FunctionTwo');
+};
 
 //handles all cases of relation changeing
 $.ratedRelationHandler = function(movieID,seenBeforeChange,rating,addMovieSet){

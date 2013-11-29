@@ -275,8 +275,8 @@ $(document).on('click','#SelectedNewRating',function(){
 	var result = confirm('Ihre Bewertung zu "'+ dialogStyl +'" ändern?');
 	if(result){
 		$.changeRating(movies[lineRating]["originalDBID"],movies[lineRating]["seen"], classn);	
-		selectedtablerebuild();	
-		loadedmovies = $.getAllMovies(); 
+		//selectedtablerebuild();	
+		//loadedmovies = $.getAllMovies(); 
 	}else{
 		$('#main_middle').html('');
 	}
