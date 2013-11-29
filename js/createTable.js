@@ -26,11 +26,11 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">D
 
 								
 var ratingTemplate= _.template('<div id="outerRating"> <div id="innerRating"><table align="center"><tr><th><div id="ratingTitle"></div></th></tr>'+
-								'<tr><td align="center"><a href="#" id="ratingElement"><img id="SelectedNewRating" class="1" src="./img/small/stars-1.jpg" width = "80px" height="20px" style="cursor: pointer;"></a></td> </tr>'+
-								'<tr><td align="center"><img id="SelectedNewRating" class="2" src="./img/small/stars-2.jpg" width = "80px" height="20px" style="cursor: pointer;"></td> </tr>'+
-								'<tr><td align="center"><img id="SelectedNewRating" class="3" src="./img/small/stars-3.jpg" width = "80px" height="20px" style="cursor: pointer;"></td> </tr>'+
-								'<tr><td align="center"><img id="SelectedNewRating" class="4" src="./img/small/stars-4.jpg" width = "80px" height="20px" style="cursor: pointer;"></td> </tr>'+
-								'<tr><td align="center"><img id="SelectedNewRating" class="5" src="./img/small/stars-5.jpg" width = "80px" height="20px" style="cursor: pointer;"></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="1"><img src="./img/small/stars-1.jpg"></a></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="2"><img src="./img/small/stars-2.jpg"></a></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="3"><img src="./img/small/stars-3.jpg"></a></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="4"><img src="./img/small/stars-4.jpg"></a></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="5"><img src="./img/small/stars-5.jpg"></a></td> </tr>'+
 								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="0">nicht Gesehen/<br>Keine Bewertung abgeben</a></td></tr>'+
 								'<tr><td align="center"><button type="button" id="btndismiss" align="right" data-dismiss="modal">Zurück</button></td></tr>'+
 								'</table></div></div>')
@@ -260,7 +260,6 @@ $(document).on('click','#SelectedNewRating',function(){
 	
 	// ask for right choice
 	var result = confirm('Ihre Bewertung zu "'+ dialogStyl +'" ändern?');
-	console.log(result);
 	if(result){
 		$.changeRating(movies[lineRating]["originalDBID"],movies[lineRating]["seen"], classn);	
 		selectedtablerebuild();	

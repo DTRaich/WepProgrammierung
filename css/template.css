@@ -2,15 +2,30 @@
 #rating {
 	width: 100px;
 }
+
 #ratingElement{
-text-decoration: none;
+	text-decoration: none;
 }
+
 #ratingElement:hover{
-border:2px;
-border-color: green;
-text-decoration: underline;
+	border:2px;
+	border-color: green;
+	text-decoration: underline;
+}
+
+#SelectedNewRating img{
+	width: 80px;
+	height: 20px;
+	cursor: pointer;
+}
+
+#SelectedNewRating:hover img{
+	/*visibility: hidden;*/
+	width:95px;
+	height:25px;
 
 }
+
 #logout {
 	text-align : center;
 }
