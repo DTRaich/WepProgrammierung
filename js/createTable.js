@@ -558,7 +558,7 @@ function createTablelogedIn(row, id) {
 				case 5:
 					//Details Cell
 					mycurrent_img =document.createElement("img");	
-					mycurrent_img.src="./img/small/details.jpg";
+					mycurrent_img.src="./img/small/details.png";
 					mycurrent_img.style.width = "20px";
 					mycurrent_img.style.height = "20px";
 					mycurrent_img.setAttribute("id","detailsclicked");
@@ -734,7 +734,7 @@ function createTableGuest(row, id) {
 				case 4:		
 					//Details Cell
 					mycurrent_img =document.createElement("img");	
-					mycurrent_img.src="./img/small/details.jpg";
+					mycurrent_img.src="./img/small/details.png";
 					mycurrent_img.style.width = "20px";
 					mycurrent_img.style.height = "20px";
 					mycurrent_img.setAttribute("id","detailsclicked");
