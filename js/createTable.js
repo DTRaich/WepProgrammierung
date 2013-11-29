@@ -491,7 +491,8 @@ function createTablelogedIn(row, id) {
 	var	mytablebody = document.createElement("tbody");
     for(var j = 0; j < row; j++) {
 		//create Row
-        mycurrent_row = document.createElement("tr");
+        mycurrent_row = document.createElement("tr");		
+		mycurrent_row.setAttribute("id","hoverID");
         
 		for(var i=0;i<7;i++){
 			mycurrent_cell = document.createElement("td");
@@ -532,7 +533,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_link.setAttribute("id","Ratinglink");
 					mycurrent_link.setAttribute("class","tooltip");
 					mycurrent_img = document.createElement("img");			
-					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".jpg";
+					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".png";
 					mycurrent_img.style.width = "80px";
 					mycurrent_img.style.height = "20px";
 					mycurrent_img.setAttribute("id","Ratingclicked");
@@ -545,7 +546,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_span.appendChild(document.createTextNode("Eigene Bewertung:"));
 					//own rating
 					mycurrent_img = document.createElement("img");			
-					mycurrent_img.src="./img/small/stars-"+id[j]["myrating"]+".jpg";
+					mycurrent_img.src="./img/small/stars-"+id[j]["myrating"]+".png";
 					mycurrent_img.style.width = "80px";
 					mycurrent_img.style.height = "20px";
 					mycurrent_span.appendChild(mycurrent_img);
@@ -697,6 +698,7 @@ function createTableGuest(row, id) {
     for(var j = 0; j < row; j++) {
 		//create Row
         mycurrent_row = document.createElement("tr");
+		mycurrent_row.setAttribute("id","hoverID");
 		
 		for(var i=0;i<5;i++){
 			mycurrent_cell = document.createElement("td");
@@ -724,7 +726,7 @@ function createTableGuest(row, id) {
 					currenttext = document.createTextNode("");
 					mycurrent_cell.appendChild(currenttext);
 					mycurrent_img = document.createElement("img");			
-					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".jpg";
+					mycurrent_img.src="./img/small/stars-"+id[j]["rating"]+".png";
 					mycurrent_img.style.width = "80px";
 					mycurrent_img.style.height = "20px";
 					mycurrent_cell.style.width = "90px";
