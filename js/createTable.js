@@ -56,6 +56,7 @@ var asc = true;
 var yearsort = true;
 var ratingsort = true;
 var seensort = true;
+var genresort = true;
 var lineRating;
 
 //--------------------------------------------------INTERN METHODS--------------------------------
@@ -180,6 +181,14 @@ $(document).on('click','#YearSortClicked',function(event){
 	movies  = $.sortMovieNumbers(yearsort, movies, "year");
 	preselecttablefilter(movies);
 	if(yearsort === true){yearsort=false;}else{yearsort=true;}	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
+});
+//GenreSortClicked
+$(document).on('click','#GenreSortClicked',function(event){
+	movies  = $.sortMovieNumbers(genresort, movies, "genre");
+	preselecttablefilter(movies);
+	if(genresort === true){genresort=false;}else{genresort=true;}	
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
@@ -455,6 +464,13 @@ function createTablelogedIn(row, id) {
 					//Genre Header
 					currenttext = document.createTextNode("Genre");
 					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";	
+					mycurrent_img.setAttribute("id","GenreSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 3:
 					//Seen Header 
@@ -671,6 +687,13 @@ function createTableGuest(row, id) {
 					//Genre Header
 					currenttext = document.createTextNode("Genre");
 					mycurrent_cell.appendChild(currenttext);
+					mycurrent_img = document.createElement("img");			
+					mycurrent_img.src="./img/small/sortArrow.jpg";
+					mycurrent_img.style.width = "10px";
+					mycurrent_img.style.height = "15px";	
+					mycurrent_img.setAttribute("id","GenreSortClicked");
+					mycurrent_img.style.cursor = "pointer";
+					mycurrent_cell.appendChild(mycurrent_img);
 					break;
 				case 3:
 					//Rating Header

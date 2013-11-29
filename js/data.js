@@ -170,8 +170,8 @@ $.sortMovieNumbers = function(asc,preSortedArray,filter){
 	// fill new sorted array
 	for(var i = 0; i < sortedArray.length ; i++ ){
 		for(var j = 0; j< preSortedArray.length ; j++){
-			var test= preSortedArray[j][filter]+preSortedArray[j]["title"];
-			if(sortedArray[i] === test){
+			var key= preSortedArray[j][filter]+preSortedArray[j]["title"];
+			if(sortedArray[i] === key){
 				finalArray[i] = new Object();
 				finalArray[i]["title"] = preSortedArray[j]["title"];
 				finalArray[i]["year"] = preSortedArray[j]["year"];
