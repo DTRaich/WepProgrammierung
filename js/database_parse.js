@@ -167,14 +167,11 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 	// delete or updated
 
 }
-// tes
-var FunctionTwo = function () {
-  console.log('FunctionTwo');
-};
 
 //handles all cases of relation changeing
 $.ratedRelationHandler = function(movieID,seenBeforeChange,rating,addMovieSet){
 	var user = Parse.User.current();
+	
 	if(seenBeforeChange == "1"){	
 		if(addMovieSet["seen"] == "0"){
 			//delete
@@ -323,10 +320,7 @@ $.gettingRatedRelations = function(movieObject, user){
 					errorWasThere = true;
 				}else{
 					// do nothing
-				}
-			
-				
-								
+				}								
 			}
 		});
 	})
@@ -345,20 +339,18 @@ $.gettingAllDBMovies = function(){
 	
 	
 	queryAllMovies.find().then(function(results) {
-  // Collect one promise for each delete into an array.
+  // Collect one promise for each
 	var promises = [];
 	
 		_.each(results, function(result) {
 				movieObject	= new Object();		
 				movie = result;					
-				//movie = results[i];	
 				
 				// fill with "movieClassDATA"							
 				movieObject["title"] = movie.get('title');				
 				movieObject["year"] = movie.get('year');
 				movieObject["genre"] = movie.get('genre');	
-				// Start this delete immediately and add its promise to the list.
-				
+		
 				promises.push($.gettingRatedRelations(movieObject,user).then(function(){}));
 				
 				
@@ -366,20 +358,17 @@ $.gettingAllDBMovies = function(){
 					movieObject["owner"] = "0";	
 				}else{
 					promises.push($.gettingUserRelations(movieObject,user,movie).then(function(){}));
-					//$.gettingUserRelations(movieObject,user,movie).then(function(){});	
 				}	
 				
 				movieObject["originalDBID"] = movie.id;		
-				//console.log(movieObject);
 				
 				// last fire object into the Array	
 				movieArray.push(movieObject);	
 	});
-	// Return a new promise that is resolved when all of the deletes are finished.
 	return Parse.Promise.when(promises);
  
 	}).then(function() {
-	// Every comment was deleted.
+	// Every thing loaded
 		selectedtablerebuild();
 	});	
 
@@ -427,4 +416,3 @@ $.delMovieFromDB = function(originalDBID){
 	});
 	
 }
-
