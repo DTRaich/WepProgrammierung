@@ -26,11 +26,11 @@ var imdbinfoTemplate = _.template('<br><h1 class="modal-title" id="modaltitle">D
 
 								
 var ratingTemplate= _.template('<div id="outerRating"> <div id="innerRating"><table align="center"><tr><th><div id="ratingTitle"></div></th></tr>'+
-								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="1"><img src="./img/small/stars-1.jpg"></a></td> </tr>'+
-								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="2"><img src="./img/small/stars-2.jpg"></a></td> </tr>'+
-								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="3"><img src="./img/small/stars-3.jpg"></a></td> </tr>'+
-								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="4"><img src="./img/small/stars-4.jpg"></a></td> </tr>'+
-								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="5"><img src="./img/small/stars-5.jpg"></a></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="1"><img src="./img/small/stars-1.png"></a></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="2"><img src="./img/small/stars-2.png</a></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="3"><img src="./img/small/stars-3.png"></a></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="4"><img src="./img/small/stars-4.png"></a></td> </tr>'+
+								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="5"><img src="./img/small/stars-5.png"></a></td> </tr>'+
 								'<tr><td align="center"><a href="#" id="SelectedNewRating" class="0">nicht Gesehen/<br>Keine Bewertung abgeben</a></td></tr>'+
 								'<tr><td align="center"><button type="button" id="btndismiss" align="right" data-dismiss="modal">Zurück</button></td></tr>'+
 								'</table></div></div>')
@@ -607,7 +607,6 @@ function createTablelogedIn(row, id) {
 			mycurrent_row.appendChild(mycurrent_cell);
 		} 		
 		//complete Row
-		mycurrent_row.setAttribute("id","Row"+j);
         mytablebody.appendChild(mycurrent_row);
     }
 	//complete Table
