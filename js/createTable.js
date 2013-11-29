@@ -52,8 +52,6 @@ startuparray[0]["originalDBID"] = "0";
 //---
 var loadedmovies = startuparray;
 var movies;
-var backg="#C4C4C4";
-var backg2 = "#E3E3E3";
 var asc = true;
 var yearsort = true;
 var ratingsort = true;
@@ -502,20 +500,20 @@ function createTablelogedIn(row, id) {
 					//Title Cell
 					currenttext = document.createTextNode(id[j]["title"]);
 					mycurrent_cell.appendChild(currenttext);
-					mycurrent_cell.style.backgroundColor = backg;
+					mycurrent_cell.setAttribute("class","dark");
 					mycurrent_cell.style.width = "230px";
 					break;
 				case 1:	
 					//Year Cell
 					currenttext = document.createTextNode(id[j]["year"]);
 					mycurrent_cell.appendChild(currenttext);
-					mycurrent_cell.style.backgroundColor =backg2;
+					mycurrent_cell.setAttribute("class","light");
 					break;
 				case 2:
 					//Genre Cell
 					currenttext = document.createTextNode(id[j]["genre"]);
 					mycurrent_cell.appendChild(currenttext);
-					mycurrent_cell.style.backgroundColor =backg;
+					mycurrent_cell.setAttribute("class","dark");
 					break;
 				case 3:
 					//Seen Cell
@@ -525,7 +523,7 @@ function createTablelogedIn(row, id) {
 						currenttext = document.createTextNode("Ja");
 					}
 					mycurrent_cell.appendChild(currenttext);
-					mycurrent_cell.style.backgroundColor =backg2;
+					mycurrent_cell.setAttribute("class","light");
 					break;
 				case 4:
 					//Rating Cell
@@ -601,7 +599,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_link.appendChild(currenttext);
 					mycurrent_cell.appendChild(mycurrent_link);
 					}					
-					mycurrent_cell.style.backgroundColor =backg2;
+					mycurrent_cell.setAttribute("class","light");
 					break;						
 			}			
 			
@@ -705,20 +703,20 @@ function createTableGuest(row, id) {
 			switch (i){
 				case 0:		
 					//Title Cell
-					currenttext = document.createTextNode(id[j]["title"]);
-					mycurrent_cell.style.backgroundColor = backg;
+					currenttext = document.createTextNode(id[j]["title"]);					
+					mycurrent_cell.setAttribute("class","dark");
 					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 1:	
 					//Year Cell
 					currenttext = document.createTextNode(id[j]["year"]);
-					mycurrent_cell.style.backgroundColor =backg2;
+					mycurrent_cell.setAttribute("class","light");
 					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 2:
 					//Genre Cell
 					currenttext = document.createTextNode(id[j]["genre"]);
-					mycurrent_cell.style.backgroundColor =backg;
+					mycurrent_cell.setAttribute("class","dark");
 					mycurrent_cell.appendChild(currenttext);
 					break;
 				case 3:
