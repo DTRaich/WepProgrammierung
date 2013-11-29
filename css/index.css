@@ -1,3 +1,4 @@
+/*index css global settings */
 /* --------------------------------------------------- Overall ----------------------- */
 body {
   background: #E7E7EA;
@@ -149,6 +150,7 @@ img {
 	color: black;
 	text-align: right;
 }
+
 /* --------------- Mainpart ---place for templates; IDs are in the specific templates in their .js files -------------------- */
 
 #main {
