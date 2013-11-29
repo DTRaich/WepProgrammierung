@@ -109,7 +109,7 @@ $.newRatingRelation = function(movieID,user,rating){
 	ratedObj.save(null, {
 		success: function(ratedObj){
 			// relation  also saved
-			//console.log("savedrelation");
+			console.log("savedrelation");
 		}
 				
 	})	
@@ -125,6 +125,7 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 	// find relation
 	relationQuery.find({
 		success: function(results){
+		console.log(results.length);
 			var ratingRelation = results[0];			
 			// delete or update
 			if(isDel == true){
@@ -132,6 +133,7 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 				ratingRelation.destroy({
 					success: function(ratingRelation) {
 						// relation deleted
+						console.log("delted")
 					}	
 				})
 				
@@ -141,6 +143,7 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 				ratingRelation.save(null, {
 					success: function(ratingRelation){
 						// successfull updated
+						console.log("update"+ rating)
 					}
 				
 				})
@@ -186,7 +189,6 @@ $.addChangesToDB = function(addMovieSet,receivedData){
 	var user = Parse.User.current();
 	var seenBeforeChange = receivedData["seen"];
 	var rating  = addMovieSet["rating"];
-	console.log(rating);
 	
 	// getting the Movie
 	var query = new Parse.Query(MovieObject);	
