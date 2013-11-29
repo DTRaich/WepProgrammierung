@@ -338,13 +338,13 @@ function getPoster(title){
 			mycurrent_cell = document.createElement("td");
 			
 			mycurrent_cell.appendChild(document.createTextNode(itemkeys[i]));
-			mycurrent_cell.style.backgroundColor = backg;	
+			mycurrent_cell.setAttribute("class","dark");
 			
 			mycurrent_row.appendChild(mycurrent_cell);	
 			mycurrent_cell = document.createElement("td");
 			
 			mycurrent_cell.appendChild(document.createTextNode(items[i]));
-			mycurrent_cell.style.backgroundColor = backg2;
+			mycurrent_cell.setAttribute("class","light");
 			mycurrent_cell.setAttribute("id",itemkeys[i]);
 			
 			mycurrent_row.appendChild(mycurrent_cell);		

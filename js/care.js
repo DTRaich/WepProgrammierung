@@ -221,14 +221,14 @@ function getimdbmovies(title){
 			
 				currenttext = document.createTextNode("Kein Titel gefunden");
 				mycurrent_cell.appendChild(currenttext);
-				mycurrent_cell.style.backgroundColor = backg;	
+				mycurrent_cell.setAttribute("class","dark");
 			
 				mycurrent_row.appendChild(mycurrent_cell);	
 				mycurrent_cell = document.createElement("td");
 			
 				currenttext = document.createTextNode("N/A");
 				mycurrent_cell.appendChild(currenttext);
-				mycurrent_cell.style.backgroundColor = backg2;
+				mycurrent_cell.setAttribute("class","light");
 			
 				mycurrent_row.appendChild(mycurrent_cell);	
 				mytablebody.appendChild(mycurrent_row);	
@@ -248,16 +248,18 @@ function getimdbmovies(title){
 				for(var i = 0 ; i < items.length ; i++){
 			
 					mycurrent_row = document.createElement("tr");
+					mycurrent_row.setAttribute("id","hoverID");
+					
 					mycurrent_cell = document.createElement("td");
 			
 					mycurrent_cell.appendChild(document.createTextNode(items[i]["title"]));
-					mycurrent_cell.style.backgroundColor = backg;	
+					mycurrent_cell.setAttribute("class","dark");	
 			
 					mycurrent_row.appendChild(mycurrent_cell);	
 					mycurrent_cell = document.createElement("td");
 			
 					mycurrent_cell.appendChild(document.createTextNode(items[i]["year"]));
-					mycurrent_cell.style.backgroundColor = backg2;
+					mycurrent_cell.setAttribute("class","light");
 			
 					mycurrent_row.appendChild(mycurrent_cell);	
 					mycurrent_cell = document.createElement("td");
@@ -271,7 +273,7 @@ function getimdbmovies(title){
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.appendChild(mycurrent_img);
 					mycurrent_cell.style.width = "30px";
-					mycurrent_cell.style.backgroundColor = backg;
+					mycurrent_cell.setAttribute("class","dark");
 			
 					mycurrent_row.appendChild(mycurrent_cell);	
 					mytablebody.appendChild(mycurrent_row);				
@@ -281,7 +283,6 @@ function getimdbmovies(title){
 			}
 		} 
     );	
-	
 	myTable.style.width="95%";
 	return myTable;
 }
@@ -325,7 +326,7 @@ $(document).ready(function(){
 	$(document).on('click','#imdbmovies',function(event){
 				
 		var mov = $.trim($('#movietitle').val());
-		$('#main').html(loadTemplate());	
+		//$('#main').html(loadTemplate());	
 		myTable = document.createElement("table");
 		myTable = getimdbmovies(mov);
 		
