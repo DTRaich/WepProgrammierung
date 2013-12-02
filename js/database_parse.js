@@ -1,10 +1,12 @@
 //InitializeDataBase
 // behrends
 Parse.initialize("OCbRi66SwZ7d0xAik7xZXNZoRdLvSE87GSyw3zxJ", "Wb5Ul5lZhMH0Bhs8tTgvFqTKUZhjXR9cDa7zx3As");
+
 //Define ParseObject
 var MovieObject = Parse.Object.extend("MovieObject");
 var RatedObject = Parse.Object.extend("RatedObject");
 
+// Template in front while loading to avoid any user actions during loading
 var loadTemplate= _.template('<div id="loadding"><img id="loadingGif"src="./img/small/loading.gif"></div>')
  
 //----------------------LogIn/LogOut/Register/GetLogStat---------------------- 
@@ -371,6 +373,11 @@ $.gettingAllDBMovies = function(){
  
 	}).then(function() {
 	// Every thing loaded
+		movies.sort();
+		movies.sort();
+		loadedmovies.sort();
+		loadedmovies.sort();
+		
 		selectedtablerebuild();
 	});	
 

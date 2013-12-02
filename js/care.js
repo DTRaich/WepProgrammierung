@@ -34,10 +34,10 @@ var rateAndCommentTemplate = _.template(' Bewertung : &nbsp&nbsp&nbsp&nbsp&nbsp&
 										' </select> <br><br>');
 
 var imdbmovietemplate=_.template('<br><table class="mainTemplateTable" id="tabelle"></table>'+
-							'<div id="main_top"></div>'+
-							'<div id="main_middle"></div>'+	
-							'<div id="main_low"><button type="button" class="btn btn-primary" id="movdismiss" align="right" data-dismiss="modal" align = "right">Abbrechen</button>'+
-							'</div>');
+								'<div id="main_top"></div>'+
+								'<div id="main_middle"></div>'+	
+								'<div id="main_low"><button type="button" class="btn btn-primary" id="movdismiss" align="right" data-dismiss="modal" align = "right">Abbrechen</button>'+
+								'</div>');
 										
 //------------------------------------ METHODS TO CALL--------------------------
 // fills formular when data needs to be changed

@@ -425,7 +425,7 @@ function preselecttable(){
 	
 	//get all Movies in movies Array	
 	movies = loadedmovies;	
-	
+
 	//check: Logedin User
 	if($.getLogStatus()){
 		node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
@@ -457,7 +457,6 @@ function selectedtablerebuild(){
 	node = document.getElementById("tabelle");	
 	
 	movies = loadedmovies;
-	
 	//check: Logedin User
 	if($.getLogStatus()){
 		node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	

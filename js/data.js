@@ -2,7 +2,7 @@
 //------------------------GLOBAL VARIABLES----------------------------
 var movieArray = new Array();
 //------------------------DATA----------------------------------------
-// how new array should look
+// how new array should look (for all programmers)
 //movieArray[9] = new Object();
 //movieArray[9]["title"] = "Star Wars";
 //movieArray[9]["year"] = "2013";
@@ -129,6 +129,7 @@ $.sortMovie = function(asc,preSortedArray,filter){
 	for(var i = 0 ; i < preSortedArray.length ; i++){
 		sortedArray.push(preSortedArray[i][filter]);	
 	}	
+	
 	// SORT!
 	sortedArray.sort();
 	// asc or dec
