@@ -1,7 +1,6 @@
 //------------------------GLOBAL VARIABLES----------------------------
 
 // ----------------------------------TEMPLATES---------------------------
-//<br><br><div id="headline" align="center"><h1>Filmliste</h1></div>'+
 // ----------------------------------MAINTEMPLATE---------------------------
 var maintemplate=_.template('<br><br><table class="mainTemplateTable" id="tabelle"></table>'+
 							'<div id="main_top"></div>'+
@@ -49,90 +48,113 @@ startuparray[0]["seen"] = "0";
 startuparray[0]["myrating"] = "0"; 
 startuparray[0]["owner"] = "X"; 
 startuparray[0]["originalDBID"] = "0"; 
-//---
+
+//-- loadedmovies out of the database
 var loadedmovies = startuparray;
+//-- working array only in this script
 var movies;
+
+//-- sorting indicators
 var asc = true;
 var yearsort = true;
 var ratingsort = true;
 var seensort = true;
 var genresort = true;
+
+// current line for the change rating dialog
 var lineRating;
 
-//--------------------------------------------------INTERN METHODS--------------------------------
+//--------------------------------------------------CLICK/OTHER EVENTS  METHODS--------------------------------
 
 //Click-Event Methods
 $(document).ready(function(){
+
 //homeClick - show the whole table
 $(document).on('click','#nav_home',function(event){		
 	preselecttable();	
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
-//navigation Genre Input
+
+//-----------------navigation Genre Input------------------
+
 //show Aktion-Movies 
 $(document).on('click','#nav_action',function(event){	
 	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Action");	
 	if(movies.length==0){movies = startuparray;}
 	preselecttablefilter(movies);	
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+
 //show Comedy-Movies
 $(document).on('click','#nav_comedy',function(event){	
 	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Comedy");
 	if(movies.length==0){movies = startuparray;}	
-	preselecttablefilter(movies);	
+	preselecttablefilter(movies);
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+
 //show Horror-Movies
 $(document).on('click','#nav_horror',function(event){	
 	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Horror");	
 	if(movies.length==0){movies = startuparray;}	
-	preselecttablefilter(movies);	
+	preselecttablefilter(movies);
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+
 //show SciFi-Movies
 $(document).on('click','#nav_scifi',function(event){	
 	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Sci-Fi");
 	if(movies.length==0){movies = startuparray;}		
-	preselecttablefilter(movies);	
+	preselecttablefilter(movies);
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+
 //show Thriller 
 $(document).on('click','#nav_thriller',function(event){	
 	movies = loadedmovies;
 	movies = $.filterMovies(movies,"Thriller");	
 	if(movies.length==0){movies = startuparray;}	
 	preselecttablefilter(movies);	
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
+
 //show own movies
 $(document).on('click','#nav_ownMovies',function(event){	
 	movies = loadedmovies;
 	movies = $.findUserFilms(movies,"1");
 	if(movies.length==0){movies = startuparray;}	
-	preselecttablefilter(movies);	
+	preselecttablefilter(movies);
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
 
-//Table Button click events
+//------------------------Table Button click events---------------------------
 //Editbutton clicked
 $(document).on('click','#Editclicked',function(event){
 	var classn = $(this).context.className;
 	$.changeMovie(movies[classn]["title"],movies[classn]["year"]);
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
+
 //deletebutton clicked
 $(document).on('click','#Deleteclicked',function(event){		
 	var classn = $(this).context.className;
@@ -146,65 +168,82 @@ $(document).on('click','#Deleteclicked',function(event){
 		}
 		selectedtablerebuild();
 	} 
-	event.preventDefault();
-	event.stopImmediatePropagation();	
-});
-//Rating clicked
-$(document).on('click','#Ratingclicked',function(event){	
-	lineRating = $(this).context.className;
-	$('#main_middle').html(ratingTemplate());	
-	rTitle = document.getElementById("ratingTitle");
-	currenttext = document.createTextNode(movies[lineRating]["title"]);
-	rTitle.appendChild(currenttext);
-	event.preventDefault();
-	event.stopImmediatePropagation();		
-});
-//detailsclicked
-$(document).on('click','#detailsclicked',function(event){	
-	var classn = $(this).context.className;
-	detailview(movies[classn]["title"]);
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
 
-//HeaderSort Clicks
+//Rating clicked
+$(document).on('click','#Ratingclicked',function(event){
+	// get the line /rating
+	lineRating = $(this).context.className;
+	// this is with other z index---- appears in front---definition css
+	$('#main_middle').html(ratingTemplate());	
+	rTitle = document.getElementById("ratingTitle");
+	currenttext = document.createTextNode(movies[lineRating]["title"]);
+	rTitle.appendChild(currenttext);
+	
+	event.preventDefault();
+	event.stopImmediatePropagation();		
+});
+
+//detailsclicked
+$(document).on('click','#detailsclicked',function(event){	
+	var classn = $(this).context.className;
+	detailview(movies[classn]["title"]);
+	
+	event.preventDefault();
+	event.stopImmediatePropagation();	
+});
+
+//-----------------------------HeaderSort Clicks----------------------------------
+// OVERALL--- every method must contain a "turn around" to switch asc und desc
 //TitleSortClicked 
 $(document).on('click','#TitleSortClicked',function(event){
 	movies  = $.sortMovie(asc, movies, "title");
 	preselecttablefilter(movies);
 	asc = !asc;
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
+
 //YearSortClicked 
 $(document).on('click','#YearSortClicked',function(event){
 	movies  = $.sortMovieNumbers(yearsort, movies, "year");
 	preselecttablefilter(movies);
 	yearsort = !yearsort;
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
+
 //GenreSortClicked
 $(document).on('click','#GenreSortClicked',function(event){
 	movies  = $.sortMovieNumbers(genresort, movies, "genre");
 	preselecttablefilter(movies);
 	genresort = !genresort;
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
+
 //RatingSortClicked 
 $(document).on('click','#RatingSortClicked',function(event){
 	movies  = $.sortMovieNumbers(ratingsort, movies, "rating");
+	
 	preselecttablefilter(movies);
 	ratingsort = !ratingsort;
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
+
 //SeenSortClicked  
 $(document).on('click','#SeenSortClicked',function(event){
 	movies  = $.sortMovieNumbers(seensort, movies, "seen");
 	preselecttablefilter(movies);
 	seensort = !seensort;
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
@@ -212,27 +251,34 @@ $(document).on('click','#SeenSortClicked',function(event){
 //imdbinfo dismiss 
 $(document).on('click','#btndismiss',function(){
 	selectedtablerebuild();	
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
 
+// opens up youtube page with trailers to the specific movie
 $(document).on('click','#trailerListbtn',function(){
 	var testtitle = document.getElementById("Title").textContent;
 	window.open("http://www.youtube.com/results?search_query="+ testtitle +" trailer&sm=3");
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 });
 
 //Searchinput enter
 $(document).on('keypress','#searchinginput',function(event){
+	// on enter 
 	if(event.which== 13){
 		var input = $.trim($('#searchinginput').val());
 		movies = $.Searchformovies(loadedmovies,input);
+		// if nothing there open up startUp
 		if(movies.length==0){
 			movies = startuparray;
 		}
+		
 		preselecttablefilter(movies);
-	}	
+	}
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();	
 })
@@ -241,10 +287,13 @@ $(document).on('keypress','#searchinginput',function(event){
 $(document).on('click','#Searchbuttonclicked',function(){
 	var input = $.trim($('#searchinginput').val());
 	movies = $.Searchformovies(loadedmovies,input);
+	
+	// if nothing there open up startUp	
 	if(movies.length==0){
 		movies = startuparray;
 	}
 	preselecttablefilter(movies);	
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 })
@@ -253,10 +302,13 @@ $(document).on('click','#Searchbuttonclicked',function(){
 $(document).on('click','#Ownerclicked',function(){
 	var classn = $(this).context.className;
 	var selowner = movies[classn]["owner"];
+	
 	movies = loadedmovies;
 	movies = $.findUserFilms(movies,selowner);
+	
 	if(movies.length==0){movies = startuparray;}	
-	preselecttablefilter(movies);		
+	preselecttablefilter(movies);
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 })
@@ -265,34 +317,36 @@ $(document).on('click','#Ownerclicked',function(){
 $(document).on('click','#SelectedNewRating',function(){
 	var classn = $(this).context.className;
 	var dialogStyl;	
+	
 	// moving into dialog style
 	if(classn != 0){
 		dialogStyl = classn;
 	}else{
 		dialogStyl = "Keine Bewertung"
 	}	
+	
 	// ask for right choice
 	var result = confirm('Ihre Bewertung zu "'+ dialogStyl +'" ändern?');
 	if(result){
 		$.changeRating(movies[lineRating]["originalDBID"],movies[lineRating]["seen"], classn);	
-		//selectedtablerebuild();	
-		//loadedmovies = $.getAllMovies(); 
+		//calling new table after promises push --> database_parse script Daniel 
 	}else{
 		$('#main_middle').html('');
 	}
+	
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 })
 
 
 });
-//-------------------------------------------------
+//------------------INTERN METHODS------------BUILDING UP THE TABLES-------------------------------
 
 //detailview
 function detailview(title){
 	$('#main').html(imdbinfoTemplate());
 	
-	//Tabelle
+	//table
 	node = document.getElementById("tabelle");
 	
 	node.parentNode.insertBefore(getPoster(title), node);	
@@ -323,12 +377,14 @@ function getPoster(title){
 				itemkeys.push(key);
 				items.push(val);
 		});
+		
 		mycurrent_img = document.createElement("img");
 		if(data.Poster == 'N/A'){
 			mycurrent_img.src = "./img/big/img-not-found.gif";
 		}else{				
 			mycurrent_img.src = data.Poster;	
-		}	
+		}
+		
 		titlepic = document.getElementById("modal-pic");
 		titlepic.appendChild(mycurrent_img);		
 		
@@ -355,6 +411,7 @@ function getPoster(title){
 	  myTable.appendChild(mytablebody);
 	  }	  
     );	
+	
 	myTable.style.width="95%";
 	return myTable;
 }
