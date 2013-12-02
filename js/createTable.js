@@ -172,7 +172,7 @@ $(document).on('click','#detailsclicked',function(event){
 $(document).on('click','#TitleSortClicked',function(event){
 	movies  = $.sortMovie(asc, movies, "title");
 	preselecttablefilter(movies);
-	if(asc === true){asc=false;}else{asc=true;}
+	asc = !asc;
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
@@ -180,7 +180,7 @@ $(document).on('click','#TitleSortClicked',function(event){
 $(document).on('click','#YearSortClicked',function(event){
 	movies  = $.sortMovieNumbers(yearsort, movies, "year");
 	preselecttablefilter(movies);
-	if(yearsort === true){yearsort=false;}else{yearsort=true;}	
+	yearsort = !yearsort;
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
@@ -188,7 +188,7 @@ $(document).on('click','#YearSortClicked',function(event){
 $(document).on('click','#GenreSortClicked',function(event){
 	movies  = $.sortMovieNumbers(genresort, movies, "genre");
 	preselecttablefilter(movies);
-	if(genresort === true){genresort=false;}else{genresort=true;}	
+	genresort = !genresort;
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
@@ -196,7 +196,7 @@ $(document).on('click','#GenreSortClicked',function(event){
 $(document).on('click','#RatingSortClicked',function(event){
 	movies  = $.sortMovieNumbers(ratingsort, movies, "rating");
 	preselecttablefilter(movies);
-	if(ratingsort === true){ratingsort=false;}else{ratingsort=true;}
+	ratingsort = !ratingsort;
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
@@ -204,7 +204,7 @@ $(document).on('click','#RatingSortClicked',function(event){
 $(document).on('click','#SeenSortClicked',function(event){
 	movies  = $.sortMovieNumbers(seensort, movies, "seen");
 	preselecttablefilter(movies);
-	if(seensort === true){seensort=false;}else{seensort=true;}
+	seensort = !seensort;
 	event.preventDefault();
 	event.stopImmediatePropagation();		
 });
