@@ -267,6 +267,7 @@ $(document).on('click','#trailerListbtn',function(){
 
 //Searchinput enter
 $(document).on('keypress','#searchinginput',function(event){
+	
 	// on enter 
 	if(event.which== 13){
 		var input = $.trim($('#searchinginput').val());
@@ -277,10 +278,13 @@ $(document).on('keypress','#searchinginput',function(event){
 		}
 		
 		preselecttablefilter(movies);
+		
+		//event here because otherwise event will be "killed" before executing the keypress
+		event.preventDefault();
+		event.stopImmediatePropagation();
 	}
 	
-	event.preventDefault();
-	event.stopImmediatePropagation();	
+		
 })
 
 //Searchbuttonclicked 
