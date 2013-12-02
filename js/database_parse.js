@@ -194,6 +194,7 @@ $.ratedRelationHandler = function(movieID,seenBeforeChange,rating,addMovieSet){
 $.addChangesToDB = function(addMovieSet,receivedData){	
 	var movieObj;	
 	var user = Parse.User.current();
+	
 	var movieID = receivedData["originalDBID"];
 	var user = Parse.User.current();
 	var seenBeforeChange = receivedData["seen"];
@@ -221,6 +222,7 @@ $.addChangesToDB = function(addMovieSet,receivedData){
 			alert('Fehler beim Laden der Benutzer');							
 		}
 	});	
+	
 	// relation handling	
 	$.ratedRelationHandler(movieID,seenBeforeChange,rating,addMovieSet);
 	
@@ -284,18 +286,13 @@ $.gettingRatedRelations = function(movieObject, user,movie){
 								
 						// checks if user  is current user to get the personal rating
 						if(user == null){
-								console.log("user is null")
 								seen  = "0";
 								myRating = "0";
 						}else{
-							console.log("there is a User")
-							if(rated.get('userID').id == user.id){								
-								
-								console.log("i have a rating")
+							if(rated.get('userID').id == user.id){							
 								seen  = "1";
 								myRating = rated.get('rating');
-								console.log(myRating);
-																
+															
 							}
 						}								
 														
@@ -312,7 +309,6 @@ $.gettingRatedRelations = function(movieObject, user,movie){
 					movieObject["rating"] = round;				
 					movieObject["seen"] = seen;	
 					movieObject["myrating"] = myRating;
-					console.log(movieObject["myrating"]);
 						
 				}else{							
 					movieObject["rating"] = "0";				
