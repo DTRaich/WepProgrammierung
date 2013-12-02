@@ -5,12 +5,6 @@ was uns so aufgefallen ist bitte abarbeiten und vorabgabe durchschauen!!!
 
 
 
-9) sterne unterschiedlich groß!
-14) bewertung spinnt contains und null fehler
-15) tabelle spinnt ab und an
-16) eine film bewertung NaN --> Bild Capture.jpg
-17) nachladen nach löschen ( createTable.js ca. Zeile 1o0 oder so )
-18) imdb Information Punkt unten? ( Bild Fehler 19 )
 
 
 
@@ -39,3 +33,10 @@ angezeigt. (siehe screenshot)
 11)rating änderbar trotz nicht gesehen 
 12) afrage design von register
 13 ) infobutton in der tabelle hat weißen rand
+
+9) sterne unterschiedlich groß!
+14) bewertung spinnt contains und null fehler
+15) tabelle spinnt ab und an
+16) eine film bewertung NaN --> Bild Capture.jpg
+17) nachladen nach löschen ( createTable.js ca. Zeile 1o0 oder so )
+18) imdb Information Punkt unten? ( Bild Fehler 19 )
