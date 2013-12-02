@@ -259,10 +259,10 @@ $.gettingUserRelations = function(movieObject, currentUser, movie){
 }
 
 // getting the relations to build up the whole stucture
-$.gettingRatedRelations = function(movieObject, user){
+$.gettingRatedRelations = function(movieObject, user,movie){
 
 	var relationQuery = new Parse.Query(RatedObject);
-	var promise = Parse.Promise.as();				
+	var promise = Parse.Promise.as();		
 	relationQuery.equalTo("movieID", movie.id);
 	// to prevend multiple alerts
 	var errorWasThere = false;		
@@ -284,25 +284,35 @@ $.gettingRatedRelations = function(movieObject, user){
 								
 						// checks if user  is current user to get the personal rating
 						if(user == null){
+								console.log("user is null")
 								seen  = "0";
 								myRating = "0";
 						}else{
-							if(rated.get('userID').id != user.id){								
-								seen = "0";	
-								myRating = "0";									
-							}else{									
+							console.log("there is a User")
+							if(rated.get('userID').id == user.id){								
+								
+								console.log("i have a rating")
 								seen  = "1";
 								myRating = rated.get('rating');
-							}	
+								console.log(myRating);
+																
+							}
 						}								
 														
 						
-						}
-						avgRating = sumRating/results.length;	
-						round = Math.round(avgRating);					
-						movieObject["rating"] = round;				
-						movieObject["seen"] = seen;	
-						movieObject["myrating"] = myRating;
+					}
+					
+					if(seen != "1"){
+						seen = "0";	
+						myRating = "0";							
+					}
+					
+					avgRating = sumRating/results.length;	
+					round = Math.round(avgRating);					
+					movieObject["rating"] = round;				
+					movieObject["seen"] = seen;	
+					movieObject["myrating"] = myRating;
+					console.log(movieObject["myrating"]);
 						
 				}else{							
 					movieObject["rating"] = "0";				
@@ -351,7 +361,7 @@ $.gettingAllDBMovies = function(){
 				movieObject["year"] = movie.get('year');
 				movieObject["genre"] = movie.get('genre');	
 		
-				promises.push($.gettingRatedRelations(movieObject,user).then(function(){}));
+				promises.push($.gettingRatedRelations(movieObject,user,movie).then(function(){}));
 				
 				
 				if(user == null){
