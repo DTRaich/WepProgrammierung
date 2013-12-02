@@ -372,12 +372,7 @@ $.gettingAllDBMovies = function(){
 	return Parse.Promise.when(promises);
  
 	}).then(function() {
-	// Every thing loaded
-		movies.sort();
-		movies.sort();
-		loadedmovies.sort();
-		loadedmovies.sort();
-		
+		// Every thing loaded
 		selectedtablerebuild();
 	});	
 
