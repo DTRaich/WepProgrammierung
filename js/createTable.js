@@ -142,7 +142,7 @@ $(document).on('click','#Deleteclicked',function(event){
 		//rebuild the same table without the deleted movie manualy to prevent loading lacks		
 		var location = $.findLocationOfMovie(movies[classn]["title"],movies[classn]["year"]);
 		if(location !== -1){
-			movies.splice(location,1);
+			loadedmovies.splice(location,1);
 		}
 		selectedtablerebuild();
 	} 

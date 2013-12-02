@@ -110,7 +110,6 @@ $.newRatingRelation = function(movieID,user,rating){
 	// save the rating obj
 	ratedObj.save().then(function(ratedObj) {
 		// the object was saved successfully.
-		console.log("savedrelation");
 		loadedmovies = $.getAllMovies(); 
 
 	}, function(error) {
@@ -129,14 +128,12 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 	// find relation
 	relationQuery.find({
 		success: function(results){
-		console.log(results.length);
 			var ratingRelation = results[0];			
 			// delete or update
 			if(isDel == true){
 			
 				ratingRelation.destroy().then(function(ratingRelation) {
 					// the object was saved successfully.
-					console.log("delete"+ rating);
 					loadedmovies = $.getAllMovies(); 
 
 				}, function(error) {
@@ -149,7 +146,6 @@ $.deleteOrUpdateRating = function(movieID,user,rating,isDel){
 				// save the rating obj
 				ratingRelation.save().then(function(ratingRelation) {
 					// the object was saved successfully.
-					console.log("updated"+ rating);
 					loadedmovies = $.getAllMovies(); 
 
 				}, function(error) {
@@ -399,7 +395,6 @@ $.delMovieFromDB = function(originalDBID){
 					
 				}
 			});	
-		// The object has been deleted from the Parse Cloud.
 		}
 	});	
 	
@@ -411,7 +406,7 @@ $.delMovieFromDB = function(originalDBID){
 				var relation = results[i];
 				relation.destroy({
 					success: function(relation) {
-						// nothing on delete^
+						// nothing on delete
 					}	
 				})
 			}

@@ -17,7 +17,7 @@ var careFormTemplate = _.template(' <h1> Neuen Film hinzufügen </h1> <br><br> '+
 												'<option value="Horror">Horror</option>' +
 												'<option value="Sci-Fi">Sci-Fi</option>' +
 												'<option value="Thriller">Thriller</option>' +
-											'</select> <br><br><br>' +
+												'</select> <br><br><br>' +
 									'Gesehen: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input id="ratingChb" name"chbRating" type="checkbox"/><br><br><br>');
 									
 //-----------------------------------------button to sen/add the movie ---------------------									
@@ -309,6 +309,7 @@ $(document).ready(function(){
 			$('#main_middle').html('');
 			isSeen = false;			
 		}	
+		
 		event.preventDefault();
 		event.stopImmediatePropagation();
 			
