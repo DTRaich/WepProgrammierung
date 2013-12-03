@@ -830,7 +830,7 @@ function createTableGuest(row, id) {
 					mycurrent_img.style.height = "20px";
 					mycurrent_cell.style.width = "90px";
 					mycurrent_cell.appendChild(mycurrent_img);
-					mycurrent_cell.setAttribute("class","dark");
+					mycurrent_cell.setAttribute("class","light");
 					break;		
 				case 4:		
 					//Details Cell
@@ -844,7 +844,7 @@ function createTableGuest(row, id) {
 					mycurrent_img.caption = "Details";
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
-					mycurrent_cell.setAttribute("class","light");
+					mycurrent_cell.setAttribute("class","dark");
 					break;
 			}			
 			mycurrent_row.appendChild(mycurrent_cell);
