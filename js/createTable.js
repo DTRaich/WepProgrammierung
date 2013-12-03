@@ -645,6 +645,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_link.appendChild(mycurrent_span);
 					mycurrent_cell.appendChild(mycurrent_link);
 					mycurrent_cell.appendChild(currenttext);
+					mycurrent_cell.setAttribute("class","dark");
 					break;	
 				case 5:
 					//Details Cell
@@ -657,6 +658,7 @@ function createTablelogedIn(row, id) {
 					mycurrent_img.style.cursor = "pointer";
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
+					mycurrent_cell.setAttribute("class","light");
 					break;
 				case 6: 
 					//Owner Cell
@@ -828,6 +830,7 @@ function createTableGuest(row, id) {
 					mycurrent_img.style.height = "20px";
 					mycurrent_cell.style.width = "90px";
 					mycurrent_cell.appendChild(mycurrent_img);
+					mycurrent_cell.setAttribute("class","dark");
 					break;		
 				case 4:		
 					//Details Cell
@@ -841,6 +844,7 @@ function createTableGuest(row, id) {
 					mycurrent_img.caption = "Details";
 					mycurrent_cell.style.width = "20px";
 					mycurrent_cell.appendChild(mycurrent_img);
+					mycurrent_cell.setAttribute("class","light");
 					break;
 			}			
 			mycurrent_row.appendChild(mycurrent_cell);
