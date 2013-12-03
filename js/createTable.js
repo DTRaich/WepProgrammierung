@@ -473,6 +473,9 @@ function tablebuild(){
 	node = document.getElementById("tabelle");	
 	
 	movies = loadedmovies;
+	
+	movies  = $.sortMovie(true, movies, "title");
+	
 	//check: Logedin User
 	if($.getLogStatus()){
 		node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
