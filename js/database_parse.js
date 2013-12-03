@@ -373,7 +373,7 @@ $.gettingAllDBMovies = function(){
  
 	}).then(function() {
 		// Every thing loaded
-		selectedtablerebuild();
+		tablebuild();
 	});	
 
 	

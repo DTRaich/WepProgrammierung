@@ -460,6 +460,18 @@ function selectedtablerebuild(){
 	$('#main').html(maintemplate());	
 	node = document.getElementById("tabelle");	
 	
+	//check: Logedin User
+	if($.getLogStatus()){
+		node.parentNode.insertBefore(createTablelogedIn(movies.length, movies), node);	
+	}else{
+		node.parentNode.insertBefore(createTableGuest(movies.length, movies), node);
+	}
+}
+//call method for the table build
+function tablebuild(){	
+	$('#main').html(maintemplate());	
+	node = document.getElementById("tabelle");	
+	
 	movies = loadedmovies;
 	//check: Logedin User
 	if($.getLogStatus()){
